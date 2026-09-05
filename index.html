@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="WebArena Pro is a heterogeneous, multimodal, and reproducible benchmark for web agents across 20 self-hosted applications."
+    >
+    <meta name="theme-color" content="#0d1b2a">
+    <meta property="og:title" content="WebArena Pro — A benchmark for capable web agents">
+    <meta
+      property="og:description"
+      content="300 tasks. 20 applications. Text, vision, audio, and video."
+    >
+    <title>WebArena Pro — A benchmark for capable web agents</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css?v=20260905-3">
+    <script src="script.js?v=20260905-2" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="shell nav-wrap">
+        <a class="brand" href="#top" aria-label="WebArena Pro home">
+          <img src="assets/logo-mark.svg" alt="" width="34" height="34">
+          <span>WebArena <strong>Pro</strong></span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+          <span></span><span></span>
+        </button>
+
+        <nav class="nav-links" aria-label="Main navigation" data-nav>
+          <a href="#overview">Overview</a>
+          <a href="#tasks">Tasks</a>
+          <a href="#evaluation">Evaluation</a>
+          <a href="#citation">Citation</a>
+          <a
+            class="nav-paper"
+            href="https://openreview.net/forum?id=eMuJZXwAn1"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read the paper
+            <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6" /></svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-grid-bg" aria-hidden="true"></div>
+        <div class="shell hero-layout">
+          <div class="hero-copy reveal">
+            <div class="eyebrow"><span></span> ICML 2026 · AIWILD</div>
+            <h1>Read, watch, listen, act.<br><em>Put web agents to the test.</em></h1>
+            <p class="hero-lede">
+              A heterogeneous, multimodal, and reproducible benchmark that tests web agents on
+              realistic work across 20 self-hosted applications.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button button-primary"
+                href="https://openreview.net/forum?id=eMuJZXwAn1"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Explore the paper
+                <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M5 15 15 5M7 5h8v8" /></svg>
+              </a>
+              <span class="button button-coming-soon">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.3 3.5 6.5 6.8 6.9A4.8 4.8 0 0 0 8 18v4M8 19c-3 .9-3-1.5-4-2" /></svg>
+                Code coming soon
+              </span>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal reveal-delay" role="img" aria-label="Illustration of an agent completing a browser task">
+            <div class="signal signal-one" aria-hidden="true"></div>
+            <div class="signal signal-two" aria-hidden="true"></div>
+            <div class="agent-console">
+              <div class="console-topbar">
+                <div class="window-dots"><i></i><i></i><i></i></div>
+                <span>agent_session_042</span>
+                <span class="live-pill"><i></i> LIVE</span>
+              </div>
+              <div class="console-body">
+                <div class="console-meta">
+                  <span class="mono-label">CURRENT TASK</span>
+                  <span class="step-count">STEP 08 / 50</span>
+                </div>
+                <h2>Compare vacation spending across two months.</h2>
+                <div class="plan-stack">
+                  <div class="plan-row complete">
+                    <span class="plan-icon">
+                      <svg aria-hidden="true" viewBox="0 0 16 16"><path d="m3 8 3 3 7-7" /></svg>
+                    </span>
+                    <div><small>01</small><p>Open finance workspace</p></div>
+                    <span class="plan-state">DONE</span>
+                  </div>
+                  <div class="plan-row complete">
+                    <span class="plan-icon">
+                      <svg aria-hidden="true" viewBox="0 0 16 16"><path d="m3 8 3 3 7-7" /></svg>
+                    </span>
+                    <div><small>02</small><p>Filter by Vacation tag</p></div>
+                    <span class="plan-state">DONE</span>
+                  </div>
+                  <div class="plan-row active">
+                    <span class="plan-icon"><i></i></span>
+                    <div><small>03</small><p>Compare monthly totals</p></div>
+                    <span class="plan-state">RUNNING</span>
+                  </div>
+                </div>
+                <div class="observation-card">
+                  <div class="observation-head">
+                    <span><i></i> BROWSER OBSERVATION</span>
+                    <span>Firefly III</span>
+                  </div>
+                  <div class="mini-chart" aria-hidden="true">
+                    <div class="chart-labels"><span>$4k</span><span>$2k</span><span>$0</span></div>
+                  <div class="bars"><i class="bar-high"></i><i class="bar-low"></i></div>
+                    <div class="bar-names"><span>JUN</span><span>AUG</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="float-chip chip-a"><span>◈</span> Finance</div>
+            <div class="float-chip chip-b"><span>▶</span> Video</div>
+            <div class="float-chip chip-c"><span>⌁</span> Cross-app</div>
+          </div>
+        </div>
+
+        <div class="shell stat-rail reveal">
+          <div><strong>300</strong><span>human-curated tasks</span></div>
+          <div><strong>20</strong><span>self-hosted apps</span></div>
+          <div><strong>06</strong><span>domain categories</span></div>
+          <div><strong>04</strong><span>modalities</span></div>
+        </div>
+      </section>
+
+      <section class="app-marquee" aria-label="Applications included in the benchmark">
+        <div class="marquee-track">
+          <div class="marquee-set">
+            <span>Nextcloud</span><i></i><span>YouTube Lite</span><i></i><span>Mattermost</span><i></i><span>Immich</span><i></i><span>ERPNext</span><i></i><span>Penpot</span><i></i><span>Firefly III</span><i></i><span>Notion</span><i></i><span>PipeCRM</span><i></i><span>TravelMap</span><i></i>
+          </div>
+          <div class="marquee-set" aria-hidden="true">
+            <span>Nextcloud</span><i></i><span>YouTube Lite</span><i></i><span>Mattermost</span><i></i><span>Immich</span><i></i><span>ERPNext</span><i></i><span>Penpot</span><i></i><span>Firefly III</span><i></i><span>Notion</span><i></i><span>PipeCRM</span><i></i><span>TravelMap</span><i></i>
+          </div>
+        </div>
+      </section>
+
+      <section class="overview section" id="overview">
+        <div class="shell">
+          <div class="section-heading split-heading reveal">
+            <div>
+              <span class="section-kicker">01 / WHY WEBARENA PRO</span>
+              <h2>Everyday tools.<br><em>Demanding tasks.</em></h2>
+            </div>
+            <p>
+              Most reproducible web benchmarks cover a small set of visually similar apps. WebArena Pro
+              expands the surface area—with heterogeneous interfaces, stateful workflows, and media that
+              agents must actually understand.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card feature-large reveal">
+              <div class="feature-number">01</div>
+              <div class="modality-orbit" aria-hidden="true">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <img src="assets/logo-mark.svg" alt="">
+                <span class="orbit-tag orbit-text">TEXT</span>
+                <span class="orbit-tag orbit-vision">VISION</span>
+                <span class="orbit-tag orbit-audio">AUDIO</span>
+                <span class="orbit-tag orbit-video">VIDEO</span>
+              </div>
+              <div class="feature-copy">
+                <h3>Multimodal by design</h3>
+                <p>Audio and video are first-class observations, alongside text and vision.</p>
+              </div>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="feature-number">02</div>
+              <div class="app-stack" aria-hidden="true">
+                <div><span>NC</span><p>Nextcloud</p><i>Collaboration</i></div>
+                <div><span>YT</span><p>YouTube Lite</p><i>Video</i></div>
+                <div><span>PC</span><p>PipeCRM</p><i>CRM</i></div>
+              </div>
+              <div class="feature-copy">
+                <h3>Real application diversity</h3>
+                <p>Twenty self-hosted applications across six distinct domain categories.</p>
+              </div>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="feature-number">03</div>
+              <div class="isolation-visual" aria-hidden="true">
+                <div class="isolation-node"><span>01</span></div>
+                <svg viewBox="0 0 240 80"><path d="M44 40h54m44 0h54" /><path class="pulse-line" d="M44 40h152" /></svg>
+                <div class="isolation-core"><span></span></div>
+                <div class="isolation-node"><span>02</span></div>
+              </div>
+              <div class="feature-copy">
+                <h3>Repeatable, isolated runs</h3>
+                <p>Each task starts from controlled state and supports reproducible parallel evaluation.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="task-section section" id="tasks">
+        <div class="shell">
+          <div class="section-heading task-heading reveal">
+            <span class="section-kicker">02 / TASK EXPLORER</span>
+            <h2>Ten tasks. <em>Ten different worlds.</em></h2>
+            <p>Select an environment to preview a real task from the benchmark.</p>
+          </div>
+
+          <div class="task-explorer reveal">
+            <div class="task-tabs" role="tablist" aria-label="Benchmark task previews" data-task-tabs></div>
+            <article class="task-preview" data-task-panel aria-live="polite"></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="evaluation section" id="evaluation">
+        <div class="shell">
+          <div class="section-heading split-heading on-dark reveal">
+            <div>
+              <span class="section-kicker">03 / EVALUATION</span>
+              <h2>DAG-based<br><em>evaluation.</em></h2>
+            </div>
+            <p>
+              Current results use judge evaluation. DAG evaluation is coming soon,
+              using deterministic checks with judge escalation in fewer than 30% of tasks.
+            </p>
+          </div>
+
+          <div class="evaluation-flow reveal">
+            <article>
+              <span class="flow-id">01</span>
+              <div class="flow-icon">
+                <svg aria-hidden="true" viewBox="0 0 32 32"><path d="M7 8h18v16H7zM11 13h10M11 18h7" /></svg>
+              </div>
+              <h3>Natural-language goal</h3>
+              <p>A human-curated instruction grounded in realistic data and context.</p>
+            </article>
+            <div class="flow-arrow" aria-hidden="true"><span></span></div>
+            <article>
+              <span class="flow-id">02</span>
+              <div class="flow-icon">
+                <svg aria-hidden="true" viewBox="0 0 32 32"><path d="M8 5h16v22H8zM12 10h8M12 15h8M12 20h5" /></svg>
+              </div>
+              <h3>Browser interaction</h3>
+              <p>The agent observes, reasons, and acts within fully functional applications.</p>
+            </article>
+            <div class="flow-arrow" aria-hidden="true"><span></span></div>
+            <article>
+              <span class="flow-id">03</span>
+              <div class="flow-icon">
+                <svg aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" /><path d="m11 16 3 3 7-8" /></svg>
+              </div>
+              <h3>Judge evaluation</h3>
+              <p>A judge evaluates task success for the current results. DAG-based verification is coming soon.</p>
+            </article>
+          </div>
+
+          <div class="results-card reveal" id="results">
+            <div class="results-heading">
+              <h3>Benchmark results</h3>
+              <span class="results-badge">Judge evaluation</span>
+            </div>
+            <p class="results-note" id="results-note">
+              These results are computed using judge evaluation. <strong>DAG evaluation is coming soon.</strong>
+            </p>
+            <p class="results-scroll-hint">Scroll horizontally to view all domains.</p>
+            <div class="results-table-wrap" role="region" aria-label="Benchmark results by domain and step budget" tabindex="0">
+              <table class="results-table" aria-describedby="results-note results-legend">
+                <caption>Success rates (%) by domain at 30-step and 50-step budgets.</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Productivity</th>
+                    <th scope="col">Communication</th>
+                    <th scope="col">Analytics</th>
+                    <th scope="col">Business<br>operations</th>
+                    <th scope="col">Design<br>&amp; media</th>
+                    <th scope="col">Travel</th>
+                    <th scope="col" class="results-overall">Overall</th>
+                  </tr>
+                </thead>
+                  <tbody>
+                    <tr class="results-budget"><th scope="rowgroup" colspan="8">30-step budget</th></tr>
+                    <tr>
+                      <th scope="row">Gemini 3.1 Pro</th>
+                      <td>30.4</td>
+                      <td>26.7</td>
+                      <td>37.5</td>
+                      <td>22.0</td>
+                      <td>32.0</td>
+                      <td><strong>33.3</strong></td>
+                      <td class="results-overall">29.3</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gemini 3.1 Flash Lite</th>
+                      <td>14.3</td>
+                      <td>13.3</td>
+                      <td>37.5</td>
+                      <td>19.0</td>
+                      <td>27.8</td>
+                      <td>22.2</td>
+                      <td class="results-overall">21.4</td>
+                    </tr>
+                    <tr class="results-leader">
+                      <th scope="row">GPT-5.5</th>
+                      <td><strong>32.1</strong></td>
+                      <td><strong>28.9</strong></td>
+                      <td><strong>43.8</strong></td>
+                      <td><strong>39.0</strong></td>
+                      <td><strong>34.0</strong></td>
+                      <td>22.2</td>
+                      <td class="results-overall"><strong>33.3</strong></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Claude Opus 4.7</th>
+                      <td>16.1</td>
+                      <td>20.0</td>
+                      <td>25.0</td>
+                      <td>15.3</td>
+                      <td>29.9</td>
+                      <td>22.2</td>
+                      <td class="results-overall">22.0</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Qwen3.6-27B</th>
+                      <td>8.9</td>
+                      <td>15.6</td>
+                      <td>12.5</td>
+                      <td>8.5</td>
+                      <td>17.5</td>
+                      <td>18.5</td>
+                      <td class="results-overall">13.7</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Qwen3.5-9B</th>
+                      <td>3.6</td>
+                      <td>0.0</td>
+                      <td>6.2</td>
+                      <td>5.1</td>
+                      <td>11.3</td>
+                      <td>3.7</td>
+                      <td class="results-overall">6.0</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gemma4-31B</th>
+                      <td>21.4</td>
+                      <td>20.0</td>
+                      <td>37.5</td>
+                      <td>22.0</td>
+                      <td>20.6</td>
+                      <td>29.6</td>
+                      <td class="results-overall">22.7</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gemma4-24B-A4B</th>
+                      <td>17.9</td>
+                      <td>24.4</td>
+                      <td>25.0</td>
+                      <td>22.0</td>
+                      <td>18.8</td>
+                      <td>14.8</td>
+                      <td class="results-overall">20.1</td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr class="results-budget"><th scope="rowgroup" colspan="8">50-step budget</th></tr>
+                    <tr>
+                      <th scope="row">Gemini 3.1 Pro</th>
+                      <td>37.5</td>
+                      <td>33.3</td>
+                      <td>43.8</td>
+                      <td>27.1</td>
+                      <td>43.3</td>
+                      <td><strong>37.0</strong></td>
+                      <td class="results-overall">37.0</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gemini 3.1 Flash Lite</th>
+                      <td>19.6</td>
+                      <td>26.7</td>
+                      <td>43.8</td>
+                      <td>25.9</td>
+                      <td>34.0</td>
+                      <td>25.9</td>
+                      <td class="results-overall">28.4</td>
+                    </tr>
+                    <tr class="results-leader">
+                      <th scope="row">GPT-5.5</th>
+                      <td><strong>41.1</strong></td>
+                      <td><strong>35.6</strong></td>
+                      <td>50.0</td>
+                      <td><strong>42.4</strong></td>
+                      <td><strong>45.4</strong></td>
+                      <td>25.9</td>
+                      <td class="results-overall"><strong>41.0</strong></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Claude Opus 4.7</th>
+                      <td>17.9</td>
+                      <td>22.2</td>
+                      <td>37.5</td>
+                      <td>20.3</td>
+                      <td>40.2</td>
+                      <td>29.6</td>
+                      <td class="results-overall">28.3</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Qwen3.6-27B</th>
+                      <td>10.7</td>
+                      <td>15.6</td>
+                      <td>12.5</td>
+                      <td>8.5</td>
+                      <td>20.6</td>
+                      <td>18.5</td>
+                      <td class="results-overall">15.0</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Qwen3.5-9B</th>
+                      <td>5.4</td>
+                      <td>4.4</td>
+                      <td>6.2</td>
+                      <td>6.8</td>
+                      <td>17.5</td>
+                      <td>3.7</td>
+                      <td class="results-overall">9.3</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gemma4-31B</th>
+                      <td>26.8</td>
+                      <td>28.9</td>
+                      <td><strong>56.2</strong></td>
+                      <td>25.4</td>
+                      <td>23.7</td>
+                      <td>29.6</td>
+                      <td class="results-overall">27.7</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gemma4-24B-A4B</th>
+                      <td>23.2</td>
+                      <td><strong>35.6</strong></td>
+                      <td>43.8</td>
+                      <td>25.4</td>
+                      <td>21.9</td>
+                      <td>14.8</td>
+                      <td class="results-overall">25.4</td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
+            <p class="results-legend" id="results-legend">Bold values indicate the highest success rate in each column within each step budget, including ties.</p>
+          </div>
+
+          <div class="challenge-card reveal">
+            <div class="challenge-copy">
+              <span class="mono-label">CURRENT FRONTIER</span>
+              <h3>There is still a long way to go.</h3>
+              <p>
+                Under judge evaluation, GPT-5.5 reaches the highest overall success rate of <strong>41.0%</strong> with a 50-step budget—leaving a
+                meaningful capability gap for the community to close.
+              </p>
+            </div>
+            <div class="score-gauge" role="img" aria-label="GPT-5.5 success rate: 41 percent">
+              <div class="gauge-meta"><span>Task success</span><span>100%</span></div>
+              <div class="gauge-track"><span></span><i></i></div>
+              <div class="gauge-score"><strong>41.0</strong><span>%</span></div>
+              <p>GPT-5.5 · 50-step budget · Judge evaluation</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="paper-section section" id="citation">
+        <div class="shell paper-layout">
+          <div class="paper-copy reveal">
+            <span class="section-kicker">04 / PAPER &amp; CODE</span>
+            <h2>Build on<br><em>WebArena Pro.</em></h2>
+            <p>
+              Read the methodology, reproduce the evaluation, and help advance capable web agents.
+            </p>
+            <div class="paper-links">
+              <a
+                class="button button-primary"
+                href="https://openreview.net/forum?id=eMuJZXwAn1"
+                target="_blank"
+                rel="noreferrer"
+              >Paper <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M5 15 15 5M7 5h8v8" /></svg></a>
+              <span class="button button-coming-soon">Code coming soon</span>
+            </div>
+          </div>
+
+          <div class="citation-card reveal">
+            <div class="citation-top">
+              <span>BIBTEX</span>
+              <button type="button" data-copy-citation>
+                <svg aria-hidden="true" viewBox="0 0 20 20"><rect x="6" y="6" width="10" height="10" rx="1" /><path d="M4 13H3V3h10v1" /></svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <pre><code data-citation>@inproceedings{kerboua2026webarenapro,
+  title  = {WebArena-Pro: A Heterogeneous,
+            Multimodal, Reproducible Benchmark
+            for Web Agents},
+  author = {Kerboua, Imene and Pesaran, Fatemeh
+            and Lu, Xing Han and others},
+  booktitle = {AIWILD at ICML},
+  year   = {2026}
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="shell authors reveal">
+          <span class="mono-label">AUTHORS</span>
+          <p>
+            Imene Kerboua · Fatemeh Pesaran · Xing Han Lu · Weijian Qi · Alexander Miller · Junyi Song ·
+            Yunjia Tian · Dongjin Kang · Seyeon Choi · Marzia Nouri · Ewen Gueguen · Matteo Boglioni ·
+            Fengyuan Liu · Zeyi Liao · Mengqi Yuan · Yue Li · Alexandre Lacoste · Alexandre Drouin ·
+            Spandana Gella · Huan Sun · Gunhee Kim · Siva Reddy
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-main">
+        <a class="brand footer-brand" href="#top" aria-label="WebArena Pro home">
+          <img src="assets/logo-mark.svg" alt="" width="42" height="42">
+          <span>WebArena <strong>Pro</strong></span>
+        </a>
+        <p>A benchmark for the next generation of web agents.</p>
+        <div class="footer-links">
+          <a href="https://openreview.net/forum?id=eMuJZXwAn1" target="_blank" rel="noreferrer">Paper</a>
+          <a href="https://github.com/McGill-NLP/webarena-pro" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.servicenow.com/research/publication/imene-kerboua-weba-icml-workshops2026.html" target="_blank" rel="noreferrer">Publication</a>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <span>© 2026 WebArena Pro</span>
+        <span>Research collaboration · McGill · Mila · ServiceNow Research</span>
+      </div>
+    </footer>
+
+    <dialog class="screenshot-dialog" data-screenshot-dialog aria-labelledby="screenshot-dialog-title">
+      <div class="dialog-bar">
+        <div>
+          <span>AUTHENTIC ENVIRONMENT CAPTURE</span>
+          <strong id="screenshot-dialog-title" data-screenshot-title>Website preview</strong>
+        </div>
+        <button type="button" aria-label="Close screenshot" data-close-screenshot>
+          <svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 5 10 10M15 5 5 15" /></svg>
+        </button>
+      </div>
+      <div class="dialog-image-wrap">
+        <img data-dialog-image src="assets/screenshots/acidwave.jpg" alt="Acidwave website screenshot" width="1440" height="900">
+      </div>
+    </dialog>
+  </body>
+</html>
