@@ -65,9 +65,9 @@ const tasks = [
     short: "YT",
     color: "#dc2626",
     url: "yt-lite.local",
-    type: "Video understanding",
-    tags: ["Video", "Single-app", "Information seeking"],
-    prompt: "In the video “Koo Koo – Forklift (Dance-A-Long)”, do they dance in a real or virtual warehouse?",
+    type: "Video understanding and design",
+    tags: ["Video", "2 apps", "Content creation"],
+    prompt: "Find a video related to breakfast recipes, identify the three main fruit ingredients shown in the video, and use Penpot to draw three circles in the colors of those fruits.",
   },
   {
     id: "nextcloud",
