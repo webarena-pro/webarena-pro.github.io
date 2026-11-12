@@ -123,35 +123,35 @@ scores display as “—”.
 
 ## Result submissions
 
-The leaderboard's **Submit results** link opens `submit.html`. The form prepares
-one JSON result for the complete Test split at a 50-step, 100-step, or unlimited
-budget, with agent/model information, versions, harness, benchmark revision,
-overall success rate, and a trace archive URL. Code and paper URLs are optional.
+The leaderboard's **Submit results** link opens `submit.html`. The form opens a
+prefilled GitHub **issue** with agent/model information, versions, benchmark
+revision, the reported SR and budget, a small scoring ZIP URL and SHA-256, and a
+separate full-traces URL. Code and paper URLs are optional. Contributors do not
+need to fork the repository or open a pull request.
 
-The contributor reviews/downloads the JSON, continues to GitHub's new-file
-editor, commits to a branch or fork, and opens a pull request against `main`.
-Large submissions fall back to downloading or copying the JSON. The website
-needs no authentication tokens or submission backend. GitHub handles login,
-commits, and pull requests; the form does not create a PR automatically.
+`.github/workflows/validate-submission.yml` runs when a submission issue is
+opened, edited, or reopened. It parses the shared submission schema, downloads
+the checksum-pinned JSON-only ZIP, and uses `scripts/scoring.py` to recompute SR
+for AgentLab or Harbor. The workflow fails on score disagreement at one decimal
+place, incomplete Test coverage, invalid/ungraded artifacts, or an unsupported
+budget. A bot comment reports the result on the issue. CI downloads no full
+traces and executes no submitted code.
 
-`submission-schema.js` shares field validation between the form and CI.
-`scripts/build-site.cjs` validates `submissions/*.json` and embeds their
-leaderboard entries into `_site/index.html`. CI checks format, score ranges,
-budgets, complete-split declarations, and URLs. It does not fetch traces or
-verify reported scores. Maintainers review the evidence before merging; the
-existing Pages deployment then publishes the merged result automatically.
+Maintainers review the full traces, settings, and retry policy before accepting
+a result. This check verifies score aggregation, not trace authenticity or a
+new benchmark execution. After approval, maintainers save the issue's JSON
+under `submissions/`. The Pages workflow rechecks its score, then
+`scripts/build-site.cjs` embeds it in `_site/index.html` for publication.
+Existing historical baselines in `script.js` are unchanged by this workflow.
 
-Trace requirements accept AgentLab, Harbor/coding-agent, and equivalent harness
-outputs. Preserve per-task results, full traces (including unsuccessful and
-interrupted runs), referenced media, and reproducibility settings. See
-[submissions/README.md](submissions/README.md) for the JSON contract, exact
-artifact paths, manual PR instructions, and validation commands.
+See [scoring/README.md](scoring/README.md) for archive creation and scoring rules,
+and [submissions/README.md](submissions/README.md) for maintainer instructions.
 
 ## Deploy with GitHub Pages
 
 The workflow in `.github/workflows/pages.yml` validates pull requests targeting
 `main` and deploys pushes to `main`. It can also be started manually from the
-Actions tab; only runs on `main` can deploy. It validates JavaScript and submission records, runs the submission tests,
+Actions tab; only runs on `main` can deploy. It validates JavaScript and submission records, runs the JavaScript/Python submission tests, verifies accepted scoring archives,
 builds the static site with Node.js, and deploys `_site/` to the `github-pages`
 environment. No package installation or third-party build dependencies are needed.
 

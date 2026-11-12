@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Submit a WebArena-Pro result with your agent, model, success rate, and evaluation traces as a pull request.">
+    <meta name="description" content="Submit a WebArena-Pro result with your agent, model, success rate, and evaluation traces as a GitHub issue.">
     <meta name="theme-color" content="#0d1b2a">
     <title>Submit results | WebArena-Pro</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=submission-pr-1">
-    <script src="submission-schema.js?v=1" defer></script>
-    <script src="submission.js?v=submission-pr-1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=submission-issue-scoring-1">
+    <script src="submission-schema.js?v=2" defer></script>
+    <script src="submission.js?v=submission-issue-scoring-1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -29,8 +29,8 @@
       <p class="submission-eyebrow">WebArena-Pro leaderboard</p>
       <h1>Submit your results</h1>
       <p class="submission-intro">
-        Share your agent’s performance and evaluation traces through a pull request.
-        Prepare your result here, propose the file on GitHub, and have it reviewed before publication.
+        Share your agent’s performance and evaluation traces through a GitHub issue.
+        CI recomputes your success rate from a small scoring archive before maintainer review.
       </p>
       <p class="submission-required-note">All fields are required unless marked optional. Submit one result per step budget for the complete Test split (300 tasks).</p>
 
@@ -49,7 +49,7 @@
             <div class="submission-field">
               <label for="submission-sr">Average SR (%)</label>
               <input id="submission-sr" name="averageSR" type="number" min="0" max="100" step="any" placeholder="e.g. 41.0" aria-describedby="submission-sr-help" required>
-              <p id="submission-sr-help" class="submission-help">Percentage of the 300 Test tasks with a final reward of 1 at the selected budget. Reviewers verify the score against your traces.</p>
+              <p id="submission-sr-help" class="submission-help">Percentage of the 300 Test tasks with a final reward of 1 at the selected budget. CI verifies this score against your scoring archive.</p>
             </div>
             <div class="submission-field">
               <label for="submission-budget">Step budget</label>
@@ -72,8 +72,11 @@
             </div>
             <div class="submission-field">
               <label for="submission-harness">Evaluation harness</label>
-              <input id="submission-harness" name="harness" type="text" list="harness-options" maxlength="100" placeholder="AgentLab, Harbor, or another harness" required>
-              <datalist id="harness-options"><option value="AgentLab"><option value="Harbor"></datalist>
+              <select id="submission-harness" name="harness" required>
+                <option value="" selected>Select a harness</option>
+                <option value="AgentLab">AgentLab</option>
+                <option value="Harbor">Harbor / coding agents</option>
+              </select>
             </div>
             <div class="submission-field">
               <label for="submission-harness-version">Harness version</label>
@@ -106,55 +109,52 @@
         </fieldset>
 
         <fieldset>
-          <legend>Evaluation traces <span class="submission-required-badge">Required</span></legend>
+          <legend>Scoring archive <span class="submission-required-badge">Required for CI</span></legend>
+          <p class="submission-help">Provide a small, public ZIP of scoring JSON files, separate from the full traces. Use the <a href="https://github.com/webarena-pro/webarena-pro.github.io/blob/main/scoring/README.md">archive creation tool and instructions</a> to package the selected attempt for each of the 300 Test tasks.</p>
+          <p class="submission-help">CI checks the archive’s SHA-256, task coverage, and step budget, then compares the computed and reported SR to one decimal place. Missing or ungraded scores fail validation. ZIP limit: 25 MiB; no screenshots or large traces are needed for this check.</p>
+          <div class="submission-fields">
+            <div class="submission-field submission-field-wide">
+              <label for="submission-scoring-archive">Scoring archive URL</label>
+              <input id="submission-scoring-archive" name="scoringArchive" type="url" pattern="https://.+" maxlength="2000" placeholder="https://…/scores.zip" required>
+              <p class="submission-help">Use a direct HTTPS download that CI can access without signing in. Pin dataset links to a revision.</p>
+            </div>
+            <div class="submission-field submission-field-wide">
+              <label for="submission-scoring-sha">Scoring archive SHA-256</label>
+              <input id="submission-scoring-sha" name="scoringSha256" type="text" pattern="[a-f0-9]{64}" minlength="64" maxlength="64" placeholder="64-character checksum printed by the archive tool" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Full evaluation traces <span class="submission-required-badge">Required</span></legend>
           <div class="submission-trace-note" id="submission-trace-help">
             <p>Link to a downloadable archive or folder with per-task results, complete execution traces, and the run configuration. Include every evaluated task, including failures and interrupted runs.</p>
             <ul>
               <li><strong>AgentLab:</strong> per-task summaries (<code>summary_info.json</code> or <code>summary.json</code>), step logs, and recorded screenshots.</li>
               <li><strong>Harbor / coding agents:</strong> each trial’s <code>result.json</code>, <code>verifier/reward.json</code> for graded trials, <code>agent/</code> logs (including <code>trajectory.json</code> when produced), and collected WebArena-Pro evidence under <code>artifacts/</code>.</li>
-              <li><strong>Other harnesses:</strong> equivalent per-task scores, agent/tool interactions, observations, and evaluation evidence.</li>
             </ul>
             <p>Include recorded screenshots and referenced media. Explain missing or interrupted artifacts; ungraded runs must be distinguishable from scored failures. Make the archive accessible to reviewers.</p>
             <p class="submission-help">Use a stable archive or dataset URL. Keep credentials and access tokens out of the submission. A trace viewer can supplement the original artifacts.</p>
           </div>
           <div class="submission-field">
-            <label for="submission-traces">Traces URL</label>
+            <label for="submission-traces">Full traces URL</label>
             <input id="submission-traces" name="traces" type="url" pattern="https?://.+" maxlength="2000" placeholder="https://…" aria-describedby="submission-trace-help" required>
           </div>
           <label class="submission-confirmation" for="submission-confirm">
             <input id="submission-confirm" name="traceConfirmation" type="checkbox" required>
-            <span>I confirm that the linked artifacts include per-task results, full execution traces for all evaluated tasks, and the configuration needed to reproduce this run.</span>
+            <span>I confirm that the scoring archive covers all 300 Test tasks and that the full traces include all evaluated attempts, failures, and the run configuration.</span>
           </label>
         </fieldset>
 
         <div class="submission-actions">
-          <button class="paper-link paper-link-primary" type="submit" disabled>Open a pull request</button>
-          <p>You’ll review a result file, commit it on a branch or fork, and open a pull request on GitHub. Your result is published after review and merge.</p>
+          <button class="paper-link paper-link-primary" type="submit" disabled>Open an issue <span aria-hidden="true">↗</span></button>
+          <p>Review and submit the prefilled issue on GitHub. CI posts the scoring check result there; maintainers review the evidence before adding your result to the leaderboard.</p>
         </div>
         <p class="submission-error" role="alert" data-submission-error hidden></p>
         <noscript>
-          <p>JavaScript is needed to prepare a result file here. Follow the <a href="https://github.com/webarena-pro/webarena-pro.github.io/tree/main/submissions">manual pull-request instructions</a> to submit without this form.</p>
+          <p>JavaScript is needed to prepare the submission issue. See the <a href="https://github.com/webarena-pro/webarena-pro.github.io/blob/main/scoring/README.md">scoring archive instructions</a> for the required files.</p>
         </noscript>
       </form>
-      <section class="submission-ready" data-submission-ready aria-labelledby="submission-ready-title" tabindex="-1" hidden>
-        <h2 id="submission-ready-title">Your submission is ready</h2>
-        <p data-submission-file></p>
-        <ol>
-          <li>Continue to GitHub and review the result file. Sign in if prompted.</li>
-          <li>Choose <strong>Propose changes</strong> or commit to a <strong>new branch</strong>. GitHub creates a fork if needed.</li>
-          <li>Open a pull request against <strong>main</strong>. Reviewers will check your traces; merging publishes your result.</li>
-        </ol>
-        <p class="submission-help" data-submission-fallback hidden>The result is too large to prefill a GitHub link. Copy the JSON below into GitHub’s file editor, or download it and add it to your fork.</p>
-        <div class="submission-actions">
-          <a class="paper-link paper-link-primary" data-submission-github>Continue on GitHub ↗</a>
-          <a class="paper-link" data-submission-download>Download result JSON</a>
-        </div>
-        <details>
-          <summary>Review or copy the result JSON</summary>
-          <label class="visually-hidden" for="submission-json">Result JSON</label>
-          <textarea id="submission-json" data-submission-json rows="16" readonly spellcheck="false"></textarea>
-        </details>
-      </section>
     </main>
 
     <footer class="site-footer shell">

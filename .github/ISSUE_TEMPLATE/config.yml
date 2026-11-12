@@ -2,4 +2,4 @@ blank_issues_enabled: true
 contact_links:
   - name: Submit a leaderboard result
     url: https://webarena-pro.github.io/submit.html
-    about: Prepare a result file and submit it through a pull request.
+    about: Open a prefilled issue with a scoring archive and full traces.

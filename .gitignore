@@ -2,3 +2,5 @@ _site/
 .DS_Store
 __pycache__/
 *.py[cod]
+.score-input.json
+.score-report.json

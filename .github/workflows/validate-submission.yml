@@ -1,0 +1,43 @@
+name: Validate submitted success rate
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: submission-score-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: >-
+      contains(github.event.issue.body, '<!-- webarena-submission:v2 -->') ||
+      startsWith(github.event.issue.title, '[Leaderboard]') ||
+      contains(github.event.changes.body.from, '<!-- webarena-submission:v2 -->') ||
+      startsWith(github.event.changes.title.from, '[Leaderboard]')
+    name: Recompute submitted SR
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Check out trusted default-branch validator
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Read submission metadata
+        run: node scripts/read-issue.cjs "$GITHUB_EVENT_PATH" .score-input.json
+
+      - name: Download scoring archive and recompute SR
+        run: python3 scripts/scoring.py verify .score-input.json --report .score-report.json
+
+      - name: Report result on the issue
+        if: ${{ !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/report-score.cjs

@@ -3,7 +3,7 @@
   const repository = "https://github.com/webarena-pro/webarena-pro.github.io";
   const fields = ["schemaVersion", "id", "agent", "agentVersion", "model", "averageSR",
     "stepBudget", "website", "code", "paper", "traces", "harness", "harnessVersion",
-    "benchmarkRevision", "split", "taskCount", "traceContentsConfirmed", "domainScores"];
+    "benchmarkRevision", "split", "taskCount", "traceContentsConfirmed", "domainScores", "scoringArchive", "scoringSha256"];
 
   function validateSubmission(record) {
     if (!record || typeof record !== "object" || Array.isArray(record)) return ["The result must be a JSON object."];
@@ -32,7 +32,7 @@
     if (!["50", "100", "unlimited"].includes(record.stepBudget)) {
       errors.push('stepBudget must be "50", "100", or "unlimited".');
     }
-    for (const key of ["website", "code", "paper", "traces"]) {
+    for (const key of ["website", "code", "paper", "traces", "scoringArchive"]) {
       const value = record[key];
       if (["code", "paper"].includes(key) && value === null) continue;
       try {
@@ -40,15 +40,20 @@
             /[\s\u0000-\u001f\u007f]/.test(value)) throw new Error();
         const url = new URL(value);
         if (!["http:", "https:"].includes(url.protocol) || !url.hostname || url.username || url.password) throw new Error();
+        if (key === "scoringArchive" && (url.protocol !== "https:" || (url.port && url.port !== "443") || url.hash)) throw new Error();
       } catch {
-        errors.push(`${key} must be an HTTP(S) URL without embedded credentials.`);
+        errors.push(key === "scoringArchive" ? "scoringArchive must be an HTTPS URL on port 443 without credentials or a fragment." : `${key} must be an HTTP(S) URL without embedded credentials.`);
       }
+    }
+    if (!["AgentLab", "Harbor"].includes(record.harness)) errors.push("Automatic scoring supports AgentLab and Harbor.");
+    if (typeof record.scoringSha256 !== "string" || !/^[a-f0-9]{64}$/.test(record.scoringSha256)) {
+      errors.push("scoringSha256 must be the 64-character SHA-256 printed by the scoring archive tool.");
     }
     if (record.split !== "test" || record.taskCount !== 300) {
       errors.push("Leaderboard submissions must cover the complete Test split (300 tasks).");
     }
     if (record.traceContentsConfirmed !== true) {
-      errors.push("Confirm that the archive contains results, full traces, and run configuration.");
+      errors.push("Confirm that the scoring archive covers all tasks and the full traces include every attempt and run configuration.");
     }
     if (!Array.isArray(record.domainScores) || record.domainScores.length !== 6 ||
         record.domainScores.some(score => score !== null && (!Number.isFinite(score) || score < 0 || score > 100))) {
@@ -73,6 +78,8 @@
       code: values.code || null,
       paper: values.paper || null,
       traces: values.traces,
+      scoringArchive: values.scoringArchive,
+      scoringSha256: values.scoringSha256,
       harness: values.harness,
       harnessVersion: values.harnessVersion,
       benchmarkRevision: values.benchmarkRevision,
@@ -85,11 +92,25 @@
 
   function filename(record) { return `submissions/${record.id}.json`; }
 
-  function githubFileUrl(record, includeContent = true) {
-    const url = new URL(`${repository}/new/main`);
-    url.searchParams.set("filename", filename(record));
-    url.searchParams.set("message", `Add ${record.agent} / ${record.model} / ${record.stepBudget} steps`);
-    if (includeContent) url.searchParams.set("value", JSON.stringify(record, null, 2) + "\n");
+  function githubIssueUrl(record) {
+    const url = new URL(`${repository}/issues/new`);
+    url.searchParams.set("title", `[Leaderboard] ${record.agent} / ${record.model} / ${record.stepBudget} steps`.slice(0, 240));
+    const body = [
+      "## Result",
+      `- Agent: ${record.agent} (${record.agentVersion})`,
+      `- Model: ${record.model}`,
+      `- Reported SR: ${record.averageSR}%`,
+      `- Step budget: ${record.stepBudget}`,
+      `- Harness: ${record.harness} (${record.harnessVersion})`,
+      `- Benchmark revision: ${record.benchmarkRevision}`,
+      "", "## Evidence",
+      `- Scoring archive: ${record.scoringArchive}`,
+      `- Full traces: ${record.traces}`,
+      "", "I confirm that the scoring archive covers all 300 Test tasks and the full traces include failures, interrupted runs, and retry details.",
+      "", "CI verifies the archive checksum and recomputes SR. Maintainers review the underlying evidence before publishing.",
+      "", "<!-- webarena-submission:v2 -->", "```json", JSON.stringify(record), "```",
+    ].join("\n");
+    url.searchParams.set("body", body);
     return url.href;
   }
 
@@ -103,7 +124,7 @@
     };
   }
 
-  const api = { validateSubmission, fromForm, filename, githubFileUrl, toLeaderboardEntry };
+  const api = { validateSubmission, fromForm, filename, githubIssueUrl, toLeaderboardEntry };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.SubmissionData = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);

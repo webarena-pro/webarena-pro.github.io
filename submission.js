@@ -1,20 +1,9 @@
 const submissionForm = document.querySelector("[data-submission-form]");
 const submissionError = document.querySelector("[data-submission-error]");
-const submissionReady = document.querySelector("[data-submission-ready]");
-let submissionDownloadUrl;
 
-function clearPreparedSubmission() {
-  submissionReady.hidden = true;
-  submissionError.hidden = true;
-  if (submissionDownloadUrl) URL.revokeObjectURL(submissionDownloadUrl);
-  submissionDownloadUrl = null;
-}
-
-submissionForm.addEventListener("input", clearPreparedSubmission);
-submissionForm.addEventListener("change", clearPreparedSubmission);
 submissionForm.addEventListener("submit", event => {
   event.preventDefault();
-  clearPreparedSubmission();
+  submissionError.hidden = true;
   if (!submissionForm.reportValidity()) return;
   const values = Object.fromEntries([...new FormData(submissionForm)]
     .map(([key, value]) => [key, value.trim()]));
@@ -25,24 +14,13 @@ submissionForm.addEventListener("submit", event => {
     submissionError.hidden = false;
     return;
   }
-
-  const json = JSON.stringify(record, null, 2) + "\n";
-  const path = SubmissionData.filename(record);
-  const fullUrl = SubmissionData.githubFileUrl(record);
-  // GitHub may reject oversized URLs. Keep the download and manual editor usable.
-  const needsManualPaste = fullUrl.length > 7000;
-  submissionReady.querySelector("[data-submission-github]").href = needsManualPaste
-    ? SubmissionData.githubFileUrl(record, false) : fullUrl;
-  submissionReady.querySelector("[data-submission-fallback]").hidden = !needsManualPaste;
-  submissionReady.querySelector("[data-submission-json]").value = json;
-  submissionReady.querySelector("[data-submission-file]").textContent = path;
-
-  submissionDownloadUrl = URL.createObjectURL(new Blob([json], { type: "application/json" }));
-  const download = submissionReady.querySelector("[data-submission-download]");
-  download.href = submissionDownloadUrl;
-  download.download = `${record.id}.json`;
-  submissionReady.hidden = false;
-  submissionReady.focus();
+  const url = SubmissionData.githubIssueUrl(record);
+  if (url.length > 8000) {
+    submissionError.textContent = "These links are too long to prepare the GitHub issue. Use shorter stable archive and resource URLs.";
+    submissionError.hidden = false;
+    return;
+  }
+  window.location.assign(url);
 });
 
 submissionForm.querySelector('button[type="submit"]').disabled = false;

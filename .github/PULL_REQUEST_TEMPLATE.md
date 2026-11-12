@@ -1,15 +1,14 @@
 ## Changes
 
-Describe the change. For a leaderboard submission, name the agent, model, and step budget.
+Describe the change. New leaderboard contributors should use the [submission form](https://webarena-pro.github.io/submit.html) to open an issue.
 
-## Leaderboard submissions
+## Accepting a reviewed result (maintainers)
 
-If this PR adds or updates a result in `submissions/`:
+If this PR adds or updates `submissions/*.json`, link the submission issue:
 
-- [ ] The result covers the complete Test split (300 tasks) at the declared budget.
-- [ ] The linked archive contains all task outcomes, full traces, and run configuration, including failures and interrupted runs.
-- [ ] Retries and the attempts used in the reported score are identified.
-- [ ] Reviewers can access the artifacts, and no credentials or access tokens are committed.
-- [ ] Agent, model, harness, and benchmark versions are identified in the submission or archive.
+- [ ] The latest issue scoring check passed for the exact archive checksum in this record.
+- [ ] Full traces and evaluation settings have been reviewed, including failures, interrupted runs, and selected retries.
+- [ ] The result covers all 300 Test tasks at the declared budget and identifies agent, model, harness, and benchmark versions.
+- [ ] The archives remain accessible and contain no credentials or access tokens.
 
-CI checks the result file format. Maintainers must review the evidence and verify the score before merging; merging publishes the entry.
+CI recomputes SR from the scoring ZIP and rejects a mismatch. Merging publishes the accepted result; aggregation checks do not replace evidence review.

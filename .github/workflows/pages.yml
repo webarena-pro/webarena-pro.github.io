@@ -31,7 +31,12 @@ jobs:
           node --check submission-schema.js
 
       - name: Test submission flow
-        run: node --test tests/*.test.cjs
+        run: |
+          node --test tests/*.test.cjs
+          python3 -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Verify accepted result scores
+        run: python3 scripts/scoring.py verify-directory submissions
 
       - name: Prepare site artifact
         run: node scripts/build-site.cjs
