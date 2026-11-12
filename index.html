@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebArena-Pro: A Heterogeneous, Multimodal, Reproducible Benchmark for Web Agents. Research paper, evaluation results, and benchmark task examples.">
+    <meta name="theme-color" content="#0d1b2a">
+    <meta property="og:title" content="WebArena-Pro: A Benchmark for Web Agents">
+    <meta property="og:description" content="300 human-curated tasks across 20 self-hosted applications, spanning text, vision, audio, and video.">
+    <title>WebArena-Pro | A Benchmark for Web Agents</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=leaderboard-results-20261110">
+    <script src="script.js?v=all-website-tasks-20261111" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell nav-wrap">
+        <a class="brand" href="#top" aria-label="WebArena Pro home">
+          <img src="assets/logo-mark.svg" alt="" width="32" height="32">
+          <span>WebArena <strong>Pro</strong></span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#results">Results</a>
+          <a href="#abstract">Abstract</a>
+          <a href="#tasks">Tasks</a>
+          <a href="#citation">Citation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="shell">
+      <section class="paper-header" id="top" aria-labelledby="paper-title">
+        <h1 id="paper-title">
+          <span class="paper-name">
+            <img src="assets/logo-mark.svg" alt="" width="60" height="60">
+            <span>WebArena-<span class="brand-accent">Pro</span></span>
+          </span>
+          <span class="paper-subtitle">A Heterogeneous, Multimodal, Reproducible<br class="desktop-break"> Benchmark for Web Agents</span>
+        </h1>
+        <p class="author-list">
+          <span>Imene Kerboua<sup>*†</sup></span>
+          <span>Fatemeh Pesaran<sup>*†</sup></span>
+          <span>Xing Han Lu<sup>†</sup></span>
+          <span>Weijian Qi</span>
+          <span>Alexander Miller</span>
+          <span>Junyi Song</span>
+          <span>Yunjia Tian</span>
+          <span>Dongjin Kang</span>
+          <span>Seyeon Choi</span>
+          <span>Marzia Nouri</span>
+          <span>Ewen Gueguen</span>
+          <span>Matteo Boglioni</span>
+          <span>Fengyuan Liu</span>
+          <span>Zeyi Liao</span>
+          <span>Mengqi Yuan</span>
+          <span>Yue Li</span>
+          <span>Alexandre Lacoste</span>
+          <span>Alexandre Drouin</span>
+          <span>Spandana Gella</span>
+          <span>Huan Sun</span>
+          <span>Gunhee Kim</span>
+          <span>Siva Reddy</span>
+        </p>
+        <p class="author-note">
+          <span><sup>*</sup> Equal contributions.</span>
+          <span><sup>†</sup> Corresponding authors.</span>
+        </p>
+        <p class="venue">Accepted at NeurIPS 2026 · E&amp;D Track</p>
+        <div class="paper-links">
+          <!-- Add href URLs and remove role, aria-disabled, and title when these resources are available. -->
+          <a class="paper-resource" role="link" aria-disabled="true" title="arXiv link coming soon">
+            <img src="assets/icons/arxiv.svg" alt="" width="24" height="24">
+            <span>arXiv</span>
+          </a>
+          <a class="paper-resource" href="https://github.com/webarena-pro/webarena-pro" target="_blank" rel="noreferrer">
+            <img src="assets/icons/github.svg" alt="" width="24" height="24">
+            <span>GitHub Code</span>
+          </a>
+          <a class="paper-resource" href="https://huggingface.co/WebArena-Pro" target="_blank" rel="noreferrer">
+            <img src="assets/icons/huggingface.svg" alt="" width="24" height="24">
+            <span>Hugging Face</span>
+          </a>
+          <a class="paper-resource" href="#results">
+            <img src="assets/icons/leaderboard.svg" alt="" width="24" height="24">
+            <span>Leaderboard</span>
+          </a>
+          <a class="paper-resource" href="#citation">
+            <img src="assets/icons/citation.svg" alt="" width="24" height="24">
+            <span>BibTeX</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="news-section" id="news" aria-labelledby="news-title">
+        <h2 id="news-title">Latest news</h2>
+        <ul class="news-list">
+          <li><time datetime="2026-12">December 2026</time> — WebArena-Pro will be presented at <strong>NeurIPS Paris</strong>.</li>
+          <li><time datetime="2026-11-16">November 16, 2026</time> — WebArena-Pro is released! 🎉 🎉</li>
+          <li><time datetime="2026-09-24">September 24, 2026</time> — WebArena-Pro has been accepted at <strong>NeurIPS 2026 · E&amp;D Track</strong>.</li>
+        </ul>
+      </section>
+
+      <section class="results-section" id="results" aria-labelledby="results-title">
+        <div class="results-heading">
+          <h2 id="results-title">Leaderboard</h2>
+          <a class="paper-link submission-link" href="submit.html">Submit results <span aria-hidden="true">↗</span></a>
+        </div>
+        <p id="results-note" class="results-note">
+          Success requires a final reward of 1.
+        </p>
+        <p id="results-details" class="results-note">
+          300 tasks: Productivity (53), Communication (44), Analytics (16),
+          Business operations (63), Design &amp; media (98), and Travel (26).
+          † Omni uses <code>watch()</code> and <code>listen()</code>.
+          “—” means the result has not been reported.
+        </p>
+        <div class="results-controls">
+          <div class="results-tabs" role="tablist" aria-label="Leaderboard view">
+            <button class="results-tab" type="button" role="tab" id="results-tab-overall" aria-selected="true" aria-controls="results-panel-overall" data-results-view="overall">Overall</button>
+            <button class="results-tab" type="button" role="tab" id="results-tab-domains" aria-selected="false" aria-controls="results-panel-domains" tabindex="-1" data-results-view="domains">By domain</button>
+          </div>
+          <div class="results-budget-control" role="group" aria-labelledby="step-budget-label">
+            <span id="step-budget-label">Step budget</span>
+            <div class="results-budget-buttons">
+              <button type="button" aria-pressed="true" aria-label="50 steps" data-step-budget="50">50</button>
+              <button type="button" aria-pressed="false" aria-label="100 steps" data-step-budget="100">100</button>
+              <button type="button" aria-pressed="false" aria-label="Unlimited steps" data-step-budget="unlimited">Unlimited</button>
+            </div>
+          </div>
+        </div>
+        <p class="results-status" role="status" aria-atomic="true" data-results-status></p>
+        <div id="results-panel-overall" role="tabpanel" aria-labelledby="results-tab-overall" tabindex="0">
+          <p class="results-scroll-hint" data-results-scroll>Scroll horizontally to see all columns.</p>
+          <div class="results-table-wrap" role="region" aria-label="Overall leaderboard" tabindex="0" data-results-table-wrap>
+            <table class="results-table results-table-overview" aria-describedby="results-note results-details">
+              <caption class="visually-hidden">Overall success rates · <span data-results-budget-label>50 steps</span></caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="results-rank">Rank</th>
+                  <th scope="col" class="results-agent">Agent</th>
+                  <th scope="col" class="results-model">Model</th>
+                  <th scope="col" aria-sort="descending">Overall SR <span aria-hidden="true">↓</span></th>
+                  <th scope="col" class="results-resource">Traces</th>
+                  <th scope="col" class="results-resource">Paper</th>
+                  <th scope="col" class="results-resource">Code</th>
+                </tr>
+              </thead>
+              <tbody data-overall-results></tbody>
+            </table>
+          </div>
+          <div class="results-empty" data-results-empty hidden>
+            <strong>Results for 100 steps are not available yet.</strong>
+            <p>Select 50 steps to explore the reported results.</p>
+          </div>
+        </div>
+        <div id="results-panel-domains" role="tabpanel" aria-labelledby="results-tab-domains" tabindex="0" hidden>
+          <p class="results-scroll-hint" data-results-scroll>Scroll horizontally to see all domains.</p>
+          <div class="results-table-wrap" role="region" aria-label="Leaderboard by domain" tabindex="0" data-results-table-wrap>
+            <table class="results-table results-table-domains" aria-describedby="results-note results-details">
+              <caption class="visually-hidden">Success rates by domain · <span data-results-budget-label>50 steps</span></caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="results-agent">Agent</th>
+                  <th scope="col" class="results-model">Model</th>
+                  <th scope="col">Productivity</th>
+                  <th scope="col">Communication</th>
+                  <th scope="col">Analytics</th>
+                  <th scope="col">Business<br>operations</th>
+                  <th scope="col">Design<br>&amp; media</th>
+                  <th scope="col">Travel</th>
+                  <th scope="col" class="results-overall" aria-sort="descending">Overall SR <span aria-hidden="true">↓</span></th>
+                </tr>
+              </thead>
+              <tbody data-domain-results></tbody>
+            </table>
+          </div>
+          <div class="results-empty" data-results-empty hidden>
+            <strong>Results for 100 steps are not available yet.</strong>
+            <p>Select 50 steps to explore the reported results.</p>
+          </div>
+        </div>
+        <noscript><p>Enable JavaScript to explore the leaderboard.</p></noscript>
+      </section>
+
+      <section class="abstract-section" id="abstract" aria-labelledby="abstract-title">
+        <h2 id="abstract-title">Abstract</h2>
+        <p class="abstract-text">
+          Web agents powered by large language and vision-language models are increasingly applied
+          to realistic browser work that spans heterogeneous applications, multimodal content, and
+          stateful workflows. However, existing reproducible web-agent benchmarks cover only a small
+          number of web applications drawn from a few software categories, and restrict modality to
+          text and vision. Live benchmarks broaden site coverage but sacrifice reproducibility,
+          since pages and data drift between runs. Moreover, existing benchmarks do not meaningfully
+          evaluate whether agents can understand and use audio and video content embedded within web
+          tasks. To address these gaps, we introduce WebArena-Pro, a benchmark comprising 300 tasks
+          across 20 self-hosted web applications in six domain categories, spanning distinct
+          interface conventions, workflows, and data models. Across the evaluated agents, the best
+          performance is achieved by Claude Code with Claude Opus 5.5 at 62.3%, followed by Codex
+          with GPT 6.1 Sol at 61.7% and OpenCode with Kimi 3.1 Pro at 60.3%. The strongest
+          GenericAgent configurations, Gemini 3.1 Pro omni and
+          Gemma4 31B, both achieve 30.3%. Among reproducible, human-curated web agent benchmarks,
+          WebArena-Pro provides the broadest application coverage and the most comprehensive
+          multimodal support to date. The benchmark treats audio and video as core observations
+          alongside text and vision, with dedicated actions for extracting information from each.
+          WebArena-Pro runs each task in isolation and supports reproducible, parallel evaluation.
+          Tasks are authored through a dedicated annotator interface, filtered by LLM-assisted
+          triage, and finally validated by humans before release.
+          Project page: <a href="https://webarena-pro.github.io/" target="_blank" rel="noreferrer">https://webarena-pro.github.io/</a>.
+        </p>
+        <dl class="benchmark-facts" aria-label="Benchmark summary">
+          <div><dt>Tasks</dt><dd>300</dd></div>
+          <div><dt>Applications</dt><dd>20</dd></div>
+          <div><dt>Domains</dt><dd>6</dd></div>
+          <div><dt>Modalities</dt><dd>Text, vision, audio, video</dd></div>
+        </dl>
+      </section>
+
+      <section class="section" id="evaluation" aria-labelledby="evaluation-title">
+        <div class="section-heading">
+          <span class="section-number" aria-hidden="true">1</span>
+          <h2 id="evaluation-title">Evaluation</h2>
+        </div>
+        <div class="prose">
+          <p>
+            Agents receive a natural-language task and interact with the corresponding applications
+            with a step budget of 50, 100, or unlimited steps. Published leaderboard results
+            currently cover 50 steps.
+          </p>
+          <p class="evaluation-note">
+            <strong>Evaluation protocol.</strong> Current results are computed using judge evaluation.
+            <strong>DAG evaluation is coming soon.</strong> The forthcoming evaluation uses deterministic
+            checks organized in a directed acyclic graph (DAG), with judge escalation in fewer than
+            30% of tasks.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="tasks" aria-labelledby="tasks-title">
+        <div class="section-heading">
+          <span class="section-number" aria-hidden="true">2</span>
+          <h2 id="tasks-title">Task examples</h2>
+        </div>
+        <p class="section-intro">
+          One task from each of the 20 benchmark websites. Choose an application to read its task
+          and inspect a screenshot of the seeded environment.
+        </p>
+        <div class="task-explorer">
+          <div class="task-tabs" role="tablist" aria-label="Benchmark task previews" data-task-tabs></div>
+          <article class="task-preview" data-task-panel aria-live="polite"></article>
+        </div>
+        <noscript><p>Enable JavaScript to browse the task examples.</p></noscript>
+      </section>
+
+      <section class="section citation-section" id="citation" aria-labelledby="citation-title">
+        <div class="section-heading">
+          <span class="section-number" aria-hidden="true">3</span>
+          <h2 id="citation-title">Paper and citation</h2>
+        </div>
+        <p>Use the citation below to reference WebArena-Pro.</p>
+        <div class="citation-card">
+          <div class="citation-top">
+            <span>BibTeX</span>
+            <button type="button" data-copy-citation><span>Copy</span></button>
+          </div>
+          <pre><code data-citation>@inproceedings{kerboua2026webarenapro,
+  title  = {WebArena-Pro: A Heterogeneous,
+            Multimodal, Reproducible Benchmark
+            for Web Agents},
+  author = {Kerboua, Imene and Pesaran, Fatemeh
+            and Lu, Xing Han and others},
+  booktitle = {AIWILD at ICML},
+  year   = {2026}
+}</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <span>WebArena-Pro · 2026</span>
+      <a href="https://www.servicenow.com/research/publication/imene-kerboua-weba-icml-workshops2026.html" target="_blank" rel="noreferrer">Publication record ↗</a>
+    </footer>
+
+    <dialog class="screenshot-dialog" data-screenshot-dialog aria-labelledby="screenshot-dialog-title">
+      <div class="dialog-bar">
+        <strong id="screenshot-dialog-title" data-screenshot-title>Environment screenshot</strong>
+        <button type="button" aria-label="Close screenshot" data-close-screenshot>Close <span aria-hidden="true">×</span></button>
+      </div>
+      <div class="dialog-image-wrap">
+        <img data-dialog-image src="assets/screenshots/acidwave.jpg" alt="Acidwave environment screenshot" width="1440" height="900">
+      </div>
+    </dialog>
+  </body>
+</html>

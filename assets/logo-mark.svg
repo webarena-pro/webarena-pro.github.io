@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title">
+  <title id="title">WebArena Pro</title>
+  <path fill="#0D1B2A" d="M100 13 174 57v91l-48 29v-26l27-16V69l-53-32-53 32v66l27 16v26l-48-29V57z"/>
+  <path fill="#3B82F6" d="M76 70.5c-2.9-2.2-7.1.2-6.6 3.8l8.5 64.1c.5 3.8 5.3 5.1 7.6 2.1l15.7-20.4 26.1-4.1c3.7-.6 4.8-5.3 1.8-7.6z"/>
+</svg>

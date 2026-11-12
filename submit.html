@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Submit a WebArena-Pro result with your agent, model, success rate, and AgentLab evaluation traces.">
+    <meta name="theme-color" content="#0d1b2a">
+    <title>Submit results | WebArena-Pro</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=submissions-1">
+    <script src="submission.js?v=submissions-2" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell nav-wrap">
+        <a class="brand" href="index.html" aria-label="WebArena Pro home">
+          <img src="assets/logo-mark.svg" alt="" width="32" height="32">
+          <span>WebArena <strong>Pro</strong></span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="index.html#results">Back to leaderboard</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="shell submission-page">
+      <p class="submission-eyebrow">WebArena-Pro leaderboard</p>
+      <h1>Submit your results</h1>
+      <p class="submission-intro">
+        Share your agent’s performance and evaluation traces. Continue to GitHub to review
+        and submit your result as an issue in the website repository.
+      </p>
+      <p class="submission-required-note">All fields are required unless marked optional. Submit one result per step budget: 50 steps, 100 steps, or unlimited steps.</p>
+
+      <form class="submission-form" data-submission-form>
+        <fieldset>
+          <legend>Result</legend>
+          <div class="submission-fields">
+            <div class="submission-field">
+              <label for="submission-agent">Agent name</label>
+              <input id="submission-agent" name="agent" type="text" maxlength="150" pattern=".*\S.*" placeholder="e.g. GenericAgent" required>
+            </div>
+            <div class="submission-field">
+              <label for="submission-model">Model</label>
+              <input id="submission-model" name="model" type="text" maxlength="150" pattern=".*\S.*" placeholder="Model name and version" required>
+            </div>
+            <div class="submission-field">
+              <label for="submission-sr">Average SR (%)</label>
+              <input id="submission-sr" name="averageSR" type="number" min="0" max="100" step="any" placeholder="e.g. 41.0" aria-describedby="submission-sr-help" required>
+              <p id="submission-sr-help" class="submission-help">Overall task success rate, from 0 to 100. We use the submitted traces to compute and verify SR.</p>
+            </div>
+            <div class="submission-field">
+              <label for="submission-budget">Step budget</label>
+              <select id="submission-budget" name="stepBudget" required>
+                <option value="" selected>Select a step budget</option>
+                <option value="50">50 steps</option>
+                <option value="100">100 steps</option>
+                <option value="unlimited">Unlimited steps</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Agent and resources</legend>
+          <div class="submission-fields">
+            <div class="submission-field submission-field-wide">
+              <label for="submission-website">Agent / company URL</label>
+              <input id="submission-website" name="website" type="url" pattern="https?://.+" maxlength="2000" placeholder="https://…" required>
+            </div>
+            <div class="submission-field">
+              <label for="submission-code">Code URL <span>(optional)</span></label>
+              <input id="submission-code" name="code" type="url" pattern="https?://.+" maxlength="2000" placeholder="https://…">
+            </div>
+            <div class="submission-field">
+              <label for="submission-paper">Paper URL <span>(optional)</span></label>
+              <input id="submission-paper" name="paper" type="url" pattern="https?://.+" maxlength="2000" placeholder="https://…">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Evaluation traces <span class="submission-required-badge">Required</span></legend>
+          <div class="submission-trace-note" id="submission-trace-help">
+            <p>Link to a downloadable archive or folder containing both:</p>
+            <ul>
+              <li>The <code>summary.json</code> files produced by the AgentLab harness.</li>
+              <li>The full execution traces for every evaluated task, including unsuccessful runs.</li>
+            </ul>
+            <p>These files are needed to compute and verify success rate. Make the link accessible to reviewers.</p>
+            <p class="submission-help">The trace-viewer format specification will be published separately.</p>
+          </div>
+          <div class="submission-field">
+            <label for="submission-traces">Traces URL</label>
+            <input id="submission-traces" name="traces" type="url" pattern="https?://.+" maxlength="2000" placeholder="https://…" aria-describedby="submission-trace-help" required>
+          </div>
+          <label class="submission-confirmation" for="submission-confirm">
+            <input id="submission-confirm" name="traceConfirmation" type="checkbox" required>
+            <span>I confirm that the linked files include the AgentLab <code>summary.json</code> files and full traces for all evaluated tasks.</span>
+          </label>
+        </fieldset>
+
+        <div class="submission-actions">
+          <button class="paper-link paper-link-primary" type="submit" disabled>Continue on GitHub <span aria-hidden="true">↗</span></button>
+          <p>You’ll review the issue before submitting it. A GitHub account is required. Your result will appear on the leaderboard after review.</p>
+        </div>
+        <p class="submission-error" role="alert" data-submission-error hidden></p>
+        <noscript>
+          <p>JavaScript is needed to prepare the issue from this form. You can also <a href="https://github.com/webarena-pro/webarena-pro.github.io/issues/new?template=result-submission.yml">submit directly on GitHub</a>.</p>
+        </noscript>
+      </form>
+    </main>
+
+    <footer class="site-footer shell">
+      <span>WebArena-Pro · 2026</span>
+      <a href="index.html#results">Back to leaderboard</a>
+    </footer>
+  </body>
+</html>
