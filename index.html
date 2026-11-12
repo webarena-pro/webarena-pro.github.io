@@ -9,7 +9,7 @@
     <meta property="og:description" content="300 human-curated tasks across 20 self-hosted applications, spanning text, vision, audio, and video.">
     <title>WebArena-Pro | A Benchmark for Web Agents</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=interactive-overview-1">
+    <link rel="stylesheet" href="styles.css?v=section-order-1">
     <script src="script.js?v=interactive-overview-1" defer></script>
   </head>
   <body>
@@ -86,7 +86,7 @@
           </a>
           <a class="paper-resource" href="#citation">
             <img src="assets/icons/citation.svg" alt="" width="24" height="24">
-            <span>BibTeX</span>
+            <span>Citation</span>
           </a>
         </div>
       </section>
@@ -98,6 +98,43 @@
           <li><time datetime="2026-11-16">November 16, 2026</time> — WebArena-Pro is released! 🎉 🎉</li>
           <li><time datetime="2026-09-24">September 24, 2026</time> — WebArena-Pro has been accepted at <strong>NeurIPS 2026 · E&amp;D Track</strong>.</li>
         </ul>
+      </section>
+
+      <section class="abstract-section" id="abstract" aria-labelledby="abstract-title">
+        <h2 id="abstract-title">What is WebArena-Pro?</h2>
+        <p class="abstract-text">
+          WebArena-Pro evaluates AI web agents on 300 tasks across 20 self-hosted applications.
+        </p>
+        <div class="overview-tabs" role="tablist" aria-label="Explore the benchmark">
+          <button class="overview-tab" type="button" role="tab" id="overview-tab-tasks" aria-selected="true" aria-controls="overview-panel-tasks" data-overview-tab>Realistic tasks</button>
+          <button class="overview-tab" type="button" role="tab" id="overview-tab-modalities" aria-selected="false" aria-controls="overview-panel-modalities" tabindex="-1" data-overview-tab>Multimodal</button>
+          <button class="overview-tab" type="button" role="tab" id="overview-tab-reproducibility" aria-selected="false" aria-controls="overview-panel-reproducibility" tabindex="-1" data-overview-tab>Reproducible</button>
+        </div>
+        <p class="overview-detail" id="overview-panel-tasks" role="tabpanel" aria-labelledby="overview-tab-tasks" tabindex="0">
+          Tasks span six domains, from productivity and communication to analytics, business, media, and travel.
+        </p>
+        <p class="overview-detail" id="overview-panel-modalities" role="tabpanel" aria-labelledby="overview-tab-modalities" tabindex="0" hidden>
+          Agents read text, interpret images, listen to audio, and watch video to complete their tasks.
+        </p>
+        <p class="overview-detail" id="overview-panel-reproducibility" role="tabpanel" aria-labelledby="overview-tab-reproducibility" tabindex="0" hidden>
+          Each task runs in an isolated environment, so evaluations can be repeated and compared.
+        </p>
+      </section>
+
+      <section class="section" id="tasks" aria-labelledby="tasks-title">
+        <div class="section-heading">
+          <span class="section-number" aria-hidden="true">1</span>
+          <h2 id="tasks-title">Task examples</h2>
+        </div>
+        <p class="section-intro">
+          Task examples from 19 benchmark websites. Choose an application to read its task
+          and inspect a screenshot of the seeded environment.
+        </p>
+        <div class="task-explorer">
+          <div class="task-tabs" role="tablist" aria-label="Benchmark task previews" data-task-tabs></div>
+          <article class="task-preview" data-task-panel aria-live="polite"></article>
+        </div>
+        <noscript><p>Enable JavaScript to browse the task examples.</p></noscript>
       </section>
 
       <script type="application/json" id="accepted-submissions">[]</script>
@@ -183,43 +220,6 @@
         <noscript><p>Enable JavaScript to explore the leaderboard.</p></noscript>
       </section>
 
-      <section class="abstract-section" id="abstract" aria-labelledby="abstract-title">
-        <h2 id="abstract-title">What is WebArena-Pro?</h2>
-        <p class="abstract-text">
-          WebArena-Pro evaluates AI web agents on 300 tasks across 20 self-hosted applications.
-        </p>
-        <div class="overview-tabs" role="tablist" aria-label="Explore the benchmark">
-          <button class="overview-tab" type="button" role="tab" id="overview-tab-tasks" aria-selected="true" aria-controls="overview-panel-tasks" data-overview-tab>Realistic tasks</button>
-          <button class="overview-tab" type="button" role="tab" id="overview-tab-modalities" aria-selected="false" aria-controls="overview-panel-modalities" tabindex="-1" data-overview-tab>Multimodal</button>
-          <button class="overview-tab" type="button" role="tab" id="overview-tab-reproducibility" aria-selected="false" aria-controls="overview-panel-reproducibility" tabindex="-1" data-overview-tab>Reproducible</button>
-        </div>
-        <p class="overview-detail" id="overview-panel-tasks" role="tabpanel" aria-labelledby="overview-tab-tasks" tabindex="0">
-          Tasks span six domains, from productivity and communication to analytics, business, media, and travel.
-        </p>
-        <p class="overview-detail" id="overview-panel-modalities" role="tabpanel" aria-labelledby="overview-tab-modalities" tabindex="0" hidden>
-          Agents read text, interpret images, listen to audio, and watch video to complete their tasks.
-        </p>
-        <p class="overview-detail" id="overview-panel-reproducibility" role="tabpanel" aria-labelledby="overview-tab-reproducibility" tabindex="0" hidden>
-          Each task runs in an isolated environment, so evaluations can be repeated and compared.
-        </p>
-      </section>
-
-      <section class="section" id="tasks" aria-labelledby="tasks-title">
-        <div class="section-heading">
-          <span class="section-number" aria-hidden="true">1</span>
-          <h2 id="tasks-title">Task examples</h2>
-        </div>
-        <p class="section-intro">
-          Task examples from 19 benchmark websites. Choose an application to read its task
-          and inspect a screenshot of the seeded environment.
-        </p>
-        <div class="task-explorer">
-          <div class="task-tabs" role="tablist" aria-label="Benchmark task previews" data-task-tabs></div>
-          <article class="task-preview" data-task-panel aria-live="polite"></article>
-        </div>
-        <noscript><p>Enable JavaScript to browse the task examples.</p></noscript>
-      </section>
-
       <section class="section citation-section" id="citation" aria-labelledby="citation-title">
         <div class="section-heading">
           <span class="section-number" aria-hidden="true">2</span>
@@ -246,7 +246,6 @@
 
     <footer class="site-footer shell">
       <span>WebArena-Pro · 2026</span>
-      <a href="https://www.servicenow.com/research/publication/imene-kerboua-weba-icml-workshops2026.html" target="_blank" rel="noreferrer">Publication record ↗</a>
     </footer>
 
     <dialog class="screenshot-dialog" data-screenshot-dialog aria-labelledby="screenshot-dialog-title">

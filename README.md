@@ -62,9 +62,9 @@ submission files so the preview includes them.
 ## Resource links
 
 The header uses borderless logo-and-label links for arXiv, GitHub, Hugging Face,
-the leaderboard, and BibTeX. Hugging Face opens
+the leaderboard, and Citation. Hugging Face opens
 `https://huggingface.co/WebArena-Pro`, and the leaderboard and
-BibTeX links jump to their page sections. GitHub opens
+Citation links jump to their page sections. GitHub opens
 `https://github.com/McGill-NLP/webarena-pro`. arXiv remains disabled until its
 resource URL is available.
 
@@ -78,7 +78,7 @@ symbols are custom SVGs.
 
 ## Leaderboard
 
-The leaderboard appears directly below Latest news and defaults to the Overall
+The leaderboard appears after the overview and task examples and defaults to the Overall
 tab at 50 steps. The 50, 100, and Unlimited step buttons apply to both the Overall
 and By domain tabs. Hover, focus, or click either view's Overall SR header to
 show the success criterion; press Escape or click elsewhere to dismiss it. Published leaderboard results
