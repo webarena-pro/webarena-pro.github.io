@@ -173,6 +173,26 @@ const domainResults = leaderboard.querySelector("[data-domain-results]");
 let selectedBudget = "50";
 let selectedView = "overall";
 
+leaderboard.querySelectorAll("[data-sr-help]").forEach(help => {
+  const trigger = help.querySelector("button");
+  const tooltip = help.querySelector("[role='tooltip']");
+  const show = () => { tooltip.hidden = false; };
+  const hide = () => { tooltip.hidden = true; };
+  help.addEventListener("mouseenter", show);
+  help.addEventListener("mouseleave", () => {
+    if (document.activeElement !== trigger) hide();
+  });
+  trigger.addEventListener("focus", show);
+  trigger.addEventListener("blur", hide);
+  trigger.addEventListener("click", show);
+  document.addEventListener("click", event => {
+    if (!help.contains(event.target)) hide();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") hide();
+  });
+});
+
 function formatStepBudget(budget) {
   return budget === "unlimited" ? "Unlimited steps" : `${budget} steps`;
 }
@@ -212,8 +232,7 @@ function renderLeaderboard() {
     .slice()
     .sort((a, b) => (b.results[selectedBudget].averageSR ?? -1) - (a.results[selectedBudget].averageSR ?? -1));
   const hasResults = entries.length > 0;
-  const reportedCount = entries.filter(entry => Number.isFinite(entry.results[selectedBudget].averageSR)).length;
-  const unreportedCount = entries.length - reportedCount;
+  leaderboard.querySelectorAll("[role='tooltip']").forEach(tooltip => { tooltip.hidden = true; });
 
   leaderboardTabs.forEach(tab => {
     const isSelected = tab.dataset.resultsView === selectedView;
@@ -274,11 +293,6 @@ function renderLeaderboard() {
     resultCell(domainRow, formatScore(scores.averageSR), "results-overall");
     domainResults.append(domainRow);
   });
-
-  const viewLabel = selectedView === "overall" ? "Overall results" : "Results by domain";
-  leaderboard.querySelector("[data-results-status]").textContent = hasResults
-    ? `${viewLabel} · ${formatStepBudget(selectedBudget)} · ${reportedCount} reported${unreportedCount ? ` · ${unreportedCount} not reported` : ""} · Ranked by overall SR`
-    : `${viewLabel} · ${formatStepBudget(selectedBudget)} · No results published`;
 }
 
 leaderboardTabs.forEach(tab => {

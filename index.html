@@ -106,15 +106,6 @@
           <h2 id="results-title">Leaderboard</h2>
           <a class="paper-link submission-link" href="submit.html">Submit results <span aria-hidden="true">↗</span></a>
         </div>
-        <p id="results-note" class="results-note">
-          Success requires a final reward of 1.
-        </p>
-        <p id="results-details" class="results-note">
-          300 tasks: Productivity (53), Communication (44), Analytics (16),
-          Business operations (63), Design &amp; media (98), and Travel (26).
-          † Omni uses <code>watch()</code> and <code>listen()</code>.
-          “—” means the result has not been reported.
-        </p>
         <div class="results-controls">
           <div class="results-tabs" role="tablist" aria-label="Leaderboard view">
             <button class="results-tab" type="button" role="tab" id="results-tab-overall" aria-selected="true" aria-controls="results-panel-overall" data-results-view="overall">Overall</button>
@@ -129,18 +120,22 @@
             </div>
           </div>
         </div>
-        <p class="results-status" role="status" aria-atomic="true" data-results-status></p>
         <div id="results-panel-overall" role="tabpanel" aria-labelledby="results-tab-overall" tabindex="0">
           <p class="results-scroll-hint" data-results-scroll>Scroll horizontally to see all columns.</p>
           <div class="results-table-wrap" role="region" aria-label="Overall leaderboard" tabindex="0" data-results-table-wrap>
-            <table class="results-table results-table-overview" aria-describedby="results-note results-details">
+            <table class="results-table results-table-overview">
               <caption class="visually-hidden">Overall success rates · <span data-results-budget-label>50 steps</span></caption>
               <thead>
                 <tr>
                   <th scope="col" class="results-rank">Rank</th>
                   <th scope="col" class="results-agent">Agent</th>
                   <th scope="col" class="results-model">Model</th>
-                  <th scope="col" aria-sort="descending">Overall SR <span aria-hidden="true">↓</span></th>
+                  <th scope="col" aria-sort="descending">
+                    <span class="results-sr-help" data-sr-help>
+                      <button type="button" class="results-sr-trigger" aria-describedby="overall-sr-tooltip">Overall SR <span aria-hidden="true">↓</span></button>
+                      <span class="results-sr-tooltip" id="overall-sr-tooltip" role="tooltip" hidden>Success requires a final reward of 1.</span>
+                    </span>
+                  </th>
                   <th scope="col" class="results-resource">Traces</th>
                   <th scope="col" class="results-resource">Paper</th>
                   <th scope="col" class="results-resource">Code</th>
@@ -157,7 +152,7 @@
         <div id="results-panel-domains" role="tabpanel" aria-labelledby="results-tab-domains" tabindex="0" hidden>
           <p class="results-scroll-hint" data-results-scroll>Scroll horizontally to see all domains.</p>
           <div class="results-table-wrap" role="region" aria-label="Leaderboard by domain" tabindex="0" data-results-table-wrap>
-            <table class="results-table results-table-domains" aria-describedby="results-note results-details">
+            <table class="results-table results-table-domains">
               <caption class="visually-hidden">Success rates by domain · <span data-results-budget-label>50 steps</span></caption>
               <thead>
                 <tr>
@@ -169,7 +164,12 @@
                   <th scope="col">Business<br>operations</th>
                   <th scope="col">Design<br>&amp; media</th>
                   <th scope="col">Travel</th>
-                  <th scope="col" class="results-overall" aria-sort="descending">Overall SR <span aria-hidden="true">↓</span></th>
+                  <th scope="col" class="results-overall" aria-sort="descending">
+                    <span class="results-sr-help" data-sr-help>
+                      <button type="button" class="results-sr-trigger" aria-describedby="domain-sr-tooltip">Overall SR <span aria-hidden="true">↓</span></button>
+                      <span class="results-sr-tooltip" id="domain-sr-tooltip" role="tooltip" hidden>Success requires a final reward of 1.</span>
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody data-domain-results></tbody>
