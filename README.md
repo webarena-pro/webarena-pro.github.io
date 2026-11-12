@@ -57,7 +57,7 @@ The header uses borderless logo-and-label links for arXiv, GitHub, Hugging Face,
 the leaderboard, and BibTeX. Hugging Face opens
 `https://huggingface.co/WebArena-Pro`, and the leaderboard and
 BibTeX links jump to their page sections. GitHub opens
-`https://github.com/webarena-pro/webarena-pro`. arXiv remains disabled until its
+`https://github.com/McGill-NLP/webarena-pro`. arXiv remains disabled until its
 resource URL is available.
 
 Icons are stored locally in `assets/icons/`, including the arXiv mark from

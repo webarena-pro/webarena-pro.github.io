@@ -3,7 +3,7 @@
 const leaderboardDomains = [
   "Productivity", "Communication", "Analytics", "Business operations", "Design & media", "Travel",
 ];
-const benchmarkRepository = "https://github.com/webarena-pro/webarena-pro";
+const benchmarkRepository = "https://github.com/McGill-NLP/webarena-pro";
 const benchmarkPaper = null; // Add the WebArena-Pro arXiv URL when available.
 const baselineResources = {
   agent: "GenericAgent",
