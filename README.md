@@ -9,11 +9,11 @@ those containers; the optimized captures live in `assets/screenshots/`.
 
 ## Task examples
 
-The task explorer contains one example for each of the 20 benchmark websites,
+The task explorer contains examples from 19 of the 20 benchmark websites,
 ordered alphabetically by application name. Every example includes a prompt,
 task tags, and an expandable screenshot. The original ten prompts are retained.
 
-The ten added prompts are copied from the benchmark's task configs at
+The nine added prompts are copied from the benchmark's task configs at
 [`f41f8e1`](https://github.com/webarena-pro/webarena-pro/tree/f41f8e10f22322bc7796a9b2317bf3f4397e7a66/webarena-pro-core/src/webarena_pro_core/config).
 Their source task IDs are listed below for future updates:
 
@@ -23,19 +23,18 @@ Their source task IDs are listed below for future updates:
 | Metabase | `metabase.raw.json` | 125 |
 | Minerva Lite | `minerva-lite.raw.json` | 134 |
 | MyDrive | `mydrive.raw.json` | 145 |
-| Password Manager | `password-manager.raw.json` | 194 |
 | Penpot | `penpot.raw.json` | 202 |
 | Peppermint | `peppermint.raw.json` | 216 |
 | Thunderbird | `thunderbird.raw.json` | 234 |
 | TravelMap | `travelmap.raw.json` | 248 |
 | X Lite | `x-lite.raw.json` | 256 |
 
-The existing Metabase capture is reused. Nine additional screenshots are
+The existing Metabase capture is reused. Eight additional screenshots are
 1280 × 720 captures from saved benchmark runs, converted to JPEG without
 changing their contents. They illustrate the application, not a completed task:
 
 - Gemini 3.1 Pro runs on October 15, 2026: ERPNext task 038 (step 1), Minerva
-  Lite 132, MyDrive 145, Password Manager 194, Penpot 202, Peppermint 214,
+  Lite 132, MyDrive 145, Penpot 202, Peppermint 214,
   Thunderbird 234, and TravelMap 248 (all other captures at step 0).
 - Qwen3.8 27B run on November 1, 2026: X Lite task 256 (step 1, Messages view).
 

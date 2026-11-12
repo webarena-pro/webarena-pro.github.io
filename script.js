@@ -411,14 +411,6 @@ const tasks = [
     prompt: 'Create a new page “New Commers” under Team Notes, with a table listing accepted candidates, their jobs, and contact details.',
   },
   {
-    id: "password-manager",
-    site: "Password Manager",
-    type: "Payment card comparison",
-    tags: ["Comparison", "Single-app", "Information seeking"],
-    prompt: "Which saved payment card expires the soonest?",
-    screenshotSize: [1280, 720],
-  },
-  {
     id: "penpot",
     site: "Penpot",
     type: "Multi-page design",
