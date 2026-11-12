@@ -22,7 +22,7 @@
         </a>
         <nav aria-label="Main navigation">
           <a href="#results">Leaderboard</a>
-          <a href="#abstract">Abstract</a>
+          <a href="#abstract">Overview</a>
           <a href="#tasks">Tasks</a>
           <a href="#citation">Citation</a>
         </nav>
@@ -184,35 +184,24 @@
       </section>
 
       <section class="abstract-section" id="abstract" aria-labelledby="abstract-title">
-        <h2 id="abstract-title">Abstract</h2>
+        <h2 id="abstract-title">What is WebArena-Pro?</h2>
         <p class="abstract-text">
-          Web agents powered by large language and vision-language models are increasingly applied
-          to realistic browser work that spans heterogeneous applications, multimodal content, and
-          stateful workflows. However, existing reproducible web-agent benchmarks cover only a small
-          number of web applications drawn from a few software categories, and restrict modality to
-          text and vision. Live benchmarks broaden site coverage but sacrifice reproducibility,
-          since pages and data drift between runs. Moreover, existing benchmarks do not meaningfully
-          evaluate whether agents can understand and use audio and video content embedded within web
-          tasks. To address these gaps, we introduce WebArena-Pro, a benchmark comprising 300 tasks
-          across 20 self-hosted web applications in six domain categories, spanning distinct
-          interface conventions, workflows, and data models. Across the evaluated agents, the best
-          performance is achieved by Claude Code with Claude Opus 5.5 at 62.3%, followed by Codex
-          with GPT 6.1 Sol at 61.7% and OpenCode with Kimi 3.1 Pro at 60.3%. The strongest
-          GenericAgent configurations, Gemini 3.1 Pro omni and
-          Gemma4 31B, both achieve 30.3%. Among reproducible, human-curated web agent benchmarks,
-          WebArena-Pro provides the broadest application coverage and the most comprehensive
-          multimodal support to date. The benchmark treats audio and video as core observations
-          alongside text and vision, with dedicated actions for extracting information from each.
-          WebArena-Pro runs each task in isolation and supports reproducible, parallel evaluation.
-          Tasks are authored through a dedicated annotator interface, filtered by LLM-assisted
-          triage, and finally validated by humans before release.
+          WebArena-Pro evaluates AI web agents on 300 tasks across 20 self-hosted applications.
         </p>
-        <dl class="benchmark-facts" aria-label="Benchmark summary">
-          <div><dt>Tasks</dt><dd>300</dd></div>
-          <div><dt>Applications</dt><dd>20</dd></div>
-          <div><dt>Domains</dt><dd>6</dd></div>
-          <div><dt>Modalities</dt><dd>Text, vision, audio, video</dd></div>
-        </dl>
+        <div class="overview-tabs" role="tablist" aria-label="Explore the benchmark">
+          <button class="overview-tab" type="button" role="tab" id="overview-tab-tasks" aria-selected="true" aria-controls="overview-panel-tasks" data-overview-tab>Realistic tasks</button>
+          <button class="overview-tab" type="button" role="tab" id="overview-tab-modalities" aria-selected="false" aria-controls="overview-panel-modalities" tabindex="-1" data-overview-tab>Multimodal</button>
+          <button class="overview-tab" type="button" role="tab" id="overview-tab-reproducibility" aria-selected="false" aria-controls="overview-panel-reproducibility" tabindex="-1" data-overview-tab>Reproducible</button>
+        </div>
+        <p class="overview-detail" id="overview-panel-tasks" role="tabpanel" aria-labelledby="overview-tab-tasks" tabindex="0">
+          Tasks span six domains, from productivity and communication to analytics, business, media, and travel.
+        </p>
+        <p class="overview-detail" id="overview-panel-modalities" role="tabpanel" aria-labelledby="overview-tab-modalities" tabindex="0" hidden>
+          Agents read text, interpret images, listen to audio, and watch video to complete their tasks.
+        </p>
+        <p class="overview-detail" id="overview-panel-reproducibility" role="tabpanel" aria-labelledby="overview-tab-reproducibility" tabindex="0" hidden>
+          Each task runs in an isolated environment, so evaluations can be repeated and compared.
+        </p>
       </section>
 
       <section class="section" id="tasks" aria-labelledby="tasks-title">

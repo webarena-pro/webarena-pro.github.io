@@ -7,6 +7,13 @@ The task explorer uses screenshots captured directly from the seeded local
 benchmark environments. The publication site has no runtime dependency on
 those containers; the optimized captures live in `assets/screenshots/`.
 
+## Overview
+
+The overview replaces the long abstract with a short introduction and three
+selectable highlights: realistic tasks, multimodal observations, and reproducible
+evaluation. Click a highlight or use Left/Right, Home, and End to switch its
+one-sentence explanation. The existing `#abstract` anchor remains available.
+
 ## Task examples
 
 The task explorer contains examples from 19 of the 20 benchmark websites,

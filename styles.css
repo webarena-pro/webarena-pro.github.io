@@ -88,13 +88,12 @@ h3 { font-size: 24px; line-height: 1.35; }
 
 .abstract-section { max-width: 850px; margin: 0 auto; padding: 30px 0 0; border-top: 1px solid var(--line); }
 .abstract-section h2 { margin-bottom: 18px; text-align: center; font-size: 26px; }
-.abstract-text { margin-bottom: 20px; font: 18px/1.8 var(--serif); }
-.abstract-source { margin-bottom: 25px; color: var(--muted); font-size: 12px; line-height: 1.7; }
-.benchmark-facts { display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; margin: 0; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.benchmark-facts > div { display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); }
-.benchmark-facts > div:last-child { border-right: 0; }
-.benchmark-facts dt { color: var(--muted); font-size: 12px; }
-.benchmark-facts dd { margin: 2px 0 0; font-size: 16px; }
+.abstract-text { margin-bottom: 20px; font: 18px/1.6 var(--serif); text-align: center; }
+.overview-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: min(500px, 100%); margin: 0 auto 16px; }
+.overview-tab { min-height: 44px; padding: 8px 6px; border: 1px solid var(--line); border-radius: 5px; background: #fff; color: var(--muted); font-size: 13px; }
+.overview-tab:hover { border-color: var(--blue); color: var(--accent); }
+.overview-tab[aria-selected="true"] { border-color: var(--blue-deep); background: var(--blue-soft); color: var(--blue-deep); }
+.overview-detail { min-height: 3.2em; margin: 0; color: var(--muted); font: 18px/1.6 var(--serif); text-align: center; }
 
 .section { padding: 58px 0 0; }
 .section-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
@@ -225,10 +224,8 @@ h3 { font-size: 24px; line-height: 1.35; }
   .paper-subtitle { font-size: 25px; }
   .desktop-break { display: none; }
   .author-list { font-size: 13px; line-height: 1.9; }
-  .abstract-text { font-size: 17px; line-height: 1.75; }
-  .benchmark-facts { grid-template-columns: 1fr 1fr 1fr; gap: 14px 0; }
-  .benchmark-facts > div:nth-child(3) { border-right: 0; }
-  .benchmark-facts > div:last-child { grid-column: 1 / -1; padding-top: 12px; border-top: 1px solid var(--line); }
+  .abstract-text, .overview-detail { font-size: 17px; }
+  .overview-detail { min-height: 4.8em; }
   .section { padding-top: 42px; }
   h2 { font-size: 27px; }
   .task-tabs { flex-wrap: nowrap; overflow-x: auto; gap: 24px; padding-bottom: 3px; }

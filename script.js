@@ -322,6 +322,28 @@ budgetButtons.forEach(button => {
 
 renderLeaderboard();
 
+const overviewTabs = [...document.querySelectorAll("[data-overview-tab]")];
+function selectOverviewTab(selectedTab) {
+  overviewTabs.forEach(tab => {
+    const isSelected = tab === selectedTab;
+    tab.setAttribute("aria-selected", String(isSelected));
+    tab.tabIndex = isSelected ? 0 : -1;
+    document.getElementById(tab.getAttribute("aria-controls")).hidden = !isSelected;
+  });
+}
+overviewTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => selectOverviewTab(tab));
+  tab.addEventListener("keydown", event => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    let nextIndex = (index + (event.key === "ArrowLeft" ? -1 : 1) + overviewTabs.length) % overviewTabs.length;
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = overviewTabs.length - 1;
+    selectOverviewTab(overviewTabs[nextIndex]);
+    overviewTabs[nextIndex].focus({ preventScroll: true });
+  });
+});
+
 const tasks = [
   {
     id: "acidwave",
