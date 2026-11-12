@@ -45,10 +45,12 @@ the correct aspect ratio while the image loads.
 ## Preview locally
 
 ```bash
-python3 -m http.server 4173 --bind 127.0.0.1
+node scripts/build-site.cjs
+python3 -m http.server 4173 --bind 127.0.0.1 --directory _site
 ```
 
-Then open <http://127.0.0.1:4173>.
+Use Node.js 22 or later, then open <http://127.0.0.1:4173>. Rebuild after editing
+submission files so the preview includes them.
 
 ## Resource links
 
@@ -101,46 +103,57 @@ python3 scripts/generate_sr_figures.py
 
 Plotting dependencies are only needed when regenerating the figures.
 
-Edit `leaderboardEntries` in `script.js` to add results. Each entry has an agent,
+New results are reviewed as JSON files in `submissions/` and included by the
+build after merge. Existing baseline entries remain in `leaderboardEntries` in
+`script.js`. Each entry has an agent,
 model, paper URL, code URL, and results keyed by step budget. Domain scores
 follow `leaderboardDomains`; `averageSR` is the reported overall success rate,
 not an unweighted average of the domain scores. Both views rank entries by
 that score and mark the top three ranks with gold, silver, and bronze medal
 emojis beside the agent names. Table text uses regular weight throughout.
 
-The baseline uses GenericAgent. Every leaderboard Code link points to the
+The baseline uses GenericAgent. Existing baseline Code links point to the
 WebArena-Pro benchmark repository defined by `benchmarkRepository`, with a
-GitHub label. Every leaderboard Paper entry uses `benchmarkPaper`, which is
+GitHub label. Existing baseline Paper entries use `benchmarkPaper`, which is
 currently `null`; Paper cells stay blank until the WebArena-Pro arXiv URL is
 added there. Set each budget's `traces` field to its trace URL when available.
-Other missing URLs appear as placeholders, not links.
+Other missing URLs appear as placeholders, not links. Submitted entries use
+their supplied agent website, code, paper, and traces URLs; missing domain
+scores display as “—”.
 
 ## Result submissions
 
-The leaderboard's **Submit results** link opens `submit.html`. The form requires
-average SR (0–100%), model, agent name, a 50-step, 100-step, or unlimited budget,
-an agent/company URL, and a traces URL. Code and paper URLs are optional.
+The leaderboard's **Submit results** link opens `submit.html`. The form prepares
+one JSON result for the complete Test split at a 50-step, 100-step, or unlimited
+budget, with agent/model information, versions, harness, benchmark revision,
+overall success rate, and a trace archive URL. Code and paper URLs are optional.
 
-Submitters must confirm that their trace archive or folder contains both the
-AgentLab harness `summary.json` files and full traces for every evaluated task,
-including unsuccessful runs. These artifacts are required to compute and verify
-SR. The trace-viewer contract will be added separately; the site does not yet
-download, parse, or automatically validate trace contents or recompute SR.
+The contributor reviews/downloads the JSON, continues to GitHub's new-file
+editor, commits to a branch or fork, and opens a pull request against `main`.
+Large submissions fall back to downloading or copying the JSON. The website
+needs no authentication tokens or submission backend. GitHub handles login,
+commits, and pull requests; the form does not create a PR automatically.
 
-`submission.js` validates the form and opens a prefilled GitHub issue draft in
-`webarena-pro/webarena-pro.github.io`. The submitter reviews and sends the issue
-on GitHub; the website itself has no submission backend and does not add results
-automatically. `.github/ISSUE_TEMPLATE/result-submission.yml` also provides a
-native GitHub issue form after it is merged into the default branch.
+`submission-schema.js` shares field validation between the form and CI.
+`scripts/build-site.cjs` validates `submissions/*.json` and embeds their
+leaderboard entries into `_site/index.html`. CI checks format, score ranges,
+budgets, complete-split declarations, and URLs. It does not fetch traces or
+verify reported scores. Maintainers review the evidence before merging; the
+existing Pages deployment then publishes the merged result automatically.
+
+Trace requirements accept AgentLab, Harbor/coding-agent, and equivalent harness
+outputs. Preserve per-task results, full traces (including unsuccessful and
+interrupted runs), referenced media, and reproducibility settings. See
+[submissions/README.md](submissions/README.md) for the JSON contract, exact
+artifact paths, manual PR instructions, and validation commands.
 
 ## Deploy with GitHub Pages
 
 The workflow in `.github/workflows/pages.yml` validates pull requests targeting
 `main` and deploys pushes to `main`. It can also be started manually from the
-Actions tab; only runs on `main` can deploy. It validates the JavaScript,
-packages both HTML pages, `styles.css`, both JavaScript files, and `assets/`, and
-deploys the artifact to the `github-pages` environment. No package installation
-or static site generator is needed.
+Actions tab; only runs on `main` can deploy. It validates JavaScript and submission records, runs the submission tests,
+builds the static site with Node.js, and deploys `_site/` to the `github-pages`
+environment. No package installation or third-party build dependencies are needed.
 
 In repository **Settings → Pages**, set **Source** to **GitHub Actions**.
 GitHub Pages requires a public repository on the free organization plan;

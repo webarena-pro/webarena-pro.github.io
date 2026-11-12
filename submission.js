@@ -1,57 +1,48 @@
 const submissionForm = document.querySelector("[data-submission-form]");
 const submissionError = document.querySelector("[data-submission-error]");
-const submissionRepository = "https://github.com/webarena-pro/webarena-pro.github.io";
+const submissionReady = document.querySelector("[data-submission-ready]");
+let submissionDownloadUrl;
 
-function buildSubmissionUrl(result) {
-  const url = new URL(`${submissionRepository}/issues/new`);
-  url.searchParams.set("title", `[Leaderboard] ${result.agent} / ${result.model} / ${result.stepBudget} steps`);
-  url.searchParams.set("body", [
-    "## Result",
-    "",
-    `- **Average SR (%):** ${result.averageSR}`,
-    `- **Step budget:** ${result.stepBudget}`,
-    `- **Model:** ${result.model}`,
-    `- **Agent name:** ${result.agent}`,
-    `- **Agent / company URL:** ${result.website}`,
-    `- **Code URL (optional):** ${result.code || "Not provided"}`,
-    `- **Paper URL (optional):** ${result.paper || "Not provided"}`,
-    "",
-    "## Evaluation traces",
-    "",
-    `**Traces URL:** ${result.traces}`,
-    "",
-    "- [x] The linked files include the AgentLab harness `summary.json` files.",
-    "- [x] The linked files include full execution traces for every evaluated task, including unsuccessful runs.",
-    "",
-    "The summaries and full traces are supplied to compute and verify success rate.",
-    "The trace-viewer format specification will be published separately.",
-  ].join("\n"));
-  return url;
+function clearPreparedSubmission() {
+  submissionReady.hidden = true;
+  submissionError.hidden = true;
+  if (submissionDownloadUrl) URL.revokeObjectURL(submissionDownloadUrl);
+  submissionDownloadUrl = null;
 }
 
+submissionForm.addEventListener("input", clearPreparedSubmission);
+submissionForm.addEventListener("change", clearPreparedSubmission);
 submissionForm.addEventListener("submit", event => {
   event.preventDefault();
-  submissionError.hidden = true;
-  const data = new FormData(submissionForm);
-  const result = Object.fromEntries([...data].map(([key, value]) => [key, value.trim()]));
+  clearPreparedSubmission();
   if (!submissionForm.reportValidity()) return;
-  if (!result.agent || !result.model || !["50", "100", "unlimited"].includes(result.stepBudget) ||
-      result.averageSR === "" || !Number.isFinite(Number(result.averageSR)) ||
-      Number(result.averageSR) < 0 || Number(result.averageSR) > 100 || !result.traceConfirmation) {
-    submissionError.textContent = "Complete the required fields and confirm that both summaries and full traces are included.";
+  const values = Object.fromEntries([...new FormData(submissionForm)]
+    .map(([key, value]) => [key, value.trim()]));
+  const record = SubmissionData.fromForm(values, crypto.randomUUID().slice(0, 8));
+  const errors = SubmissionData.validateSubmission(record);
+  if (errors.length) {
+    submissionError.textContent = errors.join(" ");
     submissionError.hidden = false;
     return;
   }
 
-  const url = buildSubmissionUrl(result);
-  // GitHub handles the final submission. This site only opens a prefilled draft.
-  // Keep oversized URLs out of navigation, where they can fail with HTTP 414.
-  if (url.href.length > 8000) {
-    submissionError.textContent = "These links are too long to prepare a GitHub issue. Use shorter share links for your resources and traces.";
-    submissionError.hidden = false;
-    return;
-  }
-  window.location.assign(url.href);
+  const json = JSON.stringify(record, null, 2) + "\n";
+  const path = SubmissionData.filename(record);
+  const fullUrl = SubmissionData.githubFileUrl(record);
+  // GitHub may reject oversized URLs. Keep the download and manual editor usable.
+  const needsManualPaste = fullUrl.length > 7000;
+  submissionReady.querySelector("[data-submission-github]").href = needsManualPaste
+    ? SubmissionData.githubFileUrl(record, false) : fullUrl;
+  submissionReady.querySelector("[data-submission-fallback]").hidden = !needsManualPaste;
+  submissionReady.querySelector("[data-submission-json]").value = json;
+  submissionReady.querySelector("[data-submission-file]").textContent = path;
+
+  submissionDownloadUrl = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+  const download = submissionReady.querySelector("[data-submission-download]");
+  download.href = submissionDownloadUrl;
+  download.download = `${record.id}.json`;
+  submissionReady.hidden = false;
+  submissionReady.focus();
 });
 
 submissionForm.querySelector('button[type="submit"]').disabled = false;

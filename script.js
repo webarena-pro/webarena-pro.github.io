@@ -164,6 +164,8 @@ const leaderboardEntries = [
 ];
 
 const leaderboard = document.querySelector("#results");
+// The build embeds validated records merged into submissions/*.json.
+leaderboardEntries.push(...JSON.parse(document.querySelector("#accepted-submissions").textContent));
 const leaderboardTabs = [...leaderboard.querySelectorAll("[data-results-view]")];
 const budgetButtons = [...leaderboard.querySelectorAll("[data-step-budget]")];
 const overallResults = leaderboard.querySelector("[data-overall-results]");
@@ -247,7 +249,15 @@ function renderLeaderboard() {
 
     const overallRow = document.createElement("tr");
     resultCell(overallRow, isReported ? String(rank).padStart(2, "0") : "—", "results-rank");
-    resultCell(overallRow, agentLabel, "results-agent");
+    const agentCell = resultCell(overallRow, agentLabel, "results-agent");
+    if (entry.website) {
+      const link = document.createElement("a");
+      link.textContent = agentLabel;
+      link.href = entry.website;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      agentCell.replaceChildren(link);
+    }
     resultCell(overallRow, entry.model, "results-model", true);
     resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);

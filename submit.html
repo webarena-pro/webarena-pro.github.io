@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Submit a WebArena-Pro result with your agent, model, success rate, and AgentLab evaluation traces.">
+    <meta name="description" content="Submit a WebArena-Pro result with your agent, model, success rate, and evaluation traces as a pull request.">
     <meta name="theme-color" content="#0d1b2a">
     <title>Submit results | WebArena-Pro</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=submissions-1">
-    <script src="submission.js?v=submissions-2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=submission-pr-1">
+    <script src="submission-schema.js?v=1" defer></script>
+    <script src="submission.js?v=submission-pr-1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -28,10 +29,10 @@
       <p class="submission-eyebrow">WebArena-Pro leaderboard</p>
       <h1>Submit your results</h1>
       <p class="submission-intro">
-        Share your agent’s performance and evaluation traces. Continue to GitHub to review
-        and submit your result as an issue in the website repository.
+        Share your agent’s performance and evaluation traces through a pull request.
+        Prepare your result here, propose the file on GitHub, and have it reviewed before publication.
       </p>
-      <p class="submission-required-note">All fields are required unless marked optional. Submit one result per step budget: 50 steps, 100 steps, or unlimited steps.</p>
+      <p class="submission-required-note">All fields are required unless marked optional. Submit one result per step budget for the complete Test split (300 tasks).</p>
 
       <form class="submission-form" data-submission-form>
         <fieldset>
@@ -48,7 +49,7 @@
             <div class="submission-field">
               <label for="submission-sr">Average SR (%)</label>
               <input id="submission-sr" name="averageSR" type="number" min="0" max="100" step="any" placeholder="e.g. 41.0" aria-describedby="submission-sr-help" required>
-              <p id="submission-sr-help" class="submission-help">Overall task success rate, from 0 to 100. We use the submitted traces to compute and verify SR.</p>
+              <p id="submission-sr-help" class="submission-help">Percentage of the 300 Test tasks with a final reward of 1 at the selected budget. Reviewers verify the score against your traces.</p>
             </div>
             <div class="submission-field">
               <label for="submission-budget">Step budget</label>
@@ -60,6 +61,30 @@
               </select>
             </div>
           </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Evaluation setup</legend>
+          <div class="submission-fields">
+            <div class="submission-field">
+              <label for="submission-agent-version">Agent version</label>
+              <input id="submission-agent-version" name="agentVersion" type="text" maxlength="100" placeholder="Version or commit" required>
+            </div>
+            <div class="submission-field">
+              <label for="submission-harness">Evaluation harness</label>
+              <input id="submission-harness" name="harness" type="text" list="harness-options" maxlength="100" placeholder="AgentLab, Harbor, or another harness" required>
+              <datalist id="harness-options"><option value="AgentLab"><option value="Harbor"></datalist>
+            </div>
+            <div class="submission-field">
+              <label for="submission-harness-version">Harness version</label>
+              <input id="submission-harness-version" name="harnessVersion" type="text" maxlength="100" placeholder="Version or commit" required>
+            </div>
+            <div class="submission-field">
+              <label for="submission-benchmark-revision">Benchmark revision</label>
+              <input id="submission-benchmark-revision" name="benchmarkRevision" type="text" maxlength="100" placeholder="WebArena-Pro commit or release tag" required>
+            </div>
+          </div>
+          <p class="submission-help">Include your full run configuration and evaluation settings in the trace archive. Identify any retries and which attempts count toward the submitted score.</p>
         </fieldset>
 
         <fieldset>
@@ -83,13 +108,14 @@
         <fieldset>
           <legend>Evaluation traces <span class="submission-required-badge">Required</span></legend>
           <div class="submission-trace-note" id="submission-trace-help">
-            <p>Link to a downloadable archive or folder containing both:</p>
+            <p>Link to a downloadable archive or folder with per-task results, complete execution traces, and the run configuration. Include every evaluated task, including failures and interrupted runs.</p>
             <ul>
-              <li>The <code>summary.json</code> files produced by the AgentLab harness.</li>
-              <li>The full execution traces for every evaluated task, including unsuccessful runs.</li>
+              <li><strong>AgentLab:</strong> per-task summaries (<code>summary_info.json</code> or <code>summary.json</code>), step logs, and recorded screenshots.</li>
+              <li><strong>Harbor / coding agents:</strong> each trial’s <code>result.json</code>, <code>verifier/reward.json</code> for graded trials, <code>agent/</code> logs (including <code>trajectory.json</code> when produced), and collected WebArena-Pro evidence under <code>artifacts/</code>.</li>
+              <li><strong>Other harnesses:</strong> equivalent per-task scores, agent/tool interactions, observations, and evaluation evidence.</li>
             </ul>
-            <p>These files are needed to compute and verify success rate. Make the link accessible to reviewers.</p>
-            <p class="submission-help">The trace-viewer format specification will be published separately.</p>
+            <p>Include recorded screenshots and referenced media. Explain missing or interrupted artifacts; ungraded runs must be distinguishable from scored failures. Make the archive accessible to reviewers.</p>
+            <p class="submission-help">Use a stable archive or dataset URL. Keep credentials and access tokens out of the submission. A trace viewer can supplement the original artifacts.</p>
           </div>
           <div class="submission-field">
             <label for="submission-traces">Traces URL</label>
@@ -97,19 +123,38 @@
           </div>
           <label class="submission-confirmation" for="submission-confirm">
             <input id="submission-confirm" name="traceConfirmation" type="checkbox" required>
-            <span>I confirm that the linked files include the AgentLab <code>summary.json</code> files and full traces for all evaluated tasks.</span>
+            <span>I confirm that the linked artifacts include per-task results, full execution traces for all evaluated tasks, and the configuration needed to reproduce this run.</span>
           </label>
         </fieldset>
 
         <div class="submission-actions">
-          <button class="paper-link paper-link-primary" type="submit" disabled>Continue on GitHub <span aria-hidden="true">↗</span></button>
-          <p>You’ll review the issue before submitting it. A GitHub account is required. Your result will appear on the leaderboard after review.</p>
+          <button class="paper-link paper-link-primary" type="submit" disabled>Prepare pull request</button>
+          <p>You’ll review a result file, commit it on a branch or fork, and open a pull request on GitHub. Your result is published after review and merge.</p>
         </div>
         <p class="submission-error" role="alert" data-submission-error hidden></p>
         <noscript>
-          <p>JavaScript is needed to prepare the issue from this form. You can also <a href="https://github.com/webarena-pro/webarena-pro.github.io/issues/new?template=result-submission.yml">submit directly on GitHub</a>.</p>
+          <p>JavaScript is needed to prepare a result file here. Follow the <a href="https://github.com/webarena-pro/webarena-pro.github.io/tree/main/submissions">manual pull-request instructions</a> to submit without this form.</p>
         </noscript>
       </form>
+      <section class="submission-ready" data-submission-ready aria-labelledby="submission-ready-title" tabindex="-1" hidden>
+        <h2 id="submission-ready-title">Your submission is ready</h2>
+        <p data-submission-file></p>
+        <ol>
+          <li>Continue to GitHub and review the result file. Sign in if prompted.</li>
+          <li>Choose <strong>Propose changes</strong> or commit to a <strong>new branch</strong>. GitHub creates a fork if needed.</li>
+          <li>Open a pull request against <strong>main</strong>. Reviewers will check your traces; merging publishes your result.</li>
+        </ol>
+        <p class="submission-help" data-submission-fallback hidden>The result is too large to prefill a GitHub link. Copy the JSON below into GitHub’s file editor, or download it and add it to your fork.</p>
+        <div class="submission-actions">
+          <a class="paper-link paper-link-primary" data-submission-github>Continue on GitHub ↗</a>
+          <a class="paper-link" data-submission-download>Download result JSON</a>
+        </div>
+        <details>
+          <summary>Review or copy the result JSON</summary>
+          <label class="visually-hidden" for="submission-json">Result JSON</label>
+          <textarea id="submission-json" data-submission-json rows="16" readonly spellcheck="false"></textarea>
+        </details>
+      </section>
     </main>
 
     <footer class="site-footer shell">
