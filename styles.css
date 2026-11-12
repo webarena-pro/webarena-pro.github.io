@@ -100,10 +100,7 @@ h3 { font-size: 24px; line-height: 1.35; }
 .section-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
 .section-heading h2 { margin-bottom: 0; }
 .section-number { color: var(--blue); font: 24px/1 var(--serif); }
-.prose, .section-intro { max-width: 860px; }
-.prose p, .section-intro { margin-bottom: 20px; }
-.evaluation-note { border-left: 3px solid var(--blue); padding: 2px 0 2px 18px; color: var(--muted); }
-.evaluation-note strong { color: var(--ink); font-weight: 600; }
+.section-intro { max-width: 860px; margin-bottom: 20px; }
 .results-section { margin: 0 auto 42px; padding-top: 30px; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
 .results-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px 20px; margin-bottom: 12px; }
 .results-heading h2 { margin-bottom: 0; }

@@ -73,7 +73,7 @@ symbols are custom SVGs.
 The leaderboard appears directly below Latest news and defaults to the Overall
 tab at 50 steps. The 50, 100, and Unlimited step buttons apply to both the Overall
 and By domain tabs. A short note alongside the scores states the success
-criterion, with the full protocol below the abstract. Published leaderboard results
+criterion. Published leaderboard results
 currently cover 50 steps; 100 and unlimited steps display empty states.
 
 Both views identify the agent separately from the model. The 50-step table
