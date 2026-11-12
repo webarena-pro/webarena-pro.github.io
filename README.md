@@ -78,9 +78,10 @@ criterion. Published leaderboard results
 currently cover 50 steps; 100 and unlimited steps display empty states.
 
 Both views identify the agent separately from the model. The 50-step table
-contains 13 reported configurations: nine GenericAgent configurations, OpenCode
+contains 15 reported configurations: nine GenericAgent configurations, OpenCode
 with Kimi 3.1 Pro and Gemini 3.1 Pro, Codex with GPT 6.1 Sol, and Claude Code
-with Claude Opus 5.5. The November 11, 2026 results are led by Claude Code at
+with Claude Opus 5.5, Claude Sonnet 5.5 and Claude Haiku 5.5. The November 11,
+2026 results are led by Claude Code / Claude Opus 5.5 at
 62.3%, followed by Codex at 61.7% and OpenCode / Kimi 3.1 Pro at 60.3%.
 Unreported scores use `null`, display as “—”, and receive no rank or medal.
 Tied scores share a competition rank.

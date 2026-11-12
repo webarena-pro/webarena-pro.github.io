@@ -160,6 +160,28 @@ const leaderboardEntries = [
     results: {
       50: { averageSR: 62.3, domains: [60.4, 72.7, 62.5, 57.1, 65.3, 50.0], traces: null }
     },
+  },
+  {
+    agent: "Claude Code",
+    model: "Claude Sonnet 5.5",
+    family: "Claude",
+    paper: benchmarkPaper,
+    codeLabel: "GitHub",
+    code: benchmarkRepository,
+    results: {
+      50: { averageSR: 50.0, domains: [50.9, 63.6, 25.0, 46.0, 50.0, 50.0], traces: null }
+    },
+  },
+  {
+    agent: "Claude Code",
+    model: "Claude Haiku 5.5",
+    family: "Claude",
+    paper: benchmarkPaper,
+    codeLabel: "GitHub",
+    code: benchmarkRepository,
+    results: {
+      50: { averageSR: 41.0, domains: [43.4, 59.1, 25.0, 39.7, 35.7, 38.5], traces: null }
+    },
   }
 ];
 
