@@ -118,9 +118,8 @@ symbols are custom SVGs.
 
 The header’s Websites resource opens the task grid; there is no separate Websites
 section. Each task dialog links directly to its application at
-`https://<site>.websites.webarenapro.win/` and to the demo login details at
-`https://websites.webarenapro.win/`. Everyone uses the same set of 20 application
-containers. Browsing and search are available, while content changes are blocked
+`https://<site>.websites.webarenapro.win/`, which signs visitors in automatically.
+Everyone uses the same set of 20 application containers. Browsing and search are available, while content changes are blocked
 by the demo gateway. Benchmark prompts retain their original instructions, so
 examples can describe edits that cannot be saved in the public read-only demo.
 
