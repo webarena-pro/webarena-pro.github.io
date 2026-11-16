@@ -584,7 +584,7 @@ function showTask(activeIndex) {
       <p class="task-prompt"></p>
       <p class="task-tags">${task.tags.map(tag => `<span>${tag}</span>`).join("")}</p>
       <a class="task-website-link" href="https://${task.id}.websites.webarenapro.win/" target="_blank" rel="noopener noreferrer">Open ${task.site} <span aria-hidden="true">↗</span></a>
-      <p class="task-demo-note">Shared read-only demo · Changes cannot be saved.<br><a href="https://websites.webarenapro.win/" target="_blank" rel="noopener noreferrer">Demo login details</a></p>
+      <p class="task-demo-note">Shared read-only demo · Changes cannot be saved.</p>
     </div>
     <figure class="task-figure">
       <a class="task-screenshot-link" href="${screenshotPath}" target="_blank" rel="noopener noreferrer" aria-label="View full ${task.site} screenshot (opens in a new tab)">
