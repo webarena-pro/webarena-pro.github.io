@@ -11,8 +11,8 @@
     <title>WebArena-Pro | A Benchmark for Web Agents</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <script src="theme.js?v=1"></script>
-    <link rel="stylesheet" href="styles.css?v=author-links-20261116">
-    <script src="script.js?v=homepage-20261116" defer></script>
+    <link rel="stylesheet" href="styles.css?v=task-grid-20261116">
+    <script src="script.js?v=task-grid-20261116" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -28,7 +28,6 @@
             <a href="#results">Leaderboard</a>
             <a href="#abstract">Overview</a>
             <a href="#tasks">Tasks</a>
-            <a href="#websites">Websites</a>
             <a href="#citation">Citation</a>
           </nav>
           <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" hidden>
@@ -95,7 +94,7 @@
             <img class="theme-color-icon" src="assets/icons/leaderboard.svg" alt="" width="24" height="24">
             <span>Leaderboard</span>
           </a>
-          <a class="paper-resource" href="#websites">
+          <a class="paper-resource" href="#tasks">
             <img class="theme-monochrome-icon" src="assets/icons/websites.svg" alt="" width="24" height="24">
             <span>Websites</span>
           </a>
@@ -119,35 +118,17 @@
           <h2 id="tasks-title">Task examples</h2>
         </div>
         <p class="section-intro">
-          Task examples from 19 benchmark websites. Choose an application to read its task
-          and inspect a screenshot of the seeded environment.
+          Choose a website to explore an example task, see its interface, and open the shared read-only demo.
         </p>
-        <div class="task-explorer">
-          <div class="task-tabs" role="tablist" aria-label="Benchmark task previews" data-task-tabs></div>
-          <article class="task-preview" data-task-panel aria-live="polite"></article>
-        </div>
-        <noscript><p>Enable JavaScript to browse the task examples.</p></noscript>
-      </section>
-
-      <section class="section websites-section" id="websites" aria-labelledby="websites-title">
-        <div class="websites-heading">
-          <span class="section-number" aria-hidden="true">2</span>
-          <h2 id="websites-title">Websites</h2>
-        </div>
-        <div class="websites-body">
-          <div class="websites-copy">
-            <p>Explore all 20 benchmark applications in a shared read-only demo with the supplied demo accounts and data.</p>
-            <p class="websites-expiry">Browse and search the websites; changes cannot be saved.</p>
-          </div>
-          <a class="websites-launch" href="https://websites.webarenapro.win/" target="_blank" rel="noopener noreferrer">Open Websites <span aria-hidden="true">↗</span></a>
-        </div>
+        <div class="website-grid" aria-label="Benchmark websites" data-website-grid></div>
+        <noscript><p>Enable JavaScript to browse the task examples, or <a href="https://websites.webarenapro.win/">open the demo websites</a>.</p></noscript>
       </section>
 
       <script type="application/json" id="accepted-submissions">[]</script>
       <section class="results-section" id="results" aria-labelledby="results-title">
         <div class="results-heading">
           <div class="results-title">
-            <span class="section-number" aria-hidden="true">3</span>
+            <span class="section-number" aria-hidden="true">2</span>
             <h2 id="results-title">Leaderboard</h2>
           </div>
           <a class="paper-link submission-link" href="submit.html">Submit results <span aria-hidden="true">↗</span></a>
@@ -231,7 +212,7 @@
 
       <section class="section citation-section" id="citation" aria-labelledby="citation-title">
         <div class="section-heading">
-          <span class="section-number" aria-hidden="true">4</span>
+          <span class="section-number" aria-hidden="true">3</span>
           <h2 id="citation-title">Citation</h2>
         </div>
         <p>Use the citation below to reference WebArena-Pro.</p>
@@ -262,14 +243,12 @@
       <span>WebArena-Pro · 2026</span>
     </footer>
 
-    <dialog class="screenshot-dialog" data-screenshot-dialog aria-labelledby="screenshot-dialog-title">
+    <dialog class="task-dialog" data-task-dialog aria-labelledby="task-dialog-title">
       <div class="dialog-bar">
-        <strong id="screenshot-dialog-title" data-screenshot-title>Environment screenshot</strong>
-        <button type="button" aria-label="Close screenshot" data-close-screenshot>Close <span aria-hidden="true">×</span></button>
+        <h2 id="task-dialog-title" data-task-title>Task example</h2>
+        <button type="button" aria-label="Close task example" data-close-task>Close <span aria-hidden="true">×</span></button>
       </div>
-      <div class="dialog-image-wrap">
-        <img data-dialog-image src="assets/screenshots/acidwave.jpg" alt="Acidwave environment screenshot" width="1440" height="900">
-      </div>
+      <article class="task-preview" data-task-panel></article>
     </dialog>
   </body>
 </html>

@@ -14,11 +14,16 @@ across 20 self-hosted applications. The existing `#abstract` anchor remains avai
 
 ## Task examples
 
-The task explorer contains examples from 19 of the 20 benchmark websites,
-ordered alphabetically by application name. The examples emphasize longer,
+The task explorer shows all 20 benchmark websites in an alphabetical logo grid:
+five columns and four rows on desktop, four columns on tablets, and two on phones.
+Each logo opens an accessible dialog with an example task, its screenshot,
+and a direct link to that website’s shared read-only demo. The examples emphasize longer,
 more involved workflows: conditional decisions, work across multiple apps,
 precise design constraints, and multi-step state changes. Every example includes
-the complete original task intent, task tags, and an expandable environment screenshot.
+the complete original task intent, task tags, and a link to the full environment screenshot.
+The dialog closes with its Close button, Escape, or a click on the backdrop.
+Website logos are bundled in `assets/websites/`, copied from the shared demo catalog
+at `webarena-pro/webarena-pro` commit `bb47401e`.
 
 The prompts are copied verbatim from the benchmark's task configs at
 [`8c77164`](https://github.com/McGill-NLP/webarena-pro/tree/8c771645431d656917152a477be5003a86bb47ec/webarena-pro-core/src/webarena_pro_core/config).
@@ -38,6 +43,7 @@ Their source task IDs are stored as `taskId` in `script.js` and listed below:
 | MyDrive | `mydrive.raw.json` | 147 |
 | Nextcloud | `nextcloud.raw.json` | 170 |
 | Notion | `notion.raw.json` | 189 |
+| Password Manager | `password-manager.raw.json` | 194 |
 | Penpot | `penpot.raw.json` | 204 |
 | Peppermint | `peppermint.raw.json` | 420 |
 | PipeCRM | `pipedrive.raw.json` | 230 |
@@ -45,6 +51,10 @@ Their source task IDs are stored as `taskId` in `script.js` and listed below:
 | TravelMap | `travelmap.raw.json` | 252 |
 | X Lite | `x-lite.raw.json` | 263 |
 | YouTube Lite | `yt-lite.raw.json` | 293 |
+
+Password Manager task 194 comes from the same config in commit `bb47401e`.
+Its 1280 × 720 screenshot shows the shared demo’s Payment Cards list, captured
+on November 16, 2026; it contains only seeded benchmark data.
 
 The existing Metabase capture is reused. Eight additional screenshots are
 1280 × 720 captures from saved benchmark runs, converted to JPEG without
@@ -104,15 +114,15 @@ Icons are stored locally in `assets/icons/`, including the arXiv mark from
 [brand assets](https://huggingface.co/brand). The review, trophy, and citation
 symbols are custom SVGs.
 
-## Websites
+## Demo website links
 
-The Websites navigation link and homepage section open
-`https://websites.webarenapro.win/`, the shared read-only demo catalog hosted
-on a separate GCP instance. Everyone uses the same set of 20 application
-containers. Direct links open each website with the supplied demo logins;
-there is no space creation or inactivity deadline. Browsing and search are
-available, while content changes are blocked by the demo gateway.
-The existing administration dashboard is not exposed through this link.
+The header’s Websites resource opens the task grid; there is no separate Websites
+section. Each task dialog links directly to its application at
+`https://<site>.websites.webarenapro.win/` and to the demo login details at
+`https://websites.webarenapro.win/`. Everyone uses the same set of 20 application
+containers. Browsing and search are available, while content changes are blocked
+by the demo gateway. Benchmark prompts retain their original instructions, so
+examples can describe edits that cannot be saved in the public read-only demo.
 
 ## Leaderboard
 
