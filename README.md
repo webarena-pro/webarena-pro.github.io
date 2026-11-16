@@ -117,11 +117,11 @@ The leaderboard appears after the overview and task examples and defaults to the
 tab at 50 steps. The 50, 100, and Unlimited step buttons apply to both the Overall
 and By domain tabs. Hover, focus, or click either view's Overall SR header to
 show the success criterion; press Escape or click elsewhere to dismiss it. Published leaderboard results
-cover 50 and 100 steps; unlimited steps display an empty state.
+cover 50 steps; 100 and unlimited steps display an empty state.
 
 Both views identify the agent separately from the model. All built-in agent
 names link to the WebArena-Pro repository in both views. The 50-step table
-contains 17 reported configurations: twelve GenericAgent configurations, OpenCode
+contains 14 reported configurations: nine GenericAgent configurations, OpenCode
 with Kimi 3.1 Pro, Gemini 3.1 Pro, and Qwen 3.8 Max Prime, Codex with GPT 6.1 Sol,
 and Claude Code with Claude Opus 5.5. Paper-backed 50-step overall and domain
 scores follow Tables 5 and 9 of
@@ -135,14 +135,13 @@ Tied scores share a competition rank.
 The omni configuration uses `watch()` and `listen()`. Domain task counts are
 53, 44, 16, 63, 98, and 26 (300 overall); success requires a final reward of 1.
 
-### Gemini 4 results
+### Gemini 4 results (temporarily removed)
 
-The three Gemini 4 GenericAgent entries use the results supplied by ericpts@
-on November 12, 2026. Their 50-step values are midpoint checkpoints from the
-same 100-step runs, not separate runs capped at 50 steps. The 100-step view
-contains these three entries. Both views highlight the new rows, and the
-Overall view displays passed-task counts below the strict success rate.
-Missing domain scores and paper links display as “—”.
+The three Gemini 4 GenericAgent entries were temporarily removed from all
+leaderboard views on November 16, 2026. Their reported results and provenance
+are retained below for possible restoration. The results were supplied by
+ericpts@ on November 12, 2026. Their 50-step values are midpoint checkpoints
+from the same 100-step runs, not separate runs capped at 50 steps.
 
 | Model | 50-step checkpoint | 100 steps | Benchmark release | Full traces |
 | --- | --- | --- | --- | --- |
@@ -158,9 +157,9 @@ scores non-terminal early stops as zero at completion while preserving valid
 midpoint checkpoints. Overall SR uses strict full-rubric completion, not mean
 rubric reward.
 
-These entries live in `leaderboardEntries` in `script.js`. The supplied Drive
-archives are linked for review; their contents have not been re-scored by this
-website's submission validator. They are not checksum-pinned scoring records
+These entries are currently excluded from `leaderboardEntries` in `script.js`.
+The supplied Drive archives are linked for review; their contents have not been
+re-scored by this website's submission validator. They are not checksum-pinned scoring records
 under `submissions/`.
 
 ### Historical figures

@@ -14,18 +14,6 @@ const baselineResources = {
   codeLabel: "GitHub",
   code: benchmarkRepository,
 };
-const gemini4Resources = {
-  ...baselineResources,
-  family: "Gemini",
-  paper: null,
-  isNew: true,
-  taskCount: 300,
-};
-const gemini4Traces = {
-  carbon: "https://drive.google.com/file/d/1V9iOWjsfshCzywmQegO8PGjVbYgGJkYF/view?usp=drivesdk&resourcekey=0-HHPWwBz_6v_pKVCDRExzAg",
-  argon: "https://drive.google.com/file/d/1o-65zPCLQ8cMyEx72qAfrcVJGg_3yCEY/view?usp=drivesdk&resourcekey=0-TcLkJFx2WFSyGTJXhWdzDQ",
-  hydrogen: "https://drive.google.com/file/d/1TNB9kl-BByL9EdaqIFDOF6Ig3THTAEbc/view?usp=drivesdk&resourcekey=0-NXZYcxOLNm4SKa11IR9Eqw",
-};
 // Paper-backed 50-step scores match arXiv:2611.17955v1, Tables 5 and 9.
 const leaderboardEntries = [
   {
@@ -191,32 +179,6 @@ const leaderboardEntries = [
     code: benchmarkRepository,
     results: {
       50: { averageSR: 62.3, domains: [60.4, 72.7, 62.5, 57.1, 65.3, 50.0], traces: codingAgentTraces }
-    },
-  },
-  // Reported by ericpts@ on 2026-11-12. The 50-step scores are checkpoints
-  // from 100-step runs; see README.md for evaluation provenance.
-  {
-    ...gemini4Resources,
-    model: "Gemini 4 Carbon",
-    results: {
-      50: { averageSR: 45.7, passed: 137, domains: [null, null, null, null, null, null], traces: gemini4Traces.carbon },
-      100: { averageSR: 56.7, passed: 170, domains: [null, null, null, null, null, null], traces: gemini4Traces.carbon }
-    },
-  },
-  {
-    ...gemini4Resources,
-    model: "Gemini 4 Argon",
-    results: {
-      50: { averageSR: 49.0, passed: 147, domains: [null, null, null, null, null, null], traces: gemini4Traces.argon },
-      100: { averageSR: 55.0, passed: 165, domains: [null, null, null, null, null, null], traces: gemini4Traces.argon }
-    },
-  },
-  {
-    ...gemini4Resources,
-    model: "Gemini 4 Hydrogen",
-    results: {
-      50: { averageSR: 40.0, passed: 120, domains: [null, null, null, null, null, null], traces: gemini4Traces.hydrogen },
-      100: { averageSR: 47.0, passed: 141, domains: [null, null, null, null, null, null], traces: gemini4Traces.hydrogen }
     },
   },
 ];
