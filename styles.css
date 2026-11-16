@@ -119,6 +119,8 @@ h3 { font-size: 24px; line-height: 1.35; }
 .author-list { max-width: 950px; margin: 0 auto 8px; color: var(--accent); font-size: 14px; line-height: 2; }
 .author-list span { display: inline; white-space: nowrap; }
 .author-list span:not(:last-child)::after { content: ","; color: var(--muted); margin-right: 6px; }
+.author-list a { text-decoration: none; }
+.author-list a:hover, .author-list a:focus-visible { text-decoration: underline; }
 .author-note { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 18px; color: var(--muted); font-size: 12px; }
 .venue { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
 .paper-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 26px; font-size: 15px; }

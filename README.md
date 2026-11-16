@@ -84,6 +84,10 @@ Task screenshots keep their original colors.
 
 ## Resource links
 
+Author names link to verified personal websites or LinkedIn profiles in a new
+tab. Junyi Song and Yunjia Tian remain plain text until their preferred personal
+or LinkedIn URLs can be confirmed.
+
 The header uses borderless logo-and-label links for arXiv, GitHub, Hugging Face,
 the leaderboard, and Citation. Hugging Face opens
 `https://huggingface.co/WebArena-Pro`, and the leaderboard and
