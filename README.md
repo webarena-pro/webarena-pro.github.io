@@ -65,8 +65,9 @@ The header uses borderless logo-and-label links for arXiv, GitHub, Hugging Face,
 the leaderboard, and Citation. Hugging Face opens
 `https://huggingface.co/WebArena-Pro`, and the leaderboard and
 Citation links jump to their page sections. GitHub opens
-`https://github.com/McGill-NLP/webarena-pro`. arXiv remains disabled until its
-resource URL is available.
+`https://github.com/McGill-NLP/webarena-pro`. arXiv opens
+`https://arxiv.org/abs/2611.17955`. The citation section includes the complete
+paper BibTeX entry and a Copy button.
 
 Icons are stored locally in `assets/icons/`, including the arXiv mark from
 [Simple Icons](https://github.com/simple-icons/simple-icons/blob/develop/icons/arxiv.svg)
@@ -121,9 +122,9 @@ emojis beside the agent names. Table text uses regular weight throughout.
 
 The baseline uses GenericAgent. Existing baseline Code links point to the
 WebArena-Pro benchmark repository defined by `benchmarkRepository`, with a
-GitHub label. Existing baseline Paper entries use `benchmarkPaper`, which is
-currently `null`; Paper cells stay blank until the WebArena-Pro arXiv URL is
-added there. Set each budget's `traces` field to its trace URL when available.
+GitHub label. Existing baseline Paper entries use `benchmarkPaper`, which
+links to the WebArena-Pro paper at `https://arxiv.org/abs/2611.17955`.
+Set each budget's `traces` field to its trace URL when available.
 Other missing URLs appear as placeholders, not links. Submitted entries use
 their supplied agent website, code, paper, and traces URLs; missing domain
 scores display as “—”.
