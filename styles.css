@@ -134,20 +134,9 @@ h3 { font-size: 24px; line-height: 1.35; }
 .paper-link-primary:not([aria-disabled="true"]):hover { color: var(--button-ink); background: var(--selected-hover); border-color: var(--selected-hover); }
 .paper-link span { margin-left: 5px; }
 
-.news-section { max-width: 850px; margin: 0 auto 30px; padding-top: 30px; border-top: 1px solid var(--line); }
-.news-section h2 { margin-bottom: 18px; text-align: center; font-size: 26px; }
-.news-list { margin: 0; padding: 0; list-style: none; }
-.news-list li { padding: 14px 18px; border-left: 3px solid var(--blue); background: var(--soft); font-size: 14px; }
-.news-list li + li { margin-top: 10px; }
-
 .abstract-section { max-width: 850px; margin: 0 auto; padding: 30px 0 0; border-top: 1px solid var(--line); }
 .abstract-section h2 { margin-bottom: 18px; text-align: center; font-size: 26px; }
 .abstract-text { margin-bottom: 20px; font: 18px/1.6 var(--serif); text-align: center; }
-.overview-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: min(500px, 100%); margin: 0 auto 16px; }
-.overview-tab { min-height: 44px; padding: 8px 6px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--muted); font-size: 13px; }
-.overview-tab:hover { border-color: var(--blue); color: var(--accent); }
-.overview-tab[aria-selected="true"] { border-color: var(--blue-deep); background: var(--blue-soft); color: var(--blue-deep); }
-.overview-detail { min-height: 3.2em; margin: 0; color: var(--muted); font: 18px/1.6 var(--serif); text-align: center; }
 
 .section { padding: 58px 0 0; }
 .section-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
@@ -283,8 +272,7 @@ h3 { font-size: 24px; line-height: 1.35; }
   .paper-subtitle { font-size: 25px; }
   .desktop-break { display: none; }
   .author-list { font-size: 13px; line-height: 1.9; }
-  .abstract-text, .overview-detail { font-size: 17px; }
-  .overview-detail { min-height: 4.8em; }
+  .abstract-text { font-size: 17px; }
   .section { padding-top: 42px; }
   .results-section { margin-top: 42px; }
   h2 { font-size: 27px; }

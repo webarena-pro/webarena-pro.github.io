@@ -9,10 +9,8 @@ those containers; the optimized captures live in `assets/screenshots/`.
 
 ## Overview
 
-The overview replaces the long abstract with a short introduction and three
-selectable highlights: realistic tasks, multimodal observations, and reproducible
-evaluation. Click a highlight or use Left/Right, Home, and End to switch its
-one-sentence explanation. The existing `#abstract` anchor remains available.
+The overview contains a single sentence introducing the benchmark's 300 tasks
+across 20 self-hosted applications. The existing `#abstract` anchor remains available.
 
 ## Task examples
 
