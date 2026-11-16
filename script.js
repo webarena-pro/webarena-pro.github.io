@@ -9,6 +9,7 @@ const genericAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips
 const codingAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_coding_agents";
 const baselineResources = {
   agent: "GenericAgent",
+  submittedBy: "WebArena-Pro team",
   website: benchmarkRepository,
   paper: benchmarkPaper,
   codeLabel: "GitHub",
@@ -16,6 +17,7 @@ const baselineResources = {
 };
 const gemini4Resources = {
   ...baselineResources,
+  submittedBy: "ericpts",
   family: "Gemini",
   paper: null,
   isNew: true,
@@ -135,6 +137,7 @@ const leaderboardEntries = [
   },
   {
     agent: "OpenCode",
+    submittedBy: "WebArena-Pro team",
     website: benchmarkRepository,
     model: "Kimi 3.1 Pro",
     family: "Kimi",
@@ -147,6 +150,7 @@ const leaderboardEntries = [
   },
   {
     agent: "OpenCode",
+    submittedBy: "WebArena-Pro team",
     website: benchmarkRepository,
     model: "Gemini 3.1 Pro",
     family: "Gemini",
@@ -159,6 +163,7 @@ const leaderboardEntries = [
   },
   {
     agent: "OpenCode",
+    submittedBy: "WebArena-Pro team",
     website: benchmarkRepository,
     model: "Qwen 3.8 Max Prime",
     family: "Qwen",
@@ -171,6 +176,7 @@ const leaderboardEntries = [
   },
   {
     agent: "Codex",
+    submittedBy: "WebArena-Pro team",
     website: benchmarkRepository,
     model: "GPT 6.1 Sol",
     family: "GPT",
@@ -183,6 +189,7 @@ const leaderboardEntries = [
   },
   {
     agent: "Claude Code",
+    submittedBy: "WebArena-Pro team",
     website: benchmarkRepository,
     model: "Claude Opus 5.5",
     family: "Claude",
@@ -362,6 +369,7 @@ function renderLeaderboard() {
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
+    resultCell(overallRow, entry.submittedBy || "—", "results-submitter");
     overallResults.append(overallRow);
 
     const domainRow = document.createElement("tr");
@@ -372,6 +380,7 @@ function renderLeaderboard() {
       resultCell(domainRow, formatScore(score));
     });
     resultCell(domainRow, formatScore(scores.averageSR), "results-overall");
+    resultCell(domainRow, entry.submittedBy || "—", "results-submitter");
     domainResults.append(domainRow);
   });
 }

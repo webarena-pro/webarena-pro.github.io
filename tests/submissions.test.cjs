@@ -10,6 +10,7 @@ const root = path.resolve(__dirname, '..');
 
 const values = {
   agent: 'Example agent', agentVersion: '1.0', model: 'Example model',
+  submittedBy: 'Example research team',
   averageSR: '42.3', stepBudget: '50', website: 'https://example.org',
   code: '', paper: '', traces: 'https://example.org/traces?revision=abc&format=zip',
   harness: 'Harbor', harnessVersion: '0.1', benchmarkRevision: 'v1.0.0',
@@ -40,12 +41,13 @@ test('form output supports each budget and harness without fabricating domain sc
       assert.deepEqual(validateSubmission(result), []);
       assert.deepEqual(result.domainScores, Array(6).fill(null));
       assert.equal(result.code, null);
+      assert.equal(result.submittedBy, values.submittedBy);
     }
   }
 });
 
 test('GitHub issue handoff preserves all metadata, Unicode, and URL punctuation', () => {
-  const result = fromForm({ ...values, agent: 'Agent & café', model: '模型 / v2' }, 'a1b2c3d4');
+  const result = fromForm({ ...values, agent: 'Agent & café', model: '模型 / v2', submittedBy: 'Équipe / 研究' }, 'a1b2c3d4');
   assert.deepEqual(validateSubmission(result), []);
   const url = new URL(githubIssueUrl(result));
   assert.equal(url.origin, 'https://github.com');
@@ -79,6 +81,8 @@ test('validation rejects invalid scores, partial splits, missing evidence, and u
     { code: 'data:text/html,hello' }, { paper: 'https://example.org/\nunsafe' },
     { domainScores: [0] }, { domainScores: [null, null, null, null, null, 101] },
     { id: '../escape' }, { unexpected: true },
+    { submittedBy: '' }, { submittedBy: ' ' }, { submittedBy: null },
+    { submittedBy: ' team' }, { submittedBy: 'a'.repeat(151) }, { submittedBy: 'team\nname' },
   ];
   for (const change of cases) assert.ok(validateSubmission({ ...record(), ...change }).length, JSON.stringify(change));
   assert.ok(validateSubmission(fromForm({ ...values, averageSR: '' }, 'a1b2c3d4')).length);
@@ -95,6 +99,7 @@ test('build includes accepted results at the declared budget and retains existin
   const html = fs.readFileSync(path.join(dir, '_site/index.html'), 'utf8');
   const entries = JSON.parse(html.match(/id="accepted-submissions">(.*?)<\/script>/s)[1]);
   assert.equal(entries[0].agent, result.agent);
+  assert.equal(entries[0].submittedBy, result.submittedBy);
   assert.deepEqual(Object.keys(entries[0].results), ['100']);
   assert.equal(entries[0].results['100'].averageSR, 42.3);
   assert.deepEqual(entries[0].results['100'].domains, result.domainScores);
@@ -102,15 +107,30 @@ test('build includes accepted results at the declared budget and retains existin
   assert.equal(fs.readFileSync(path.join(dir, '_site/script.js'), 'utf8'), fs.readFileSync(path.join(root, 'script.js'), 'utf8'));
 });
 
+test('submissions without a submitter remain valid and build without an attribution', t => {
+  const dir = fixture(t);
+  const result = fromForm({ ...values, submittedBy: '' }, 'a1b2c3d4');
+  assert.ok(!Object.hasOwn(result, 'submittedBy'));
+  assert.deepEqual(validateSubmission(result), []);
+  assert.deepEqual(parseIssue(new URL(githubIssueUrl(result)).searchParams.get('body')), result);
+  save(dir, result);
+  assert.equal(buildSite(dir), 1);
+  const html = fs.readFileSync(path.join(dir, '_site/index.html'), 'utf8');
+  const entries = JSON.parse(html.match(/id="accepted-submissions">(.*?)<\/script>/s)[1]);
+  assert.equal(entries[0].submittedBy, null);
+});
+
 test('submitted markup remains JSON data and cannot escape into the page', t => {
   const dir = fixture(t);
   const result = { ...record(), agent: '</script><img src=x onerror=alert(1)> $& $`' };
+  result.submittedBy = result.agent;
   save(dir, result);
   buildSite(dir);
   const html = fs.readFileSync(path.join(dir, '_site/index.html'), 'utf8');
   assert.ok(!html.includes('<img src=x'));
   const entries = JSON.parse(html.match(/id="accepted-submissions">(.*?)<\/script>/s)[1]);
   assert.equal(entries[0].agent, result.agent);
+  assert.equal(entries[0].submittedBy, result.submittedBy);
 });
 
 test('invalid JSON, mismatched filenames, and unsupported files fail the build', t => {
