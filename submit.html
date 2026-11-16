@@ -9,8 +9,8 @@
     <title>Submit results | WebArena-Pro</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <script src="theme.js?v=1"></script>
-    <link rel="stylesheet" href="styles.css?v=dark-mode-1">
-    <script src="submission-schema.js?v=2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=submitted-by-20261116">
+    <script src="submission-schema.js?v=3" defer></script>
     <script src="submission.js?v=submission-issue-scoring-1" defer></script>
   </head>
   <body>
@@ -48,6 +48,11 @@
         <fieldset>
           <legend>Result</legend>
           <div class="submission-fields">
+            <div class="submission-field submission-field-wide">
+              <label for="submission-submitted-by">Submitted by <span>(optional)</span></label>
+              <input id="submission-submitted-by" name="submittedBy" type="text" maxlength="150" pattern=".*\S.*" placeholder="Your name or organization" aria-describedby="submission-submitted-by-help">
+              <p id="submission-submitted-by-help" class="submission-help">This name will appear in the leaderboard’s Submitted by column.</p>
+            </div>
             <div class="submission-field">
               <label for="submission-agent">Agent name</label>
               <input id="submission-agent" name="agent" type="text" maxlength="150" pattern=".*\S.*" placeholder="e.g. GenericAgent" required>

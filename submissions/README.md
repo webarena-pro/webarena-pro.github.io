@@ -31,6 +31,7 @@ Example (replace all values, including the placeholder checksum):
   "schemaVersion": 1,
   "id": "my-agent-my-model-50-unique-id",
   "agent": "My agent",
+  "submittedBy": "My name or organization",
   "agentVersion": "1.0.0",
   "model": "Exact model name and version",
   "averageSR": 40.0,
@@ -51,7 +52,10 @@ Example (replace all values, including the placeholder checksum):
 }
 ```
 
-All fields are required. `code` and `paper` may be `null`. Harness is `AgentLab`
+All fields except `submittedBy` are required. When provided, `submittedBy` must
+be non-empty text of at most 150 characters and is displayed publicly in both
+leaderboard views. Older records without it display “—”.
+`code` and `paper` may be `null`. Harness is `AgentLab`
 or `Harbor`. URLs use HTTP(S), contain no credentials, and are at most 2,000
 characters; `scoringArchive` additionally requires public HTTPS on port 443
 without a fragment. The archive bytes must match `scoringSha256`.

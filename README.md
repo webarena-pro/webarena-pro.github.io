@@ -110,7 +110,11 @@ and By domain tabs. Hover, focus, or click either view's Overall SR header to
 show the success criterion; press Escape or click elsewhere to dismiss it. Published leaderboard results
 cover 50 and 100 steps; unlimited steps display an empty state.
 
-Both views identify the agent separately from the model. All built-in agent
+Both views identify the agent separately from the model and include a
+**Submitted by** column. Built-in paper results credit the WebArena-Pro team;
+the Gemini 4 results credit `ericpts`, as recorded in their provenance below.
+Accepted submissions use their optional `submittedBy` name; missing names
+display as “—”. All built-in agent
 names link to the WebArena-Pro repository in both views. The 50-step table
 contains 17 reported configurations: twelve GenericAgent configurations, OpenCode
 with Kimi 3.1 Pro, Gemini 3.1 Pro, and Qwen 3.8 Max Prime, Codex with GPT 6.1 Sol,
@@ -177,7 +181,7 @@ Plotting dependencies are only needed when regenerating the figures.
 Form-submitted results are reviewed as JSON files in `submissions/` and included
 by the build after merge. Existing baseline entries remain in `leaderboardEntries` in
 `script.js`. Each entry has an agent,
-model, paper URL, code URL, and results keyed by step budget. Domain scores
+model, submitter name, paper URL, code URL, and results keyed by step budget. Domain scores
 follow `leaderboardDomains`; `averageSR` is the reported overall success rate,
 not an unweighted average of the domain scores. Both views rank entries by
 that score and mark the top three ranks with gold, silver, and bronze medal
