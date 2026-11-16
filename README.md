@@ -17,24 +17,36 @@ one-sentence explanation. The existing `#abstract` anchor remains available.
 ## Task examples
 
 The task explorer contains examples from 19 of the 20 benchmark websites,
-ordered alphabetically by application name. Every example includes a prompt,
-task tags, and an expandable screenshot. The original ten prompts are retained.
+ordered alphabetically by application name. The examples emphasize longer,
+more involved workflows: conditional decisions, work across multiple apps,
+precise design constraints, and multi-step state changes. Every example includes
+the complete original task intent, task tags, and an expandable environment screenshot.
 
-The nine added prompts are copied from the benchmark's task configs at
-[`f41f8e1`](https://github.com/webarena-pro/webarena-pro/tree/f41f8e10f22322bc7796a9b2317bf3f4397e7a66/webarena-pro-core/src/webarena_pro_core/config).
-Their source task IDs are listed below for future updates:
+The prompts are copied verbatim from the benchmark's task configs at
+[`8c77164`](https://github.com/McGill-NLP/webarena-pro/tree/8c771645431d656917152a477be5003a86bb47ec/webarena-pro-core/src/webarena_pro_core/config).
+Their source task IDs are stored as `taskId` in `script.js` and listed below:
 
 | Website | Config | Task ID |
 | --- | --- | --- |
-| ERPNext | `erp-next.raw.json` | 038 |
-| Metabase | `metabase.raw.json` | 125 |
-| Minerva Lite | `minerva-lite.raw.json` | 134 |
-| MyDrive | `mydrive.raw.json` | 145 |
-| Penpot | `penpot.raw.json` | 202 |
-| Peppermint | `peppermint.raw.json` | 216 |
-| Thunderbird | `thunderbird.raw.json` | 234 |
-| TravelMap | `travelmap.raw.json` | 248 |
-| X Lite | `x-lite.raw.json` | 256 |
+| Acidwave | `acidwave.raw.json` | 403 |
+| ERPNext | `erp-next.raw.json` | 322 |
+| Firefly III | `firefly.raw.json` | 062 |
+| Flight Search | `flight-search.raw.json` | 340 |
+| Immich | `immich.raw.json` | 087 |
+| Job Portal | `jobportal.raw.json` | 096 |
+| Mattermost | `mattermost.raw.json` | 118 |
+| Metabase | `metabase.raw.json` | 325 |
+| Minerva Lite | `minerva-lite.raw.json` | 137 |
+| MyDrive | `mydrive.raw.json` | 147 |
+| Nextcloud | `nextcloud.raw.json` | 170 |
+| Notion | `notion.raw.json` | 189 |
+| Penpot | `penpot.raw.json` | 204 |
+| Peppermint | `peppermint.raw.json` | 420 |
+| PipeCRM | `pipedrive.raw.json` | 230 |
+| Thunderbird | `thunderbird.raw.json` | 243 |
+| TravelMap | `travelmap.raw.json` | 252 |
+| X Lite | `x-lite.raw.json` | 263 |
+| YouTube Lite | `yt-lite.raw.json` | 293 |
 
 The existing Metabase capture is reused. Eight additional screenshots are
 1280 × 720 captures from saved benchmark runs, converted to JPEG without
@@ -85,7 +97,8 @@ and By domain tabs. Hover, focus, or click either view's Overall SR header to
 show the success criterion; press Escape or click elsewhere to dismiss it. Published leaderboard results
 currently cover 50 steps; 100 and unlimited steps display empty states.
 
-Both views identify the agent separately from the model. The 50-step table
+Both views identify the agent separately from the model. All built-in agent
+names link to the WebArena-Pro repository in both views. The 50-step table
 contains 13 reported configurations: nine GenericAgent configurations, OpenCode
 with Kimi 3.1 Pro and Gemini 3.1 Pro, Codex with GPT 6.1 Sol, and Claude Code
 with Claude Opus 5.5. The November 11, 2026 results are led by Claude Code at
@@ -124,6 +137,13 @@ The baseline uses GenericAgent. Existing baseline Code links point to the
 WebArena-Pro benchmark repository defined by `benchmarkRepository`, with a
 GitHub label. Existing baseline Paper entries use `benchmarkPaper`, which
 links to the WebArena-Pro paper at `https://arxiv.org/abs/2611.17955`.
+The 50-step Traces links open the public
+[GenericAgent dataset](https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_generic_agent)
+for its seven published model cohorts, or the
+[coding-agent dataset](https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_coding_agents)
+for OpenCode, Codex, and Claude Code. The GenericAgent dataset does not contain
+the standard Gemini 3.1 Pro or Qwen 3.6 27B cohorts; their trace links remain
+unavailable. Historical 30-step trace links are also unavailable.
 Set each budget's `traces` field to its trace URL when available.
 Other missing URLs appear as placeholders, not links. Submitted entries use
 their supplied agent website, code, paper, and traces URLs; missing domain

@@ -5,8 +5,11 @@ const leaderboardDomains = [
 ];
 const benchmarkRepository = "https://github.com/McGill-NLP/webarena-pro";
 const benchmarkPaper = "https://arxiv.org/abs/2611.17955";
+const genericAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_generic_agent";
+const codingAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_coding_agents";
 const baselineResources = {
   agent: "GenericAgent",
+  website: benchmarkRepository,
   paper: benchmarkPaper,
   codeLabel: "GitHub",
   code: benchmarkRepository,
@@ -31,7 +34,7 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/",
     results: {
       30: { averageSR: 21.4, domains: [14.3, 13.3, 37.5, 19.0, 27.8, 22.2], traces: null },
-      50: { averageSR: 23.7, domains: [15.1, 27.3, 25.0, 20.6, 25.5, 34.6], traces: null }
+      50: { averageSR: 23.7, domains: [15.1, 27.3, 25.0, 20.6, 25.5, 34.6], traces: genericAgentTraces }
     },
   },
   {
@@ -52,7 +55,7 @@ const leaderboardEntries = [
     releaseSource: "https://www.anthropic.com/news/claude-opus-4-7",
     results: {
       30: { averageSR: 22.0, domains: [16.1, 20.0, 25.0, 15.3, 29.9, 22.2], traces: null },
-      50: { averageSR: 25.3, domains: [20.8, 36.4, 31.3, 17.5, 24.5, 34.6], traces: null }
+      50: { averageSR: 25.3, domains: [20.8, 36.4, 31.3, 17.5, 24.5, 34.6], traces: genericAgentTraces }
     },
   },
   {
@@ -74,7 +77,7 @@ const leaderboardEntries = [
     releaseSource: "https://github.com/QwenLM/Qwen3.8/blob/main/README.md",
     results: {
       30: { averageSR: 6.0, domains: [3.6, 0.0, 6.2, 5.1, 11.3, 3.7], traces: null },
-      50: { averageSR: 5.0, domains: [3.8, 9.1, 12.5, 3.2, 4.1, 3.8], traces: null }
+      50: { averageSR: 5.0, domains: [3.8, 9.1, 12.5, 3.2, 4.1, 3.8], traces: genericAgentTraces }
     },
   },
   {
@@ -85,7 +88,7 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/",
     results: {
       30: { averageSR: 22.7, domains: [21.4, 20.0, 37.5, 22.0, 20.6, 29.6], traces: null },
-      50: { averageSR: 30.3, domains: [18.9, 38.6, 37.5, 30.2, 30.6, 34.6], traces: null }
+      50: { averageSR: 30.3, domains: [18.9, 38.6, 37.5, 30.2, 30.6, 34.6], traces: genericAgentTraces }
     },
   },
   {
@@ -96,7 +99,7 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/",
     results: {
       30: { averageSR: 20.1, domains: [17.9, 24.4, 25.0, 22.0, 18.8, 14.8], traces: null },
-      50: { averageSR: 22.3, domains: [18.9, 25.0, 37.5, 23.8, 17.3, 30.8], traces: null }
+      50: { averageSR: 22.3, domains: [18.9, 25.0, 37.5, 23.8, 17.3, 30.8], traces: genericAgentTraces }
     },
   },
   {
@@ -104,7 +107,7 @@ const leaderboardEntries = [
     model: "Qwen 3.8 27B",
     family: "Qwen",
     results: {
-      50: { averageSR: 15.7, domains: [7.5, 15.9, 12.5, 14.3, 19.4, 23.1], traces: null }
+      50: { averageSR: 15.7, domains: [7.5, 15.9, 12.5, 14.3, 19.4, 23.1], traces: genericAgentTraces }
     },
   },
   {
@@ -114,51 +117,55 @@ const leaderboardEntries = [
     releaseDate: "2026-02-19",
     releaseSource: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
     results: {
-      50: { averageSR: 30.3, domains: [26.4, 27.3, 43.8, 20.6, 38.8, 26.9], traces: null }
+      50: { averageSR: 30.3, domains: [26.4, 27.3, 43.8, 20.6, 38.8, 26.9], traces: genericAgentTraces }
     },
   },
   {
     agent: "OpenCode",
+    website: benchmarkRepository,
     model: "Kimi 3.1 Pro",
     family: "Kimi",
     paper: benchmarkPaper,
     codeLabel: "GitHub",
     code: benchmarkRepository,
     results: {
-      50: { averageSR: 60.3, domains: [56.6, 79.5, 68.8, 54.0, 59.2, 50.0], traces: null }
+      50: { averageSR: 60.3, domains: [56.6, 79.5, 68.8, 54.0, 59.2, 50.0], traces: codingAgentTraces }
     },
   },
   {
     agent: "OpenCode",
+    website: benchmarkRepository,
     model: "Gemini 3.1 Pro",
     family: "Gemini",
     paper: benchmarkPaper,
     codeLabel: "GitHub",
     code: benchmarkRepository,
     results: {
-      50: { averageSR: 47.0, domains: [39.6, 65.9, 43.8, 41.3, 49.0, 38.5], traces: null }
+      50: { averageSR: 47.0, domains: [39.6, 65.9, 43.8, 41.3, 49.0, 38.5], traces: codingAgentTraces }
     },
   },
   {
     agent: "Codex",
+    website: benchmarkRepository,
     model: "GPT 6.1 Sol",
     family: "GPT",
     paper: benchmarkPaper,
     codeLabel: "GitHub",
     code: benchmarkRepository,
     results: {
-      50: { averageSR: 61.7, domains: [60.4, 81.8, 62.5, 49.2, 63.3, 53.8], traces: null }
+      50: { averageSR: 61.7, domains: [60.4, 81.8, 62.5, 49.2, 63.3, 53.8], traces: codingAgentTraces }
     },
   },
   {
     agent: "Claude Code",
+    website: benchmarkRepository,
     model: "Claude Opus 5.5",
     family: "Claude",
     paper: benchmarkPaper,
     codeLabel: "GitHub",
     code: benchmarkRepository,
     results: {
-      50: { averageSR: 62.3, domains: [60.4, 72.7, 62.5, 57.1, 65.3, 50.0], traces: null }
+      50: { averageSR: 62.3, domains: [60.4, 72.7, 62.5, 57.1, 65.3, 50.0], traces: codingAgentTraces }
     },
   }
 ];
@@ -207,6 +214,19 @@ function resultCell(row, text, className = "", isHeading = false) {
   if (className) cell.className = className;
   cell.textContent = text;
   row.append(cell);
+  return cell;
+}
+
+function agentCell(row, entry, label) {
+  const cell = resultCell(row, label, "results-agent");
+  if (entry.website) {
+    const link = document.createElement("a");
+    link.textContent = label;
+    link.href = entry.website;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    cell.replaceChildren(link);
+  }
   return cell;
 }
 
@@ -268,15 +288,7 @@ function renderLeaderboard() {
 
     const overallRow = document.createElement("tr");
     resultCell(overallRow, isReported ? String(rank).padStart(2, "0") : "—", "results-rank");
-    const agentCell = resultCell(overallRow, agentLabel, "results-agent");
-    if (entry.website) {
-      const link = document.createElement("a");
-      link.textContent = agentLabel;
-      link.href = entry.website;
-      link.target = "_blank";
-      link.rel = "noreferrer";
-      agentCell.replaceChildren(link);
-    }
+    agentCell(overallRow, entry, agentLabel);
     resultCell(overallRow, entry.model, "results-model", true);
     resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
@@ -285,7 +297,7 @@ function renderLeaderboard() {
     overallResults.append(overallRow);
 
     const domainRow = document.createElement("tr");
-    resultCell(domainRow, agentLabel, "results-agent");
+    agentCell(domainRow, entry, agentLabel);
     resultCell(domainRow, entry.model, "results-model", true);
     scores.domains.forEach(score => {
       resultCell(domainRow, formatScore(score));
@@ -347,174 +359,193 @@ overviewTabs.forEach((tab, index) => {
 const tasks = [
   {
     id: "acidwave",
+    taskId: "403",
     site: "Acidwave",
     short: "AW",
     color: "#d9468f",
     url: "acidwave.local / songs",
-    type: "Audio comparison",
-    tags: ["Audio", "Single-app", "Comparison"],
-    prompt: "Among GREYLINE, NEON WANT, RETURN POSTCARD, and BRASS STEP, which song has the longest instrumental intro—that is, which one starts its lyrics latest?",
+    type: "Audio-guided travel booking",
+    tags: ["Audio", "2 apps", "Multi-step"],
+    prompt: "Listen to the recording titled \"Trailer Static\" on Acidwave and identify the cities named in the spoken audio. For each distinct city that has accommodation listings on TravelMap, complete one accommodation booking. Count repeated mentions of the same city only once, and skip cities that have no listings there. You may choose any available property and booking details (dates, number of guests, and length of stay) independently for each city; the bookings do not need to form a single travel itinerary.",
   },
   {
     id: "erp-next",
+    taskId: "322",
     site: "ERPNext",
-    type: "Delivery management",
+    type: "Customer onboarding and invoicing",
     tags: ["Business operations", "Multi-step", "State change"],
-    prompt: "Add a new delivery note for customer Boreal Retail Partners East Office with the MAT-DN-RET series with source warehouse Goods In Transit - WAC for one ACOUSTIC-PANEL",
+    prompt: "Create and submit a Sales Invoice for this new customer:\n\n  - Company: Maple Lantern Architecture Inc.\n  - Customer type: Company\n  - Customer group: All Customer Groups\n  - Territory: All Territories\n  - Contact: Evelyn Hart, Sales Operations Manager\n  - Email: evelyn.hart@maplelantern.example\n  - Phone: +1 613-555-0147\n  - Mobile: +1 613-555-0192\n  - Address: Suite 420, 100 Example Boulevard, Ottawa, Ontario K1P 5G4, Canada\n\n  Invoice details:\n\n  - Posting date: August 7, 2026\n  - Due date: August 21, 2026\n  - Price list: Standard Selling\n  - Currency: EUR\n  - Remarks: Ottawa studio workstation setup\n  - 4 × Executive Desk\n  - 8 × 27in 4K Monitor \n  - 4 × Ergo Office Chair \n  - 4 × USB-C Docking Station \n  - 4 × Cable Management Kit",
     screenshotSize: [1280, 720],
   },
   {
     id: "firefly",
+    taskId: "062",
     site: "Firefly III",
     short: "FF",
     color: "#5a3cf0",
     url: "firefly.local / transactions",
-    type: "Financial analysis",
-    tags: ["Data analysis", "Single-app", "Information seeking"],
-    prompt: "Find which vacation month was more expensive: June 2025 or August 2025.",
+    type: "Conditional travel budgeting",
+    tags: ["2 apps", "Data analysis", "State change"],
+    prompt: "In Firefly, find the most expensive single transaction tagged Vacation between June 1 and August 31, 2025, and note its amount and report in the following form: 2025 max: C$X,XXX.XX\n\nThen in flight-search, find the cheapest one-way economy flight from JFK to LAX on 2026-08-15, and note its price. If the JFK-to-LAX 2026 flight is cheaper than the most expensive 2025 Vacation transaction, create a piggy bank in Firefly named \"Cheaper Flight Fund\" with target amount equal to the JFK-to-LAX flight price, saving from TD Chequing, and add C$50 from TD Chequing to it. Otherwise, do nothing.",
   },
   {
     id: "flight",
+    taskId: "340",
     site: "Flight Search",
     short: "FS",
     color: "#2563eb",
     url: "flights.local / search",
-    type: "Travel search",
-    tags: ["Search", "Comparison", "Information seeking"],
-    prompt: "Find the earliest one-way economy flight from San Francisco (SFO) to Seattle (SEA) on 2026-06-15.",
+    type: "Multi-city trip optimization",
+    tags: ["3 apps", "Planning", "Comparison"],
+    prompt: "Find the cheapest multi-city economy itinerary for one adult departing Montreal (YUL) on September 20, 2026, visiting Lisbon (LIS) and Berlin (BER) exactly once, spending two nights in one city and three nights in the other, and departing the final city for Montreal on September 26. Intercity flights must arrive on the same local calendar day so every lodging night is usable. Then find the cheapest available Travelmap accommodation for one guest for the corresponding dates. Report the route (City1, num nights as int), (City2, num nights), combined total in US$X,XXX.XX.",
   },
   {
     id: "immich",
+    taskId: "087",
     site: "Immich",
     short: "IM",
     color: "#4250af",
     url: "immich.local / administration",
-    type: "System administration",
-    tags: ["Visual", "State change", "Long horizon"],
-    prompt: "Delete all users who are not using any storage space.",
+    type: "Photo organization and sharing",
+    tags: ["Visual", "Multi-step", "Access control"],
+    prompt: "Create separate albums to save photos from April 5, 2015 and April 27, 2026 named “250405” and “260427,” respectively, and share both albums with agent2 and agent3 with viewer access.",
   },
   {
     id: "jobportal",
+    taskId: "096",
     site: "Job Portal",
     short: "JP",
     color: "#3b82f6",
     url: "jobs.local / search",
-    type: "Structured search",
-    tags: ["Filter", "Sort", "Information seeking"],
-    prompt: "How many jobs did Helix AI post, and which ones have the highest salaries?",
+    type: "Job posting revision",
+    tags: ["Comparison", "Multi-step", "State change"],
+    prompt: "Close the two intern job postings with the earliest application deadlines. Then create new part-time versions of those roles that require at least 1 year of experience, with the income increased by 25% compared to the original postings. Set the application deadline for the new postings to two months from now.",
   },
   {
     id: "mattermost",
+    taskId: "118",
     site: "Mattermost",
     short: "MM",
     color: "#152c53",
     url: "mattermost.local / engineering / deployments",
-    type: "Cross-app research",
-    tags: ["4 apps", "Information seeking", "Content creation"],
-    prompt: "In Mattermost, find the Tuesday item in the Engineering team’s Deployments schedule for March 10–14. Then total the Home Internet payments from January through April 2026 in Firefly, count the nonstop one-way economy flights from Denver to Las Vegas on June 15, 2026, and post the combined summary on X.",
+    type: "Cross-app operational reporting",
+    tags: ["4 apps", "Data analysis", "Communication"],
+    prompt: "Find the two action items in Bob's infrastructure status report for the week of March 10. Then, count the open deals currently shown in the Lead stage. Next, find how many Groceries expenses there are from 2026-01-01 through 2026-03-31 and their total. Finally, find how many one-way economy flights from Denver (DEN) to Las Vegas (LAS) on 2026-06-15 include United Airlines. Post the combined summary in the infrastructure status discussion.",
   },
   {
     id: "metabase",
+    taskId: "325",
     site: "Metabase",
-    type: "Dashboard customization",
-    tags: ["Data analysis", "Visualization", "State change"],
-    prompt: "I would like to see the sales dashboard first when I log into Metabase. The dashboard is missing a plot on the monthly revenue trend, and a filter by date.",
+    type: "Layered revenue visualization",
+    tags: ["Data analysis", "Visualization", "Multi-step"],
+    prompt: "Create a monthly order_summary combo chart with four layers:\n\n  1. Revenue by acquisition source\n  2. Total revenue over time\n  3. Three-month revenue average over time\n  4. Distinct orders over time",
   },
   {
     id: "minerva-lite",
+    taskId: "137",
     site: "Minerva Lite",
-    type: "Course planning",
-    tags: ["Planning", "Multi-step", "State change"],
-    prompt: "Sign up for three classes that will most help me complete my degree in the winter",
+    type: "Schedule-aware travel coordination",
+    tags: ["5 apps", "Planning", "Communication"],
+    prompt: "Find the cheapest 4-day round-trip flight from ICN to KIX during the first week of October 2026 that minimizes missed classes based on my current schedule. Then ask whether Emma is available. Also, post the itinerary and ask who else can join the trip (in case). Finally, add this as a new trip in the Travel Budget database, making sure to distinguish it from the existing trip.",
     screenshotSize: [1280, 720],
   },
   {
     id: "mydrive",
+    taskId: "147",
     site: "MyDrive",
-    type: "File organization",
-    tags: ["Files", "Multi-step", "State change"],
-    prompt: "Create a folder for each file type and then sort the entire drive by file type",
+    type: "Multilingual algorithm files",
+    tags: ["Coding", "Files", "Multi-step"],
+    prompt: "\"Create an algorithm folder with Q1 and Q2 subfolders. In each folder, write the given algorithm in Python, Java, and JavaScript, using filenames in the {question}_{language} format, such as Q1_python.py and Q1_java.java.\n\nQ1: Write a function that returns the nth value of the Fibonacci sequence.\nQ2: Given two n x n binary matrices mat and target, return true if mat can be made equal to target by rotating mat in 90-degree increments; otherwise, return false. (n == mat.length == target.length, n == mat[i].length == target[i].length)\"",
     screenshotSize: [1280, 720],
   },
   {
     id: "nextcloud",
+    taskId: "170",
     site: "Nextcloud",
     short: "NC",
     color: "#0082c9",
     url: "nextcloud.local / talk",
-    type: "Collaboration",
-    tags: ["Communication", "Multi-step", "State change"],
-    prompt: "Set up a poll for the first Project Charlie meeting with options at 10 AM, 2 PM, and 5 PM, and share it in a group conversation with Betty, Daniel, Barbara, and Alex. Mark all three options and add a checkmark reaction afterward.",
+    type: "Secure recruiting collaboration",
+    tags: ["Files", "Communication", "Access control"],
+    prompt: "Send the Marketing Assistant resume files in both .docx and .pdf formats to Nancy, Lisa, and Richard in a group chat. Then, request the creation of a “Marketing Assistant Interview Result” file in the interview folder and share the file request link with them. Set the expiration date to the end of next week (Sunday of the following calendar week), and protect it with the password 'marketing'.",
   },
   {
     id: "notion",
+    taskId: "189",
     site: "Notion",
     short: "NT",
     color: "#111827",
     url: "notion.local / team-notes",
-    type: "Cross-app synthesis",
-    tags: ["2 apps", "Table", "Content creation"],
-    prompt: 'Create a new page “New Commers” under Team Notes, with a table listing accepted candidates, their jobs, and contact details.',
+    type: "Shared travel budget coordination",
+    tags: ["2 apps", "Data analysis", "Communication"],
+    prompt: "I’m planning a domestic flight trip with the two people I most recently interacted with across the connected communication platforms. In the Travel Budget database,  assign one person to the accommodation-related items and the other to the activity-related items using the email property. Then share in the group message how much each person should pay.",
   },
   {
     id: "penpot",
+    taskId: "204",
     site: "Penpot",
-    type: "Multi-page design",
+    type: "Detailed modal component design",
     tags: ["Visual", "Multi-step", "Content creation"],
-    prompt: "Create a new file with three pages. Rename the pages to Rectangle, Triangle, and Circle, and add the corresponding shape to each page.",
+    prompt: "Create a new file and make a 1000×1000 board named “Base Modal” and design a calendar modal component inside it. The modal should be an 800×800 rectangle with a white background (#ffffff), 12px border radius, and a drop shadow of 0 0 12px #000000 at 15% opacity. Inside the modal, include a 48px “Title” text, a 36px “description” text, and a 700×200 button with background color #dfdfdf and 12px border radius. Then, group the rectangle, texts, and button together.",
     screenshotSize: [1280, 720],
   },
   {
     id: "peppermint",
+    taskId: "420",
     site: "Peppermint",
-    type: "Incident triage",
-    tags: ["Support", "Filtering", "Information seeking"],
-    prompt: "Summarize the current high-priority incident tickets owner and status",
+    type: "Customer ranking and onboarding",
+    tags: ["2 apps", "Data analysis", "State change"],
+    prompt: "Identify the three referral-acquired customers with the highest total qualifying order value during 2024. Include only paid, shipped, and completed orders. Add those three customers to Peppermint using their names and emails, avoiding duplicates by email. Create a linked “Referral onboarding — [full name]” ticket for each, assigned to Priya Sharma. Include their rank, qualifying order count, and total order value. Set the first-ranked customer’s ticket to High priority and the other two to Medium.",
     screenshotSize: [1280, 720],
   },
   {
     id: "pipedrive",
+    taskId: "230",
     site: "PipeCRM",
     short: "PC",
     color: "#1f2937",
     url: "pipecrm.local / leads",
-    type: "Sales workflow",
-    tags: ["2 apps", "Email", "State change"],
-    prompt: "Send an email to the contact on the Meridian Law Group lead to arrange a meeting next monday, then register the activity.",
+    type: "Deal comparison and follow-up",
+    tags: ["Comparison", "Multi-step", "State change"],
+    prompt: "For the organization Nimbus Cloud Services, find its two open deals, determine which one has the lower value, and add a task activity to that lower-value deal due on 2026-05-20 with subject exactly: Benchmark task: follow up on lower-value Nimbus deal.",
   },
   {
     id: "thunderbird",
+    taskId: "243",
     site: "Thunderbird",
-    type: "Email recovery",
-    tags: ["Email", "Information seeking", "State change"],
-    prompt: "If any unread emails were accidentally moved to the trash, recover them and summarize the information in each recovered email.",
+    type: "Conditional vacation reply drafts",
+    tags: ["Email", "Filtering", "Content creation"],
+    prompt: "Draft and save vacation-reply emails for the relevant threads. For every unread email, create a draft telling the sender that I am on vacation and will respond as soon as possible. For every read email received after Jan 20 that has not already been notified, create a draft telling the sender that I am on vacation. Do not send any of the drafts.",
     screenshotSize: [1280, 720],
   },
   {
     id: "travelmap",
+    taskId: "252",
     site: "TravelMap",
-    type: "Stay planning",
-    tags: ["Travel", "Information seeking", "Communication"],
-    prompt: "Read the Leslieville listing details, house rules, and check-in policy, then message Maya asking whether early check-in around 1 PM is possible and whether keypad instructions arrive the same day.",
+    type: "Trip changes and host research",
+    tags: ["Travel", "Multi-step", "Communication"],
+    prompt: "First, handle the existing Vancouver trip by opening Trips, reviewing booking BKG-2001, opening the associated Vancouver listing, checking the bike-storage details, and reviewing the existing Inbox conversation with Priya. Then return to Trips and cancel booking BKG-2001. After that, find Joshua Tree Artist Dome, read the host bio and policies, save the listing, and send Jordan a message asking whether sunset hot-tub use is allowed and whether cell service is reliable for arrival.",
     screenshotSize: [1280, 720],
   },
   {
     id: "x-lite",
+    taskId: "263",
     site: "X Lite",
-    type: "Group coordination",
-    tags: ["Communication", "Multi-step", "State change"],
-    prompt: "Create a private coordination chat for the Saturday annotation session and include the confirmed attendees.",
+    type: "Video research and public sharing",
+    tags: ["Video", "3 apps", "Content creation"],
+    prompt: "I’m preparing for air travel and want to learn how to avoid losing luggage. Please find a relevant video guide, create a document (page) that summarizes all the tips for preventing luggage loss, and then share the document (page) in a public post. Mention the speaker's name inside of the post.",
     screenshotSize: [1280, 720],
   },
   {
     id: "yt-lite",
+    taskId: "293",
     site: "YouTube Lite",
     short: "YT",
     color: "#dc2626",
     url: "yt-lite.local",
-    type: "Video understanding and design",
-    tags: ["Video", "2 apps", "Content creation"],
-    prompt: "Find a video related to breakfast recipes, identify the three main fruit ingredients shown in the video, and use Penpot to draw three circles in the colors of those fruits.",
+    type: "Video-guided report creation",
+    tags: ["Video", "Visual", "2 apps"],
+    prompt: "Find a YouTube video that teaches how to write a poem and has a yellow clock in its thumbnail. After watching the video, create a report in the Personal Travel workspace in Notion with the title “How to Write a Poem.” Set the page emoji to match the title of the last poem mentioned in the video, and include the presenter’s Instagram account in the page content.",
   },
 ];
 
@@ -550,7 +581,7 @@ function renderTasks(activeIndex = 0, shouldFocus = false) {
     <div class="task-description">
       <span class="example-number">Example ${String(activeIndex + 1).padStart(2, "0")} / ${tasks.length}</span>
       <h3>${task.site}</h3>
-      <p class="task-prompt">${task.prompt}</p>
+      <p class="task-prompt"></p>
       <p class="task-tags">${task.tags.map(tag => `<span>${tag}</span>`).join("")}</p>
     </div>
     <figure class="task-figure">
@@ -560,6 +591,8 @@ function renderTasks(activeIndex = 0, shouldFocus = false) {
         <button class="screenshot-expand" type="button" data-expand-screenshot="${screenshotPath}" data-screenshot-alt="${task.site}">View full screenshot</button>
       </figcaption>
     </figure>`;
+
+  panel.querySelector(".task-prompt").textContent = task.prompt;
 
   if (shouldFocus) {
     const activeTab = tabs.querySelector(`[data-task-index="${activeIndex}"]`);
