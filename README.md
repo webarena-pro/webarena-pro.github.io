@@ -107,10 +107,11 @@ symbols are custom SVGs.
 ## Websites
 
 The Websites navigation link and homepage section open
-`https://websites.webarenapro.win/`, the public visitor launcher hosted on a
-separate GCP instance. Visitors receive private application state, can open
-multiple websites in one session, and acknowledge deletion after one hour of
-inactivity before starting. The launcher supports 20 concurrent visitor spaces.
+`https://websites.webarenapro.win/`, the shared read-only demo catalog hosted
+on a separate GCP instance. Everyone uses the same set of 20 application
+containers. Direct links open each website with the supplied demo logins;
+there is no space creation or inactivity deadline. Browsing and search are
+available, while content changes are blocked by the demo gateway.
 The existing administration dashboard is not exposed through this link.
 
 ## Leaderboard
