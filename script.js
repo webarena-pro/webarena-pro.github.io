@@ -26,6 +26,7 @@ const gemini4Traces = {
   argon: "https://drive.google.com/file/d/1o-65zPCLQ8cMyEx72qAfrcVJGg_3yCEY/view?usp=drivesdk&resourcekey=0-TcLkJFx2WFSyGTJXhWdzDQ",
   hydrogen: "https://drive.google.com/file/d/1TNB9kl-BByL9EdaqIFDOF6Ig3THTAEbc/view?usp=drivesdk&resourcekey=0-NXZYcxOLNm4SKa11IR9Eqw",
 };
+// Paper-backed 50-step scores match arXiv:2611.17955v1, Tables 5 and 9.
 const leaderboardEntries = [
   {
     ...baselineResources,
@@ -141,7 +142,7 @@ const leaderboardEntries = [
     codeLabel: "GitHub",
     code: benchmarkRepository,
     results: {
-      50: { averageSR: 60.3, domains: [56.6, 79.5, 68.8, 54.0, 59.2, 50.0], traces: codingAgentTraces }
+      50: { averageSR: 60.7, domains: [56.6, 79.5, 68.8, 54.0, 59.2, 53.8], traces: codingAgentTraces }
     },
   },
   {
@@ -153,7 +154,19 @@ const leaderboardEntries = [
     codeLabel: "GitHub",
     code: benchmarkRepository,
     results: {
-      50: { averageSR: 47.0, domains: [39.6, 65.9, 43.8, 41.3, 49.0, 38.5], traces: codingAgentTraces }
+      50: { averageSR: 48.0, domains: [41.5, 65.9, 50.0, 41.3, 50.0, 38.5], traces: codingAgentTraces }
+    },
+  },
+  {
+    agent: "OpenCode",
+    website: benchmarkRepository,
+    model: "Qwen 3.8 Max Prime",
+    family: "Qwen",
+    paper: benchmarkPaper,
+    codeLabel: "GitHub",
+    code: benchmarkRepository,
+    results: {
+      50: { averageSR: 55.7, domains: [54.7, 70.5, 56.3, 47.6, 55.1, 53.8], traces: codingAgentTraces }
     },
   },
   {
@@ -165,7 +178,7 @@ const leaderboardEntries = [
     codeLabel: "GitHub",
     code: benchmarkRepository,
     results: {
-      50: { averageSR: 61.7, domains: [60.4, 81.8, 62.5, 49.2, 63.3, 53.8], traces: codingAgentTraces }
+      50: { averageSR: 62.3, domains: [60.4, 81.8, 62.5, 49.2, 64.3, 57.7], traces: codingAgentTraces }
     },
   },
   {
