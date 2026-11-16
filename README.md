@@ -112,10 +112,15 @@ cover 50 and 100 steps; unlimited steps display an empty state.
 
 Both views identify the agent separately from the model. All built-in agent
 names link to the WebArena-Pro repository in both views. The 50-step table
-contains 16 reported configurations: twelve GenericAgent configurations, OpenCode
-with Kimi 3.1 Pro and Gemini 3.1 Pro, Codex with GPT 6.1 Sol, and Claude Code
-with Claude Opus 5.5. The November 11, 2026 results are led by Claude Code at
-62.3%, followed by Codex at 61.7% and OpenCode / Kimi 3.1 Pro at 60.3%.
+contains 17 reported configurations: twelve GenericAgent configurations, OpenCode
+with Kimi 3.1 Pro, Gemini 3.1 Pro, and Qwen 3.8 Max Prime, Codex with GPT 6.1 Sol,
+and Claude Code with Claude Opus 5.5. Paper-backed 50-step overall and domain
+scores follow Tables 5 and 9 of
+[arXiv:2611.17955v1](https://arxiv.org/pdf/2611.17955v1), published November 13,
+2026 and checked November 16, 2026. Codex and Claude Code tie at 62.3%, followed
+by OpenCode / Kimi 3.1 Pro at 60.7% and OpenCode / Qwen 3.8 Max Prime at 55.7%.
+OpenCode / Gemini 3.1 Pro scores 48.0%. For Kimi, Table 5's 60.7% takes precedence
+over the inconsistent 60.3% in Section 4.2; the abstract also reports 60.7%.
 Unreported scores use `null`, display as “—”, and receive no rank or medal.
 Tied scores share a competition rank.
 The omni configuration uses `watch()` and `listen()`. Domain task counts are
