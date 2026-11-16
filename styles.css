@@ -317,3 +317,13 @@ h3 { font-size: 24px; line-height: 1.35; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* Public visitor environments */
+.websites-section { display: flex; align-items: center; justify-content: space-between; gap: 36px; padding: 32px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.websites-copy { max-width: 720px; }
+.websites-copy h2 { margin-bottom: 14px; }
+.websites-copy p { margin-bottom: 12px; color: var(--muted); }
+.websites-copy .websites-expiry { margin-bottom: 0; font-size: 13px; }
+.websites-launch { display: inline-flex; align-items: center; gap: 18px; flex-shrink: 0; padding: 11px 18px; border-radius: 6px; background: var(--selected); color: var(--button-ink); text-decoration: none; font-size: 14px; font-weight: 600; }
+.websites-launch:hover { background: var(--selected-hover); color: var(--button-ink); }
+@media (max-width: 760px) { .websites-section { flex-direction: column; align-items: flex-start; gap: 22px; padding: 24px; } .site-header nav { gap: 16px; } }

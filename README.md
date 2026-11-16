@@ -102,6 +102,15 @@ Icons are stored locally in `assets/icons/`, including the arXiv mark from
 [brand assets](https://huggingface.co/brand). The review, trophy, and citation
 symbols are custom SVGs.
 
+## Websites
+
+The Websites navigation link and homepage section open
+`https://websites.webarenapro.win/`, the public visitor launcher hosted on a
+separate GCP instance. Visitors receive private application state, can open
+multiple websites in one session, and acknowledge deletion after one hour of
+inactivity before starting. The launcher supports 20 concurrent visitor spaces.
+The existing administration dashboard is not exposed through this link.
+
 ## Leaderboard
 
 The leaderboard appears after the overview and task examples and defaults to the Overall
