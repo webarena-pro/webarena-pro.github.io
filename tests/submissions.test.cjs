@@ -23,7 +23,7 @@ function fixture(t) {
   fs.mkdirSync(path.join(dir, 'submissions'));
   fs.mkdirSync(path.join(dir, 'assets'));
   fs.writeFileSync(path.join(dir, 'assets', 'example.txt'), 'asset');
-  for (const name of ['index.html', 'submit.html', 'styles.css', 'script.js', 'submission.js', 'submission-schema.js']) {
+  for (const name of ['index.html', 'submit.html', 'styles.css', 'theme.js', 'script.js', 'submission.js', 'submission-schema.js']) {
     fs.copyFileSync(path.join(root, name), path.join(dir, name));
   }
   return dir;

@@ -26,11 +26,12 @@ jobs:
 
       - name: Validate JavaScript
         run: |
+          node --check theme.js
           node --check script.js
           node --check submission.js
           node --check submission-schema.js
 
-      - name: Test submission flow
+      - name: Test website
         run: |
           node --test tests/*.test.cjs
           python3 -m unittest discover -s tests -p 'test_*.py'

@@ -71,6 +71,19 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory _site
 Use Node.js 22 or later, then open <http://127.0.0.1:4173>. Rebuild after editing
 submission files so the preview includes them.
 
+## Color themes
+
+Both pages follow the device color scheme on first visit. The header's theme
+button switches between light and dark mode and saves the choice in local storage
+under `webarena-pro-theme`, shared by the homepage and submission form. Device
+changes are followed until a visitor chooses a theme. If storage is blocked,
+the switch still works for the current page.
+
+`theme.js` applies the preference before the stylesheet loads to avoid a light
+flash. Theme colors live in `styles.css`; `assets/logo-light.png` and
+`assets/logo-dark.png` are the supplied logos, displayed according to the theme.
+Task screenshots keep their original colors.
+
 ## Resource links
 
 The header uses borderless logo-and-label links for arXiv, GitHub, Hugging Face,
