@@ -37,7 +37,7 @@ function buildSite(root = projectRoot, output = path.join(root, "_site")) {
   fs.mkdirSync(output, { recursive: true });
   fs.writeFileSync(path.join(output, "index.html"), source.replace(marker,
     () => `<script type="application/json" id="accepted-submissions">${json}</script>`));
-  for (const name of ["submit.html", "styles.css", "script.js", "submission.js", "submission-schema.js"]) {
+  for (const name of ["submit.html", "styles.css", "theme.js", "script.js", "submission.js", "submission-schema.js"]) {
     fs.copyFileSync(path.join(root, name), path.join(output, name));
   }
   fs.rmSync(path.join(output, "assets"), { recursive: true, force: true });
