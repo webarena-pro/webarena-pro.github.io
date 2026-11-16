@@ -368,17 +368,16 @@ renderLeaderboard();
 const tasks = [
   {
     id: "acidwave",
+    logo: "acidwave.svg",
     taskId: "403",
     site: "Acidwave",
-    short: "AW",
-    color: "#d9468f",
-    url: "acidwave.local / songs",
     type: "Audio-guided travel booking",
     tags: ["Audio", "2 apps", "Multi-step"],
     prompt: "Listen to the recording titled \"Trailer Static\" on Acidwave and identify the cities named in the spoken audio. For each distinct city that has accommodation listings on TravelMap, complete one accommodation booking. Count repeated mentions of the same city only once, and skip cities that have no listings there. You may choose any available property and booking details (dates, number of guests, and length of stay) independently for each city; the bookings do not need to form a single travel itinerary.",
   },
   {
     id: "erp-next",
+    logo: "erp-next.svg",
     taskId: "322",
     site: "ERPNext",
     type: "Customer onboarding and invoicing",
@@ -388,61 +387,52 @@ const tasks = [
   },
   {
     id: "firefly",
+    logo: "firefly.png",
     taskId: "062",
     site: "Firefly III",
-    short: "FF",
-    color: "#5a3cf0",
-    url: "firefly.local / transactions",
     type: "Conditional travel budgeting",
     tags: ["2 apps", "Data analysis", "State change"],
     prompt: "In Firefly, find the most expensive single transaction tagged Vacation between June 1 and August 31, 2025, and note its amount and report in the following form: 2025 max: C$X,XXX.XX\n\nThen in flight-search, find the cheapest one-way economy flight from JFK to LAX on 2026-08-15, and note its price. If the JFK-to-LAX 2026 flight is cheaper than the most expensive 2025 Vacation transaction, create a piggy bank in Firefly named \"Cheaper Flight Fund\" with target amount equal to the JFK-to-LAX flight price, saving from TD Chequing, and add C$50 from TD Chequing to it. Otherwise, do nothing.",
   },
   {
-    id: "flight",
+    id: "flight-search",
+    logo: "flight-search.svg",
     taskId: "340",
     site: "Flight Search",
-    short: "FS",
-    color: "#2563eb",
-    url: "flights.local / search",
     type: "Multi-city trip optimization",
     tags: ["3 apps", "Planning", "Comparison"],
     prompt: "Find the cheapest multi-city economy itinerary for one adult departing Montreal (YUL) on September 20, 2026, visiting Lisbon (LIS) and Berlin (BER) exactly once, spending two nights in one city and three nights in the other, and departing the final city for Montreal on September 26. Intercity flights must arrive on the same local calendar day so every lodging night is usable. Then find the cheapest available Travelmap accommodation for one guest for the corresponding dates. Report the route (City1, num nights as int), (City2, num nights), combined total in US$X,XXX.XX.",
   },
   {
     id: "immich",
+    logo: "immich.ico",
     taskId: "087",
     site: "Immich",
-    short: "IM",
-    color: "#4250af",
-    url: "immich.local / administration",
     type: "Photo organization and sharing",
     tags: ["Visual", "Multi-step", "Access control"],
     prompt: "Create separate albums to save photos from April 5, 2015 and April 27, 2026 named “250405” and “260427,” respectively, and share both albums with agent2 and agent3 with viewer access.",
   },
   {
     id: "jobportal",
+    logo: "jobportal.svg",
     taskId: "096",
     site: "Job Portal",
-    short: "JP",
-    color: "#3b82f6",
-    url: "jobs.local / search",
     type: "Job posting revision",
     tags: ["Comparison", "Multi-step", "State change"],
     prompt: "Close the two intern job postings with the earliest application deadlines. Then create new part-time versions of those roles that require at least 1 year of experience, with the income increased by 25% compared to the original postings. Set the application deadline for the new postings to two months from now.",
   },
   {
     id: "mattermost",
+    logo: "mattermost.png",
     taskId: "118",
     site: "Mattermost",
-    short: "MM",
-    color: "#152c53",
-    url: "mattermost.local / engineering / deployments",
     type: "Cross-app operational reporting",
     tags: ["4 apps", "Data analysis", "Communication"],
     prompt: "Find the two action items in Bob's infrastructure status report for the week of March 10. Then, count the open deals currently shown in the Lead stage. Next, find how many Groceries expenses there are from 2026-01-01 through 2026-03-31 and their total. Finally, find how many one-way economy flights from Denver (DEN) to Las Vegas (LAS) on 2026-06-15 include United Airlines. Post the combined summary in the infrastructure status discussion.",
   },
   {
     id: "metabase",
+    logo: "metabase.png",
     taskId: "325",
     site: "Metabase",
     type: "Layered revenue visualization",
@@ -451,6 +441,7 @@ const tasks = [
   },
   {
     id: "minerva-lite",
+    logo: "minerva-lite.svg",
     taskId: "137",
     site: "Minerva Lite",
     type: "Schedule-aware travel coordination",
@@ -460,6 +451,7 @@ const tasks = [
   },
   {
     id: "mydrive",
+    logo: "mydrive.svg",
     taskId: "147",
     site: "MyDrive",
     type: "Multilingual algorithm files",
@@ -469,28 +461,35 @@ const tasks = [
   },
   {
     id: "nextcloud",
+    logo: "nextcloud.ico",
     taskId: "170",
     site: "Nextcloud",
-    short: "NC",
-    color: "#0082c9",
-    url: "nextcloud.local / talk",
     type: "Secure recruiting collaboration",
     tags: ["Files", "Communication", "Access control"],
     prompt: "Send the Marketing Assistant resume files in both .docx and .pdf formats to Nancy, Lisa, and Richard in a group chat. Then, request the creation of a “Marketing Assistant Interview Result” file in the interview folder and share the file request link with them. Set the expiration date to the end of next week (Sunday of the following calendar week), and protect it with the password 'marketing'.",
   },
   {
     id: "notion",
+    logo: "notion.svg",
     taskId: "189",
     site: "Notion",
-    short: "NT",
-    color: "#111827",
-    url: "notion.local / team-notes",
     type: "Shared travel budget coordination",
     tags: ["2 apps", "Data analysis", "Communication"],
     prompt: "I’m planning a domestic flight trip with the two people I most recently interacted with across the connected communication platforms. In the Travel Budget database,  assign one person to the accommodation-related items and the other to the activity-related items using the email property. Then share in the group message how much each person should pay.",
   },
   {
+    id: "password-manager",
+    logo: "password-manager.svg",
+    taskId: "194",
+    site: "Password Manager",
+    type: "Payment card comparison",
+    tags: ["Comparison", "Information retrieval"],
+    prompt: "Which saved payment card expires the soonest?",
+    screenshotSize: [1280, 720],
+  },
+  {
     id: "penpot",
+    logo: "penpot.png",
     taskId: "204",
     site: "Penpot",
     type: "Detailed modal component design",
@@ -500,6 +499,7 @@ const tasks = [
   },
   {
     id: "peppermint",
+    logo: "peppermint.ico",
     taskId: "420",
     site: "Peppermint",
     type: "Customer ranking and onboarding",
@@ -509,17 +509,16 @@ const tasks = [
   },
   {
     id: "pipedrive",
+    logo: "pipedrive.svg",
     taskId: "230",
     site: "PipeCRM",
-    short: "PC",
-    color: "#1f2937",
-    url: "pipecrm.local / leads",
     type: "Deal comparison and follow-up",
     tags: ["Comparison", "Multi-step", "State change"],
     prompt: "For the organization Nimbus Cloud Services, find its two open deals, determine which one has the lower value, and add a task activity to that lower-value deal due on 2026-05-20 with subject exactly: Benchmark task: follow up on lower-value Nimbus deal.",
   },
   {
     id: "thunderbird",
+    logo: "thunderbird.ico",
     taskId: "243",
     site: "Thunderbird",
     type: "Conditional vacation reply drafts",
@@ -529,6 +528,7 @@ const tasks = [
   },
   {
     id: "travelmap",
+    logo: "travelmap.svg",
     taskId: "252",
     site: "TravelMap",
     type: "Trip changes and host research",
@@ -538,6 +538,7 @@ const tasks = [
   },
   {
     id: "x-lite",
+    logo: "x-lite.svg",
     taskId: "263",
     site: "X Lite",
     type: "Video research and public sharing",
@@ -547,87 +548,67 @@ const tasks = [
   },
   {
     id: "yt-lite",
+    logo: "yt-lite.svg",
     taskId: "293",
     site: "YouTube Lite",
-    short: "YT",
-    color: "#dc2626",
-    url: "yt-lite.local",
     type: "Video-guided report creation",
     tags: ["Video", "Visual", "2 apps"],
     prompt: "Find a YouTube video that teaches how to write a poem and has a yellow clock in its thumbnail. After watching the video, create a report in the Personal Travel workspace in Notion with the title “How to Write a Poem.” Set the page emoji to match the title of the last poem mentioned in the video, and include the presenter’s Instagram account in the page content.",
   },
 ];
 
-const tabs = document.querySelector("[data-task-tabs]");
+const websiteGrid = document.querySelector("[data-website-grid]");
+const taskDialog = document.querySelector("[data-task-dialog]");
 const panel = document.querySelector("[data-task-panel]");
+const taskTitle = document.querySelector("[data-task-title]");
+const closeTask = document.querySelector("[data-close-task]");
 
-tabs.innerHTML = tasks.map((task, index) => `
-  <button
-    class="task-tab"
-    type="button"
-    role="tab"
-    id="task-tab-${index}"
-    aria-selected="false"
-    aria-controls="task-panel"
-    tabindex="-1"
-    data-task-index="${index}"
-  >${task.site}</button>`).join("");
+websiteGrid.innerHTML = tasks.map((task, index) => `
+  <button class="website-tile" type="button" data-task-index="${index}"
+    aria-label="View ${task.site} task example" aria-haspopup="dialog" aria-controls="task-dialog">
+    <span class="website-logo"><img src="assets/websites/${task.logo}" alt="" width="48" height="48" loading="lazy"></span>
+    <span>${task.site}</span>
+  </button>`).join("");
 
-function renderTasks(activeIndex = 0, shouldFocus = false) {
+taskDialog.id = "task-dialog";
+
+function showTask(activeIndex) {
   const task = tasks[activeIndex];
-  const screenshotName = task.id === "flight" ? "flight-search" : task.id;
-  const screenshotPath = `assets/screenshots/${screenshotName}.jpg`;
+  const screenshotPath = `assets/screenshots/${task.id}.jpg`;
   const [screenshotWidth, screenshotHeight] = task.screenshotSize || [1440, 900];
-  tabs.querySelectorAll("[data-task-index]").forEach((button, index) => {
-    button.setAttribute("aria-selected", String(index === activeIndex));
-    button.tabIndex = index === activeIndex ? 0 : -1;
-  });
-
-  panel.id = "task-panel";
-  panel.setAttribute("role", "tabpanel");
-  panel.setAttribute("aria-labelledby", `task-tab-${activeIndex}`);
+  taskTitle.textContent = task.site;
   panel.innerHTML = `
     <div class="task-description">
       <span class="example-number">Example ${String(activeIndex + 1).padStart(2, "0")} / ${tasks.length}</span>
-      <h3>${task.site}</h3>
+      <h3>${task.type}</h3>
       <p class="task-prompt"></p>
       <p class="task-tags">${task.tags.map(tag => `<span>${tag}</span>`).join("")}</p>
+      <a class="task-website-link" href="https://${task.id}.websites.webarenapro.win/" target="_blank" rel="noopener noreferrer">Open ${task.site} <span aria-hidden="true">↗</span></a>
+      <p class="task-demo-note">Shared read-only demo · Changes cannot be saved.<br><a href="https://websites.webarenapro.win/" target="_blank" rel="noopener noreferrer">Demo login details</a></p>
     </div>
     <figure class="task-figure">
-      <img src="${screenshotPath}" alt="${task.site} interface from the seeded WebArena-Pro environment" width="${screenshotWidth}" height="${screenshotHeight}" loading="lazy">
+      <a class="task-screenshot-link" href="${screenshotPath}" target="_blank" rel="noopener noreferrer" aria-label="View full ${task.site} screenshot (opens in a new tab)">
+        <img src="${screenshotPath}" alt="${task.site} interface from the seeded WebArena-Pro environment" width="${screenshotWidth}" height="${screenshotHeight}">
+      </a>
       <figcaption>
-        <span>${task.site} environment · ${task.type}</span>
-        <button class="screenshot-expand" type="button" data-expand-screenshot="${screenshotPath}" data-screenshot-alt="${task.site}">View full screenshot</button>
+        <span>Seeded benchmark environment</span>
+        <a href="${screenshotPath}" target="_blank" rel="noopener noreferrer">View full screenshot ↗</a>
       </figcaption>
     </figure>`;
-
   panel.querySelector(".task-prompt").textContent = task.prompt;
-
-  if (shouldFocus) {
-    const activeTab = tabs.querySelector(`[data-task-index="${activeIndex}"]`);
-    activeTab.focus({ preventScroll: true });
-    activeTab.scrollIntoView({ block: "nearest", inline: "nearest" });
-  }
+  taskDialog.showModal();
+  taskDialog.scrollTop = 0;
+  document.body.style.overflow = "hidden";
 }
 
-renderTasks();
-
-tabs.addEventListener("click", event => {
+websiteGrid.addEventListener("click", event => {
   const button = event.target.closest("[data-task-index]");
-  if (button) renderTasks(Number(button.dataset.taskIndex));
+  if (button) showTask(Number(button.dataset.taskIndex));
 });
-
-tabs.addEventListener("keydown", event => {
-  const current = event.target.closest("[data-task-index]");
-  if (!current || !["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-  event.preventDefault();
-  const index = Number(current.dataset.taskIndex);
-  let nextIndex = index;
-  if (["ArrowDown", "ArrowRight"].includes(event.key)) nextIndex = (index + 1) % tasks.length;
-  if (["ArrowUp", "ArrowLeft"].includes(event.key)) nextIndex = (index - 1 + tasks.length) % tasks.length;
-  if (event.key === "Home") nextIndex = 0;
-  if (event.key === "End") nextIndex = tasks.length - 1;
-  renderTasks(nextIndex, true);
+closeTask.addEventListener("click", () => taskDialog.close());
+taskDialog.addEventListener("close", () => { document.body.style.overflow = ""; });
+taskDialog.addEventListener("click", event => {
+  if (event.target === taskDialog) taskDialog.close();
 });
 
 const copyButton = document.querySelector("[data-copy-citation]");
@@ -641,25 +622,4 @@ copyButton.addEventListener("click", async () => {
   } catch {
     label.textContent = "Select text";
   }
-});
-
-const screenshotDialog = document.querySelector("[data-screenshot-dialog]");
-const dialogImage = document.querySelector("[data-dialog-image]");
-const dialogTitle = document.querySelector("[data-screenshot-title]");
-const closeScreenshot = document.querySelector("[data-close-screenshot]");
-
-panel.addEventListener("click", event => {
-  const button = event.target.closest("[data-expand-screenshot]");
-  if (!button) return;
-  dialogImage.src = button.dataset.expandScreenshot;
-  dialogImage.alt = `${button.dataset.screenshotAlt} environment screenshot`;
-  dialogTitle.textContent = button.dataset.screenshotAlt;
-  screenshotDialog.showModal();
-  document.body.style.overflow = "hidden";
-});
-
-closeScreenshot.addEventListener("click", () => screenshotDialog.close());
-screenshotDialog.addEventListener("close", () => { document.body.style.overflow = ""; });
-screenshotDialog.addEventListener("click", event => {
-  if (event.target === screenshotDialog) screenshotDialog.close();
 });
