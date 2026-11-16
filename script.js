@@ -14,6 +14,18 @@ const baselineResources = {
   codeLabel: "GitHub",
   code: benchmarkRepository,
 };
+const gemini4Resources = {
+  ...baselineResources,
+  family: "Gemini",
+  paper: null,
+  isNew: true,
+  taskCount: 300,
+};
+const gemini4Traces = {
+  carbon: "https://drive.google.com/file/d/1V9iOWjsfshCzywmQegO8PGjVbYgGJkYF/view?usp=drivesdk&resourcekey=0-HHPWwBz_6v_pKVCDRExzAg",
+  argon: "https://drive.google.com/file/d/1o-65zPCLQ8cMyEx72qAfrcVJGg_3yCEY/view?usp=drivesdk&resourcekey=0-TcLkJFx2WFSyGTJXhWdzDQ",
+  hydrogen: "https://drive.google.com/file/d/1TNB9kl-BByL9EdaqIFDOF6Ig3THTAEbc/view?usp=drivesdk&resourcekey=0-NXZYcxOLNm4SKa11IR9Eqw",
+};
 const leaderboardEntries = [
   {
     ...baselineResources,
@@ -112,7 +124,7 @@ const leaderboardEntries = [
   },
   {
     ...baselineResources,
-    model: "Gemini 3.1 Pro (omni†)",
+    model: "Gemini 3.1 Pro (omni)",
     family: "Gemini",
     releaseDate: "2026-02-19",
     releaseSource: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
@@ -167,7 +179,33 @@ const leaderboardEntries = [
     results: {
       50: { averageSR: 62.3, domains: [60.4, 72.7, 62.5, 57.1, 65.3, 50.0], traces: codingAgentTraces }
     },
-  }
+  },
+  // Reported by ericpts@ on 2026-11-12. The 50-step scores are checkpoints
+  // from 100-step runs; see README.md for evaluation provenance.
+  {
+    ...gemini4Resources,
+    model: "Gemini 4 Carbon",
+    results: {
+      50: { averageSR: 45.7, passed: 137, domains: [null, null, null, null, null, null], traces: gemini4Traces.carbon },
+      100: { averageSR: 56.7, passed: 170, domains: [null, null, null, null, null, null], traces: gemini4Traces.carbon }
+    },
+  },
+  {
+    ...gemini4Resources,
+    model: "Gemini 4 Argon",
+    results: {
+      50: { averageSR: 49.0, passed: 147, domains: [null, null, null, null, null, null], traces: gemini4Traces.argon },
+      100: { averageSR: 55.0, passed: 165, domains: [null, null, null, null, null, null], traces: gemini4Traces.argon }
+    },
+  },
+  {
+    ...gemini4Resources,
+    model: "Gemini 4 Hydrogen",
+    results: {
+      50: { averageSR: 40.0, passed: 120, domains: [null, null, null, null, null, null], traces: gemini4Traces.hydrogen },
+      100: { averageSR: 47.0, passed: 141, domains: [null, null, null, null, null, null], traces: gemini4Traces.hydrogen }
+    },
+  },
 ];
 
 const leaderboard = document.querySelector("#results");
@@ -230,6 +268,17 @@ function agentCell(row, entry, label) {
   return cell;
 }
 
+function modelCell(row, entry) {
+  const cell = resultCell(row, entry.model, "results-model", true);
+  if (entry.isNew) {
+    const badge = document.createElement("span");
+    badge.className = "results-new-label";
+    badge.textContent = "New";
+    cell.append(badge);
+  }
+  return cell;
+}
+
 function resourceCell(row, url, label, description, unavailableLabel = "Coming soon") {
   const cell = resultCell(row, "", "results-resource");
   const resource = document.createElement(url ? "a" : "span");
@@ -287,18 +336,25 @@ function renderLeaderboard() {
     const agentLabel = medal ? `${medal} ${entry.agent}` : entry.agent;
 
     const overallRow = document.createElement("tr");
+    if (entry.isNew) overallRow.className = "results-row-new";
     resultCell(overallRow, isReported ? String(rank).padStart(2, "0") : "—", "results-rank");
     agentCell(overallRow, entry, agentLabel);
-    resultCell(overallRow, entry.model, "results-model", true);
-    resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
+    modelCell(overallRow, entry);
+    const scoreCell = resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
+    if (Number.isInteger(scores.passed) && Number.isInteger(entry.taskCount)) {
+      const passed = document.createElement("small");
+      passed.textContent = `${scores.passed} / ${entry.taskCount}`;
+      scoreCell.append(passed);
+    }
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
-    resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, "");
+    resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
     overallResults.append(overallRow);
 
     const domainRow = document.createElement("tr");
+    if (entry.isNew) domainRow.className = "results-row-new";
     agentCell(domainRow, entry, agentLabel);
-    resultCell(domainRow, entry.model, "results-model", true);
+    modelCell(domainRow, entry);
     scores.domains.forEach(score => {
       resultCell(domainRow, formatScore(score));
     });

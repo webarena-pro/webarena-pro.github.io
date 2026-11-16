@@ -128,10 +128,13 @@ h3 { font-size: 24px; line-height: 1.35; }
 .results-table tbody th[scope="row"] { font-weight: 400; white-space: nowrap; }
 .results-table tbody tr { border-bottom: 1px solid #f0f1f2; }
 .results-table tbody tr:hover { background: var(--soft); }
+.results-table tbody .results-row-new { background: #eef5ff; }
+.results-new-label { margin-left: 5px; color: var(--accent); font-size: 11px; white-space: nowrap; }
 .results-table .results-model, .results-table .results-agent, .results-table .results-resource { text-align: left; }
 .results-table .results-agent { color: var(--muted); white-space: nowrap; }
 .results-table .results-rank { width: 55px; padding-left: 8px; text-align: left; color: var(--muted); }
 .results-table .results-score { font-size: 15px; }
+.results-score small { display: block; color: var(--muted); font-size: 11px; }
 .results-table .results-resource { white-space: nowrap; }
 .results-resource a { text-decoration: none; }
 .results-resource a:hover { text-decoration: underline; }

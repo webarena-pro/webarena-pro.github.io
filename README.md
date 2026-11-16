@@ -95,11 +95,11 @@ The leaderboard appears after the overview and task examples and defaults to the
 tab at 50 steps. The 50, 100, and Unlimited step buttons apply to both the Overall
 and By domain tabs. Hover, focus, or click either view's Overall SR header to
 show the success criterion; press Escape or click elsewhere to dismiss it. Published leaderboard results
-currently cover 50 steps; 100 and unlimited steps display empty states.
+cover 50 and 100 steps; unlimited steps display an empty state.
 
 Both views identify the agent separately from the model. All built-in agent
 names link to the WebArena-Pro repository in both views. The 50-step table
-contains 13 reported configurations: nine GenericAgent configurations, OpenCode
+contains 16 reported configurations: twelve GenericAgent configurations, OpenCode
 with Kimi 3.1 Pro and Gemini 3.1 Pro, Codex with GPT 6.1 Sol, and Claude Code
 with Claude Opus 5.5. The November 11, 2026 results are led by Claude Code at
 62.3%, followed by Codex at 61.7% and OpenCode / Kimi 3.1 Pro at 60.3%.
@@ -107,6 +107,36 @@ Unreported scores use `null`, display as “—”, and receive no rank or medal
 Tied scores share a competition rank.
 The omni configuration uses `watch()` and `listen()`. Domain task counts are
 53, 44, 16, 63, 98, and 26 (300 overall); success requires a final reward of 1.
+
+### Gemini 4 results
+
+The three Gemini 4 GenericAgent entries use the results supplied by ericpts@
+on November 12, 2026. Their 50-step values are midpoint checkpoints from the
+same 100-step runs, not separate runs capped at 50 steps. The 100-step view
+contains these three entries. Both views highlight the new rows, and the
+Overall view displays passed-task counts below the strict success rate.
+Missing domain scores and paper links display as “—”.
+
+| Model | 50-step checkpoint | 100 steps | Benchmark release | Full traces |
+| --- | --- | --- | --- | --- |
+| Gemini 4 Carbon (`gemini-4-carbon`) | 137 / 300 (45.7%) | 170 / 300 (56.7%) | v0.6.2 (`f21693c6`) | [Carbon](https://drive.google.com/file/d/1V9iOWjsfshCzywmQegO8PGjVbYgGJkYF/view?usp=drivesdk&resourcekey=0-HHPWwBz_6v_pKVCDRExzAg) |
+| Gemini 4 Argon (`gemini-4-argon`) | 147 / 300 (49.0%) | 165 / 300 (55.0%) | v0.6.0 (`c8ec3a77`) | [Argon](https://drive.google.com/file/d/1o-65zPCLQ8cMyEx72qAfrcVJGg_3yCEY/view?usp=drivesdk&resourcekey=0-TcLkJFx2WFSyGTJXhWdzDQ) |
+| Gemini 4 Hydrogen (`gemini-4-hydrogen`) | 120 / 300 (40.0%) | 141 / 300 (47.0%) | v0.6.2 (`f21693c6`) | [Hydrogen](https://drive.google.com/file/d/1TNB9kl-BByL9EdaqIFDOF6Ig3THTAEbc/view?usp=drivesdk&resourcekey=0-NXZYcxOLNm4SKa11IR9Eqw) |
+
+The reported setup uses BrowserGym GenericAgent with temperature 1.0, high
+reasoning effort, viewport screenshots and accessibility trees, native
+audio/video `listen()`, and Whisper (`whisper-1`) transcription. The Tier-2
+rubric judge is `gemini-3.1-pro-preview`. The reported terminal-provenance rule
+scores non-terminal early stops as zero at completion while preserving valid
+midpoint checkpoints. Overall SR uses strict full-rubric completion, not mean
+rubric reward.
+
+These entries live in `leaderboardEntries` in `script.js`. The supplied Drive
+archives are linked for review; their contents have not been re-scored by this
+website's submission validator. They are not checksum-pinned scoring records
+under `submissions/`.
+
+### Historical figures
 
 Historical 30-step data and success-rate figure assets are retained in the
 repository, but the figures are not displayed on the homepage. Known release dates and
@@ -124,8 +154,10 @@ python3 scripts/generate_sr_figures.py
 
 Plotting dependencies are only needed when regenerating the figures.
 
-New results are reviewed as JSON files in `submissions/` and included by the
-build after merge. Existing baseline entries remain in `leaderboardEntries` in
+### Result data and resource links
+
+Form-submitted results are reviewed as JSON files in `submissions/` and included
+by the build after merge. Existing baseline entries remain in `leaderboardEntries` in
 `script.js`. Each entry has an agent,
 model, paper URL, code URL, and results keyed by step budget. Domain scores
 follow `leaderboardDomains`; `averageSR` is the reported overall success rate,
