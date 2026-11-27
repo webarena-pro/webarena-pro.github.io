@@ -7,13 +7,31 @@ const benchmarkRepository = "https://github.com/McGill-NLP/webarena-pro";
 const benchmarkPaper = "https://arxiv.org/abs/2611.17955";
 const genericAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_generic_agent";
 const codingAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_coding_agents";
-const baselineResources = {
-  agent: "GenericAgent",
+const genericAgentPaper50 = {
+  traces: genericAgentTraces,
+  benchmarkRevision: "mixed revisions (v0.6.0 re-evaluations)",
+};
+const teamResources = {
+  submittedBy: "WebArena-Pro team",
   website: benchmarkRepository,
-  paper: benchmarkPaper,
+  config: "High reasoning effort",
   codeLabel: "GitHub",
   code: benchmarkRepository,
 };
+const baselineResources = {
+  ...teamResources,
+  agent: "GenericAgent",
+  paper: benchmarkPaper,
+};
+const newTeamResources = {
+  ...teamResources,
+  isNew: true,
+};
+// Counts are strict passes on the full Test split. Domain SRs use the same test-task catalog as the scorer.
+function testResult(passed, traces, domains) {
+  return { passed, averageSR: Number((100 * passed / 300).toFixed(1)), domains, traces };
+}
+
 // Paper-backed 50-step scores match arXiv:2611.17955v1, Tables 5 and 9.
 const leaderboardEntries = [
   {
@@ -24,7 +42,7 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
     results: {
       30: { averageSR: 29.3, domains: [30.4, 26.7, 37.5, 22.0, 32.0, 33.3], traces: null },
-      50: { averageSR: 29.3, domains: [28.3, 27.3, 43.8, 20.6, 33.7, 30.8], traces: null }
+      50: { ...genericAgentPaper50, averageSR: 29.3, domains: [28.3, 27.3, 43.8, 20.6, 33.7, 30.8] }
     },
   },
   {
@@ -35,12 +53,13 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/",
     results: {
       30: { averageSR: 21.4, domains: [14.3, 13.3, 37.5, 19.0, 27.8, 22.2], traces: null },
-      50: { averageSR: 23.7, domains: [15.1, 27.3, 25.0, 20.6, 25.5, 34.6], traces: genericAgentTraces }
+      50: { ...genericAgentPaper50, averageSR: 23.7, domains: [15.1, 27.3, 25.0, 20.6, 25.5, 34.6] }
     },
   },
   {
     ...baselineResources,
     model: "GPT-5.5",
+    config: null,
     family: "GPT",
     releaseDate: "2026-04-23",
     releaseSource: "https://openai.com/index/introducing-gpt-5-5/",
@@ -56,7 +75,7 @@ const leaderboardEntries = [
     releaseSource: "https://www.anthropic.com/news/claude-opus-4-7",
     results: {
       30: { averageSR: 22.0, domains: [16.1, 20.0, 25.0, 15.3, 29.9, 22.2], traces: null },
-      50: { averageSR: 25.3, domains: [20.8, 36.4, 31.3, 17.5, 24.5, 34.6], traces: genericAgentTraces }
+      50: { ...genericAgentPaper50, averageSR: 25.3, domains: [20.8, 36.4, 31.3, 17.5, 24.5, 34.6] }
     },
   },
   {
@@ -67,7 +86,7 @@ const leaderboardEntries = [
     releaseSource: "https://qwen.ai/blog?id=qwen3.6-27b",
     results: {
       30: { averageSR: 13.7, domains: [8.9, 15.6, 12.5, 8.5, 17.5, 18.5], traces: null },
-      50: { averageSR: 13.0, domains: [5.7, 22.7, 12.5, 7.9, 15.3, 15.4], traces: null }
+      50: { ...genericAgentPaper50, averageSR: 13.0, domains: [5.7, 22.7, 12.5, 7.9, 15.3, 15.4] }
     },
   },
   {
@@ -78,7 +97,7 @@ const leaderboardEntries = [
     releaseSource: "https://github.com/QwenLM/Qwen3.8/blob/main/README.md",
     results: {
       30: { averageSR: 6.0, domains: [3.6, 0.0, 6.2, 5.1, 11.3, 3.7], traces: null },
-      50: { averageSR: 5.0, domains: [3.8, 9.1, 12.5, 3.2, 4.1, 3.8], traces: genericAgentTraces }
+      50: { ...genericAgentPaper50, averageSR: 5.0, domains: [3.8, 9.1, 12.5, 3.2, 4.1, 3.8] }
     },
   },
   {
@@ -89,7 +108,7 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/",
     results: {
       30: { averageSR: 22.7, domains: [21.4, 20.0, 37.5, 22.0, 20.6, 29.6], traces: null },
-      50: { averageSR: 30.3, domains: [18.9, 38.6, 37.5, 30.2, 30.6, 34.6], traces: genericAgentTraces }
+      50: { ...genericAgentPaper50, averageSR: 30.3, domains: [18.9, 38.6, 37.5, 30.2, 30.6, 34.6] }
     },
   },
   {
@@ -100,7 +119,7 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/",
     results: {
       30: { averageSR: 20.1, domains: [17.9, 24.4, 25.0, 22.0, 18.8, 14.8], traces: null },
-      50: { averageSR: 22.3, domains: [18.9, 25.0, 37.5, 23.8, 17.3, 30.8], traces: genericAgentTraces }
+      50: { ...genericAgentPaper50, averageSR: 22.3, domains: [18.9, 25.0, 37.5, 23.8, 17.3, 30.8] }
     },
   },
   {
@@ -108,7 +127,7 @@ const leaderboardEntries = [
     model: "Qwen 3.8 27B",
     family: "Qwen",
     results: {
-      50: { averageSR: 15.7, domains: [7.5, 15.9, 12.5, 14.3, 19.4, 23.1], traces: genericAgentTraces }
+      50: { ...genericAgentPaper50, averageSR: 15.7, domains: [7.5, 15.9, 12.5, 14.3, 19.4, 23.1] }
     },
   },
   {
@@ -118,67 +137,106 @@ const leaderboardEntries = [
     releaseDate: "2026-02-19",
     releaseSource: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
     results: {
-      50: { averageSR: 30.3, domains: [26.4, 27.3, 43.8, 20.6, 38.8, 26.9], traces: genericAgentTraces }
+      50: { ...genericAgentPaper50, averageSR: 30.3, domains: [26.4, 27.3, 43.8, 20.6, 38.8, 26.9] }
     },
   },
   {
+    ...teamResources,
     agent: "OpenCode",
-    website: benchmarkRepository,
     model: "Kimi 3.1 Pro",
+    benchmarkRevision: ["v1.0.0-rc.2", "v1.0.0-rc.3"],
     family: "Kimi",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 60.7, domains: [56.6, 79.5, 68.8, 54.0, 59.2, 53.8], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "OpenCode",
-    website: benchmarkRepository,
     model: "Gemini 3.1 Pro",
+    benchmarkRevision: "v1.0.0-rc.3",
     family: "Gemini",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 48.0, domains: [41.5, 65.9, 50.0, 41.3, 50.0, 38.5], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "OpenCode",
-    website: benchmarkRepository,
     model: "Qwen 3.8 Max Prime",
+    benchmarkRevision: "v1.0.0-rc.3",
     family: "Qwen",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 55.7, domains: [54.7, 70.5, 56.3, 47.6, 55.1, 53.8], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "Codex",
-    website: benchmarkRepository,
     model: "GPT 6.1 Sol",
+    benchmarkRevision: ["v1.0.0-rc.2", "v1.0.0-rc.3"],
     family: "GPT",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 62.3, domains: [60.4, 81.8, 62.5, 49.2, 64.3, 57.7], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "Claude Code",
-    website: benchmarkRepository,
     model: "Claude Opus 5.5",
+    benchmarkRevision: "v1.0.0-rc.3",
     family: "Claude",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 62.3, domains: [60.4, 72.7, 62.5, 57.1, 65.3, 50.0], traces: codingAgentTraces }
+    },
+  },
+  {
+    ...newTeamResources,
+    agent: "Codex",
+    model: "GPT-6.2 Astra",
+    benchmarkRevision: "v1.0.1",
+    family: "GPT",
+    results: {
+      50: testResult(192, "https://huggingface.co/datasets/WebArena-Pro/traces_codex_gpt-6.2_astra_high",
+        [56.6, 84.1, 68.8, 57.1, 67.3, 46.2]),
+    },
+  },
+  {
+    ...newTeamResources,
+    agent: "Codex",
+    model: "GPT-6.2 Sol",
+    benchmarkRevision: ["v1.0.0-rc.3", "v1.0.1"],
+    family: "GPT",
+    results: {
+      50: testResult(183, "https://huggingface.co/datasets/WebArena-Pro/traces_codex_gpt-6.2_sol_high",
+        [56.6, 77.3, 62.5, 50.8, 64.3, 53.8]),
+    },
+  },
+  {
+    ...newTeamResources,
+    agent: "Gemini CLI",
+    model: "Gemini 4 Neon",
+    benchmarkRevision: "v1.0.1",
+    family: "Gemini",
+    results: {
+      50: testResult(185, "https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-neon_high",
+        [60.4, 84.1, 62.5, 55.6, 59.2, 50.0]),
+    },
+  },
+  {
+    ...newTeamResources,
+    agent: "Gemini CLI",
+    model: "Gemini 4 Carbon",
+    benchmarkRevision: "v1.0.0-rc.3",
+    family: "Gemini",
+    results: {
+      50: testResult(160, "https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-carbon_high",
+        [52.8, 65.9, 43.8, 50.8, 53.1, 46.2]),
     },
   },
 ];
@@ -230,19 +288,6 @@ function resultCell(row, text, className = "", isHeading = false) {
   return cell;
 }
 
-function agentCell(row, entry, label) {
-  const cell = resultCell(row, label, "results-agent");
-  if (entry.website) {
-    const link = document.createElement("a");
-    link.textContent = label;
-    link.href = entry.website;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    cell.replaceChildren(link);
-  }
-  return cell;
-}
-
 function modelCell(row, entry) {
   const cell = resultCell(row, entry.model, "results-model", true);
   if (entry.isNew) {
@@ -252,6 +297,19 @@ function modelCell(row, entry) {
     cell.append(badge);
   }
   return cell;
+}
+
+function configCell(row, entry, scores) {
+  const revision = scores.benchmarkRevision || entry.benchmarkRevision;
+  const revisions = Array.isArray(revision) ? revision : [revision];
+  const usesV101 = revisions.includes("v1.0.1");
+  const cell = resultCell(row, entry.config || (usesV101 ? "" : "—"), "results-config");
+  if (usesV101) {
+    const tag = document.createElement("span");
+    tag.className = "results-version-tag";
+    tag.textContent = "v1.0.1";
+    cell.append(tag);
+  }
 }
 
 function resourceCell(row, url, label, description, unavailableLabel = "Coming soon") {
@@ -313,14 +371,11 @@ function renderLeaderboard() {
     const overallRow = document.createElement("tr");
     if (entry.isNew) overallRow.className = "results-row-new";
     resultCell(overallRow, isReported ? String(rank).padStart(2, "0") : "—", "results-rank");
-    agentCell(overallRow, entry, agentLabel);
+    resultCell(overallRow, agentLabel, "results-agent");
     modelCell(overallRow, entry);
-    const scoreCell = resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
-    if (Number.isInteger(scores.passed) && Number.isInteger(entry.taskCount)) {
-      const passed = document.createElement("small");
-      passed.textContent = `${scores.passed} / ${entry.taskCount}`;
-      scoreCell.append(passed);
-    }
+    resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
+    configCell(overallRow, entry, scores);
+    resultCell(overallRow, entry.submittedBy || "—", "results-submitter");
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
@@ -328,12 +383,14 @@ function renderLeaderboard() {
 
     const domainRow = document.createElement("tr");
     if (entry.isNew) domainRow.className = "results-row-new";
-    agentCell(domainRow, entry, agentLabel);
+    resultCell(domainRow, agentLabel, "results-agent");
     modelCell(domainRow, entry);
     scores.domains.forEach(score => {
       resultCell(domainRow, formatScore(score));
     });
     resultCell(domainRow, formatScore(scores.averageSR), "results-overall");
+    configCell(domainRow, entry, scores);
+    resultCell(domainRow, entry.submittedBy || "—", "results-submitter");
     domainResults.append(domainRow);
   });
 }

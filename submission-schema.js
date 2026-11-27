@@ -5,11 +5,13 @@
     "stepBudget", "website", "code", "paper", "traces", "harness", "harnessVersion",
     "benchmarkRevision", "split", "taskCount", "traceContentsConfirmed", "domainScores", "scoringArchive", "scoringSha256"];
 
+  const optionalFields = ["submittedBy", "config"];
+
   function validateSubmission(record) {
     if (!record || typeof record !== "object" || Array.isArray(record)) return ["The result must be a JSON object."];
     const errors = [];
     for (const key of Object.keys(record)) {
-      if (!fields.includes(key)) errors.push(`Unknown field: ${key}.`);
+      if (!fields.includes(key) && !optionalFields.includes(key)) errors.push(`Unknown field: ${key}.`);
     }
     for (const key of fields) {
       if (!Object.hasOwn(record, key)) errors.push(`Missing field: ${key}.`);
@@ -18,9 +20,10 @@
     if (typeof record.id !== "string" || !/^[a-z0-9][a-z0-9-]{0,119}$/.test(record.id)) {
       errors.push("id must contain 1–120 lowercase letters, numbers, or hyphens.");
     }
-    for (const key of ["agent", "model", "agentVersion", "harness", "harnessVersion", "benchmarkRevision"]) {
+    for (const key of ["agent", "model", "agentVersion", "harness", "harnessVersion", "benchmarkRevision", ...optionalFields]) {
+      if (optionalFields.includes(key) && !Object.hasOwn(record, key)) continue;
       const value = record[key];
-      const limit = ["agent", "model"].includes(key) ? 150 : 100;
+      const limit = ["agent", "model", ...optionalFields].includes(key) ? 150 : 100;
       if (typeof value !== "string" || !value.trim() || value !== value.trim() ||
           value.length > limit || /[\u0000-\u001f\u007f]/.test(value)) {
         errors.push(`${key} must be non-empty text of at most ${limit} characters.`);
@@ -70,6 +73,8 @@
       schemaVersion: 1,
       id: `${slug}-${values.stepBudget}-${suffix}`,
       agent: values.agent,
+      ...(values.submittedBy ? { submittedBy: values.submittedBy } : {}),
+      ...(values.config ? { config: values.config } : {}),
       agentVersion: values.agentVersion,
       model: values.model,
       averageSR: values.averageSR === "" ? NaN : Number(values.averageSR),
@@ -99,6 +104,8 @@
       "## Result",
       `- Agent: ${record.agent} (${record.agentVersion})`,
       `- Model: ${record.model}`,
+      ...(record.submittedBy ? [`- Submitted by: ${record.submittedBy}`] : []),
+      ...(record.config ? [`- Config: ${record.config}`] : []),
       `- Reported SR: ${record.averageSR}%`,
       `- Step budget: ${record.stepBudget}`,
       `- Harness: ${record.harness} (${record.harnessVersion})`,
@@ -117,6 +124,9 @@
   function toLeaderboardEntry(record) {
     return {
       agent: record.agent, model: record.model, website: record.website,
+      submittedBy: record.submittedBy || null,
+      config: record.config || null,
+      benchmarkRevision: record.benchmarkRevision,
       paper: record.paper, code: record.code, codeLabel: "Code", submissionId: record.id,
       results: {
         [record.stepBudget]: { averageSR: record.averageSR, domains: record.domainScores, traces: record.traces },

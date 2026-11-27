@@ -11,8 +11,8 @@
     <title>WebArena-Pro | A Benchmark for Web Agents</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <script src="theme.js?v=1"></script>
-    <link rel="stylesheet" href="styles.css?v=task-grid-20261116">
-    <script src="script.js?v=demo-links-20261116" defer></script>
+    <link rel="stylesheet" href="styles.css?v=leaderboard-layout-20261127">
+    <script src="script.js?v=leaderboard-layout-20261127" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -163,6 +163,8 @@
                       <span class="results-sr-tooltip" id="overall-sr-tooltip" role="tooltip" hidden>Success requires a final reward of 1.</span>
                     </span>
                   </th>
+                  <th scope="col" class="results-config">Config</th>
+                  <th scope="col" class="results-submitter">Submitted by</th>
                   <th scope="col" class="results-resource">Traces</th>
                   <th scope="col" class="results-resource">Paper</th>
                   <th scope="col" class="results-resource">Code</th>
@@ -172,8 +174,8 @@
             </table>
           </div>
           <div class="results-empty" data-results-empty hidden>
-            <strong>Results for 100 steps are not available yet.</strong>
-            <p>Select 50 steps to explore the reported results.</p>
+            <strong>No results for this step budget.</strong>
+            <p>Select 50 steps to see reported results.</p>
           </div>
         </div>
         <div id="results-panel-domains" role="tabpanel" aria-labelledby="results-tab-domains" tabindex="0" hidden>
@@ -197,14 +199,16 @@
                       <span class="results-sr-tooltip" id="domain-sr-tooltip" role="tooltip" hidden>Success requires a final reward of 1.</span>
                     </span>
                   </th>
+                  <th scope="col" class="results-config">Config</th>
+                  <th scope="col" class="results-submitter">Submitted by</th>
                 </tr>
               </thead>
               <tbody data-domain-results></tbody>
             </table>
           </div>
           <div class="results-empty" data-results-empty hidden>
-            <strong>Results for 100 steps are not available yet.</strong>
-            <p>Select 50 steps to explore the reported results.</p>
+            <strong>No results for this step budget.</strong>
+            <p>Select 50 steps to see reported results.</p>
           </div>
         </div>
         <noscript><p>Enable JavaScript to explore the leaderboard.</p></noscript>
