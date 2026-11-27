@@ -23,7 +23,6 @@ const newTeamResources = {
   ...teamResources,
   taskCount: 300,
   isNew: true,
-  traceLabel: "Dataset",
 };
 const gemini4Resources = {
   ...baselineResources,
@@ -391,7 +390,7 @@ function renderLeaderboard() {
       passed.textContent = `${scores.passed} / ${entry.taskCount}`;
       scoreCell.append(passed);
     }
-    resourceCell(overallRow, scores.traces, entry.traceLabel || "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
+    resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
     configCell(overallRow, entry, scores);
