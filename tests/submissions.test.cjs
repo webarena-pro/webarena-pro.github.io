@@ -103,6 +103,7 @@ test('build includes accepted results at the declared budget and retains existin
   assert.equal(entries[0].agent, result.agent);
   assert.equal(entries[0].submittedBy, result.submittedBy);
   assert.equal(entries[0].config, result.config);
+  assert.equal(entries[0].benchmarkRevision, result.benchmarkRevision);
   assert.deepEqual(Object.keys(entries[0].results), ['100']);
   assert.equal(entries[0].results['100'].averageSR, 42.3);
   assert.deepEqual(entries[0].results['100'].domains, result.domainScores);
@@ -123,6 +124,7 @@ test('older submissions build without attribution or config', t => {
   const entries = JSON.parse(html.match(/id="accepted-submissions">(.*?)<\/script>/s)[1]);
   assert.equal(entries[0].submittedBy, null);
   assert.equal(entries[0].config, null);
+  assert.equal(entries[0].benchmarkRevision, result.benchmarkRevision);
 });
 
 test('submitted markup remains JSON data and cannot escape into the page', t => {

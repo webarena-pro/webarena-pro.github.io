@@ -136,7 +136,11 @@ from those three GenericAgent runs.
 Both views show **Submitted by** and **Config**. The WebArena-Pro team ran the
 paper baselines and the four coding-agent evaluations below. Google DeepMind
 self-reported the three Gemini 4 GenericAgent runs. Config shows the recorded
-reasoning effort and identifies checkpoints from longer runs. The paper
+reasoning effort, WebArena-Pro release tag or commit, and any checkpoint from a longer run.
+The leaderboard displays the v1.0.0-rc.3 runtime (including patched builds) as
+v1.0.0. A slash separates releases used in the same score. The 50-step
+GenericAgent paper scores combine earlier traces with v0.6.0 reruns and regrades.
+The paper
 describes high reasoning effort in [Section 4.1](https://arxiv.org/html/2611.17955v1).
 Accepted submissions can supply their own attribution and configuration.
 

@@ -126,6 +126,7 @@
       agent: record.agent, model: record.model, website: record.website,
       submittedBy: record.submittedBy || null,
       config: record.config || null,
+      benchmarkRevision: record.benchmarkRevision,
       paper: record.paper, code: record.code, codeLabel: "Code", submissionId: record.id,
       results: {
         [record.stepBudget]: { averageSR: record.averageSR, domains: record.domainScores, traces: record.traces },
