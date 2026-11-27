@@ -211,7 +211,7 @@ model, submitter name, paper URL, code URL, and results keyed by step budget. Do
 follow `leaderboardDomains`; `averageSR` is the reported overall success rate,
 not an unweighted average of the domain scores. Both views rank entries by
 that score and mark the top three ranks with gold, silver, and bronze medal
-emojis beside the agent names. Table text uses regular weight throughout.
+emojis beside the agent names. Column headers are bold.
 
 The baseline uses GenericAgent. Existing baseline Code links point to the
 WebArena-Pro benchmark repository defined by `benchmarkRepository`, with a
