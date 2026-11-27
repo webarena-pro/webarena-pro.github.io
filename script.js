@@ -384,12 +384,7 @@ function renderLeaderboard() {
     resultCell(overallRow, isReported ? String(rank).padStart(2, "0") : "—", "results-rank");
     resultCell(overallRow, agentLabel, "results-agent");
     modelCell(overallRow, entry);
-    const scoreCell = resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
-    if (Number.isInteger(scores.passed) && Number.isInteger(entry.taskCount)) {
-      const passed = document.createElement("small");
-      passed.textContent = `${scores.passed} / ${entry.taskCount}`;
-      scoreCell.append(passed);
-    }
+    resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
