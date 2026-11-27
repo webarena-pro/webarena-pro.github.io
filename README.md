@@ -151,8 +151,7 @@ The omni configuration uses `watch()` and `listen()`. Domain task counts are
 ### Codex and Gemini CLI results
 
 Each run used high reasoning effort and a 50-step budget on all 300 Test tasks.
-The per-model Hugging Face trace datasets require repository access. The domain
-rates use the selected task outcomes and the [scoring catalog](scoring/test-tasks.json).
+The domain rates use the selected task outcomes and the [scoring catalog](scoring/test-tasks.json).
 
 | Agent | Model | Strict passes | Success rate | Trace dataset |
 | --- | --- | ---: | ---: | --- |
@@ -220,11 +219,9 @@ GitHub label. Existing baseline Paper entries use `benchmarkPaper`, which
 links to the WebArena-Pro paper at `https://arxiv.org/abs/2611.17955`.
 For the paper baselines, the 50-step Traces links open the public
 [GenericAgent dataset](https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_generic_agent)
-for its seven published model cohorts, or the
+for all nine model cohorts, or the
 [coding-agent dataset](https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_coding_agents)
-for OpenCode, Codex, and Claude Code. The GenericAgent dataset does not contain
-the standard Gemini 3.1 Pro or Qwen 3.6 27B cohorts; their trace links remain
-unavailable. Historical 30-step trace links are also unavailable.
+for OpenCode, Codex, and Claude Code. Historical 30-step trace links are unavailable.
 Set each budget's `traces` field to its trace URL when available.
 Other missing URLs appear as placeholders, not links. Submitted entries use
 their supplied agent website, code, paper, and traces URLs; missing domain

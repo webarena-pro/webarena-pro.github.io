@@ -23,7 +23,7 @@ const newTeamResources = {
   ...teamResources,
   taskCount: 300,
   isNew: true,
-  traceLabel: "Dataset (restricted)",
+  traceLabel: "Dataset",
 };
 const gemini4Resources = {
   ...baselineResources,
@@ -64,7 +64,7 @@ const leaderboardEntries = [
     releaseSource: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
     results: {
       30: { averageSR: 29.3, domains: [30.4, 26.7, 37.5, 22.0, 32.0, 33.3], traces: null },
-      50: { averageSR: 29.3, domains: [28.3, 27.3, 43.8, 20.6, 33.7, 30.8], traces: null }
+      50: { averageSR: 29.3, domains: [28.3, 27.3, 43.8, 20.6, 33.7, 30.8], traces: genericAgentTraces }
     },
   },
   {
@@ -108,7 +108,7 @@ const leaderboardEntries = [
     releaseSource: "https://qwen.ai/blog?id=qwen3.6-27b",
     results: {
       30: { averageSR: 13.7, domains: [8.9, 15.6, 12.5, 8.5, 17.5, 18.5], traces: null },
-      50: { averageSR: 13.0, domains: [5.7, 22.7, 12.5, 7.9, 15.3, 15.4], traces: null }
+      50: { averageSR: 13.0, domains: [5.7, 22.7, 12.5, 7.9, 15.3, 15.4], traces: genericAgentTraces }
     },
   },
   {
@@ -404,7 +404,7 @@ function renderLeaderboard() {
       passed.textContent = `${scores.passed} / ${entry.taskCount}`;
       scoreCell.append(passed);
     }
-    resourceCell(overallRow, scores.traces, entry.traceLabel || "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps${entry.traceLabel ? " (access required)" : ""}`);
+    resourceCell(overallRow, scores.traces, entry.traceLabel || "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
     configCell(overallRow, entry, scores);
