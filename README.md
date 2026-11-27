@@ -131,7 +131,7 @@ and By domain tabs. Hover, focus, or click either view's Overall SR header to
 show the success criterion. Press Escape or click elsewhere to dismiss it.
 The 50-step view includes 14 paper baselines and four additional coding-agent runs.
 
-In Overall, **Overall SR** is followed by **Config**, **Submitted by**, **Traces**,
+In Overall, **Overall SR** is followed by **Config**, **Traces**,
 **Paper**, and **Code**. Both views show “High effort” and a version tag in Config
 for the 18 built-in 50-step results. GPT-6.2 Astra, GPT-6.2 Sol, and Gemini 4 Neon
 show `v1.0.1`. The other 15 rows show `v1.0.0`, including the paper’s GenericAgent
