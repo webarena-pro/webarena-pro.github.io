@@ -224,8 +224,8 @@ for all nine model cohorts, or the
 for OpenCode, Codex, and Claude Code. Historical 30-step trace links are unavailable.
 Set each budget's `traces` field to its trace URL when available.
 Other missing URLs appear as placeholders, not links. Submitted entries use
-their supplied agent website, code, paper, and traces URLs; missing domain
-scores display as “—”.
+their supplied code, paper, and traces URLs. Agent names appear as plain text in
+both views. Missing domain scores display as “—”.
 
 ## Result submissions
 

@@ -304,19 +304,6 @@ function resultCell(row, text, className = "", isHeading = false) {
   return cell;
 }
 
-function agentCell(row, entry, label) {
-  const cell = resultCell(row, label, "results-agent");
-  if (entry.website) {
-    const link = document.createElement("a");
-    link.textContent = label;
-    link.href = entry.website;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    cell.replaceChildren(link);
-  }
-  return cell;
-}
-
 function modelCell(row, entry) {
   const cell = resultCell(row, entry.model, "results-model", true);
   if (entry.isNew) {
@@ -396,7 +383,7 @@ function renderLeaderboard() {
     const overallRow = document.createElement("tr");
     if (entry.isNew) overallRow.className = "results-row-new";
     resultCell(overallRow, isReported ? String(rank).padStart(2, "0") : "—", "results-rank");
-    agentCell(overallRow, entry, agentLabel);
+    resultCell(overallRow, agentLabel, "results-agent");
     modelCell(overallRow, entry);
     const scoreCell = resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
     if (Number.isInteger(scores.passed) && Number.isInteger(entry.taskCount)) {
@@ -413,7 +400,7 @@ function renderLeaderboard() {
 
     const domainRow = document.createElement("tr");
     if (entry.isNew) domainRow.className = "results-row-new";
-    agentCell(domainRow, entry, agentLabel);
+    resultCell(domainRow, agentLabel, "results-agent");
     modelCell(domainRow, entry);
     scores.domains.forEach(score => {
       resultCell(domainRow, formatScore(score));
