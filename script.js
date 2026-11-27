@@ -7,13 +7,53 @@ const benchmarkRepository = "https://github.com/McGill-NLP/webarena-pro";
 const benchmarkPaper = "https://arxiv.org/abs/2611.17955";
 const genericAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_generic_agent";
 const codingAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_coding_agents";
-const baselineResources = {
-  agent: "GenericAgent",
+const teamResources = {
+  submittedBy: "WebArena-Pro team",
   website: benchmarkRepository,
-  paper: benchmarkPaper,
+  config: "High reasoning effort",
   codeLabel: "GitHub",
   code: benchmarkRepository,
 };
+const baselineResources = {
+  ...teamResources,
+  agent: "GenericAgent",
+  paper: benchmarkPaper,
+};
+const newTeamResources = {
+  ...teamResources,
+  taskCount: 300,
+  isNew: true,
+  traceLabel: "Dataset (restricted)",
+};
+const gemini4Resources = {
+  ...baselineResources,
+  submittedBy: "Self-reported by Google DeepMind",
+  family: "Gemini",
+  paper: null,
+  isNew: true,
+  taskCount: 300,
+};
+const gemini4Traces = {
+  carbon: "https://drive.google.com/file/d/1V9iOWjsfshCzywmQegO8PGjVbYgGJkYF/view?usp=drivesdk&resourcekey=0-HHPWwBz_6v_pKVCDRExzAg",
+  argon: "https://drive.google.com/file/d/1o-65zPCLQ8cMyEx72qAfrcVJGg_3yCEY/view?usp=drivesdk&resourcekey=0-TcLkJFx2WFSyGTJXhWdzDQ",
+  hydrogen: "https://drive.google.com/file/d/1TNB9kl-BByL9EdaqIFDOF6Ig3THTAEbc/view?usp=drivesdk&resourcekey=0-NXZYcxOLNm4SKa11IR9Eqw",
+};
+// Counts are strict passes on the full Test split. Domain SRs use the same test-task catalog as the scorer.
+function testResult(passed, traces, domains = leaderboardDomains.map(() => null)) {
+  return { passed, averageSR: Number((100 * passed / 300).toFixed(1)), domains, traces };
+}
+
+function deepMindResult(model, traces, checkpointPasses, finalPasses) {
+  return {
+    ...gemini4Resources,
+    model,
+    results: {
+      50: { ...testResult(checkpointPasses, traces), checkpointOf: 100 },
+      100: testResult(finalPasses, traces),
+    },
+  };
+}
+
 // Paper-backed 50-step scores match arXiv:2611.17955v1, Tables 5 and 9.
 const leaderboardEntries = [
   {
@@ -41,6 +81,7 @@ const leaderboardEntries = [
   {
     ...baselineResources,
     model: "GPT-5.5",
+    config: null,
     family: "GPT",
     releaseDate: "2026-04-23",
     releaseSource: "https://openai.com/index/introducing-gpt-5-5/",
@@ -122,65 +163,98 @@ const leaderboardEntries = [
     },
   },
   {
+    ...teamResources,
     agent: "OpenCode",
-    website: benchmarkRepository,
     model: "Kimi 3.1 Pro",
     family: "Kimi",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 60.7, domains: [56.6, 79.5, 68.8, 54.0, 59.2, 53.8], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "OpenCode",
-    website: benchmarkRepository,
     model: "Gemini 3.1 Pro",
     family: "Gemini",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 48.0, domains: [41.5, 65.9, 50.0, 41.3, 50.0, 38.5], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "OpenCode",
-    website: benchmarkRepository,
     model: "Qwen 3.8 Max Prime",
     family: "Qwen",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 55.7, domains: [54.7, 70.5, 56.3, 47.6, 55.1, 53.8], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "Codex",
-    website: benchmarkRepository,
     model: "GPT 6.1 Sol",
     family: "GPT",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 62.3, domains: [60.4, 81.8, 62.5, 49.2, 64.3, 57.7], traces: codingAgentTraces }
     },
   },
   {
+    ...teamResources,
     agent: "Claude Code",
-    website: benchmarkRepository,
     model: "Claude Opus 5.5",
     family: "Claude",
     paper: benchmarkPaper,
-    codeLabel: "GitHub",
-    code: benchmarkRepository,
     results: {
       50: { averageSR: 62.3, domains: [60.4, 72.7, 62.5, 57.1, 65.3, 50.0], traces: codingAgentTraces }
     },
   },
+  {
+    ...newTeamResources,
+    agent: "Codex",
+    model: "GPT-6.2 Astra",
+    family: "GPT",
+    results: {
+      50: testResult(192, "https://huggingface.co/datasets/WebArena-Pro/traces_codex_gpt-6.2_astra_high",
+        [56.6, 84.1, 68.8, 57.1, 67.3, 46.2]),
+    },
+  },
+  {
+    ...newTeamResources,
+    agent: "Codex",
+    model: "GPT-6.2 Sol",
+    family: "GPT",
+    results: {
+      50: testResult(183, "https://huggingface.co/datasets/WebArena-Pro/traces_codex_gpt-6.2_sol_high",
+        [56.6, 77.3, 62.5, 50.8, 64.3, 53.8]),
+    },
+  },
+  {
+    ...newTeamResources,
+    agent: "Gemini CLI",
+    model: "Gemini 4 Neon",
+    family: "Gemini",
+    results: {
+      50: testResult(185, "https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-neon_high",
+        [60.4, 84.1, 62.5, 55.6, 59.2, 50.0]),
+    },
+  },
+  {
+    ...newTeamResources,
+    agent: "Gemini CLI",
+    model: "Gemini 4 Carbon",
+    family: "Gemini",
+    results: {
+      50: testResult(160, "https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-carbon_high",
+        [52.8, 65.9, 43.8, 50.8, 53.1, 46.2]),
+    },
+  },
+  deepMindResult("Gemini 4 Carbon", gemini4Traces.carbon, 137, 170),
+  deepMindResult("Gemini 4 Argon", gemini4Traces.argon, 147, 165),
+  deepMindResult("Gemini 4 Hydrogen", gemini4Traces.hydrogen, 120, 141),
 ];
 
 const leaderboard = document.querySelector("#results");
@@ -254,6 +328,15 @@ function modelCell(row, entry) {
   return cell;
 }
 
+function configCell(row, entry, scores) {
+  const cell = resultCell(row, entry.config || "—", "results-config");
+  if (scores.checkpointOf) {
+    const note = document.createElement("small");
+    note.textContent = `Checkpoint of ${scores.checkpointOf}-step run`;
+    cell.append(note);
+  }
+}
+
 function resourceCell(row, url, label, description, unavailableLabel = "Coming soon") {
   const cell = resultCell(row, "", "results-resource");
   const resource = document.createElement(url ? "a" : "span");
@@ -321,9 +404,11 @@ function renderLeaderboard() {
       passed.textContent = `${scores.passed} / ${entry.taskCount}`;
       scoreCell.append(passed);
     }
-    resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
+    resourceCell(overallRow, scores.traces, entry.traceLabel || "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps${entry.traceLabel ? " (access required)" : ""}`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
+    configCell(overallRow, entry, scores);
+    resultCell(overallRow, entry.submittedBy || "—", "results-submitter");
     overallResults.append(overallRow);
 
     const domainRow = document.createElement("tr");
@@ -334,6 +419,8 @@ function renderLeaderboard() {
       resultCell(domainRow, formatScore(score));
     });
     resultCell(domainRow, formatScore(scores.averageSR), "results-overall");
+    configCell(domainRow, entry, scores);
+    resultCell(domainRow, entry.submittedBy || "—", "results-submitter");
     domainResults.append(domainRow);
   });
 }

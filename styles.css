@@ -161,8 +161,8 @@ h3 { font-size: 24px; line-height: 1.35; }
 .results-budget-buttons button[aria-pressed="true"] { background: var(--selected); border-color: var(--selected); color: var(--button-ink); font-weight: 600; }
 .results-table-wrap { position: relative; overflow-x: auto; margin-top: 16px; }
 .results-table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
-.results-table-overview { min-width: 820px; }
-.results-table-domains { min-width: 1040px; }
+.results-table-overview { min-width: 980px; }
+.results-table-domains { min-width: 1200px; }
 .results-table th, .results-table td { padding: 12px; text-align: right; font-weight: 400; }
 .results-table th:first-child { text-align: left; padding-left: 8px; }
 .results-table thead { border-top: 2px solid var(--table-line); border-bottom: 1px solid var(--table-subline); }
@@ -175,11 +175,13 @@ h3 { font-size: 24px; line-height: 1.35; }
 .results-table tbody tr:hover { background: var(--soft); }
 .results-table tbody .results-row-new { background: var(--row-new); }
 .results-new-label { margin-left: 5px; color: var(--accent); font-size: 11px; white-space: nowrap; }
-.results-table .results-model, .results-table .results-agent, .results-table .results-resource { text-align: left; }
+.results-table .results-model, .results-table .results-agent, .results-table .results-resource, .results-table .results-config, .results-table .results-submitter { text-align: left; }
 .results-table .results-agent { color: var(--muted); white-space: nowrap; }
+.results-table .results-config { min-width: 100px; max-width: 185px; overflow-wrap: anywhere; }
+.results-table .results-submitter { min-width: 130px; max-width: 220px; color: var(--muted); overflow-wrap: anywhere; }
 .results-table .results-rank { width: 55px; padding-left: 8px; text-align: left; color: var(--muted); }
 .results-table .results-score { font-size: 15px; }
-.results-score small { display: block; color: var(--muted); font-size: 11px; }
+.results-score small, .results-config small { display: block; color: var(--muted); font-size: 11px; }
 .results-table .results-resource { white-space: nowrap; }
 .results-resource a { text-decoration: none; }
 .results-resource a:hover { text-decoration: underline; }
@@ -254,9 +256,7 @@ h3 { font-size: 24px; line-height: 1.35; }
 .dialog-bar button { min-height: 36px; padding: 4px 10px; background: none; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); font-size: 13px; }
 .dialog-bar button span { margin-left: 8px; }
 
-@media (max-width: 1104px) {
-  #results-panel-domains .results-scroll-hint { display: block; }
-}
+#results-panel-domains .results-scroll-hint { display: block; }
 @media (max-width: 1050px) {
   .results-scroll-hint { display: block; }
   .paper-subtitle { font-size: 29px; }

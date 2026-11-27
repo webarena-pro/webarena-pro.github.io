@@ -31,6 +31,8 @@ Example (replace all values, including the placeholder checksum):
   "schemaVersion": 1,
   "id": "my-agent-my-model-50-unique-id",
   "agent": "My agent",
+  "submittedBy": "My name or organization",
+  "config": "High reasoning effort",
   "agentVersion": "1.0.0",
   "model": "Exact model name and version",
   "averageSR": 40.0,
@@ -51,7 +53,10 @@ Example (replace all values, including the placeholder checksum):
 }
 ```
 
-All fields are required. `code` and `paper` may be `null`. Harness is `AgentLab`
+`submittedBy` and `config` are optional. Both accept up to 150 characters
+of plain text and appear in both leaderboard views. Use `config` for the
+reasoning effort or other relevant run settings. Omitted values display as “—”.
+`code` and `paper` may be `null`. Harness is `AgentLab`
 or `Harbor`. URLs use HTTP(S), contain no credentials, and are at most 2,000
 characters; `scoringArchive` additionally requires public HTTPS on port 443
 without a fragment. The archive bytes must match `scoringSha256`.

@@ -128,32 +128,44 @@ examples can describe edits that cannot be saved in the public read-only demo.
 The leaderboard appears after the overview and task examples and defaults to the Overall
 tab at 50 steps. The 50, 100, and Unlimited step buttons apply to both the Overall
 and By domain tabs. Hover, focus, or click either view's Overall SR header to
-show the success criterion; press Escape or click elsewhere to dismiss it. Published leaderboard results
-cover 50 steps; 100 and unlimited steps display an empty state.
+show the success criterion. Press Escape or click elsewhere to dismiss it.
+The 50-step view includes paper baselines, four additional coding-agent runs,
+and three GenericAgent checkpoints. The 100-step view shows the final results
+from those three GenericAgent runs.
 
-Both views identify the agent separately from the model. All built-in agent
-names link to the WebArena-Pro repository in both views. The 50-step table
-contains 14 reported configurations: nine GenericAgent configurations, OpenCode
-with Kimi 3.1 Pro, Gemini 3.1 Pro, and Qwen 3.8 Max Prime, Codex with GPT 6.1 Sol,
-and Claude Code with Claude Opus 5.5. Paper-backed 50-step overall and domain
-scores follow Tables 5 and 9 of
-[arXiv:2611.17955v1](https://arxiv.org/pdf/2611.17955v1), published November 13,
-2026 and checked November 16, 2026. Codex and Claude Code tie at 62.3%, followed
-by OpenCode / Kimi 3.1 Pro at 60.7% and OpenCode / Qwen 3.8 Max Prime at 55.7%.
-OpenCode / Gemini 3.1 Pro scores 48.0%. For Kimi, Table 5's 60.7% takes precedence
-over the inconsistent 60.3% in Section 4.2; the abstract also reports 60.7%.
+Both views show **Submitted by** and **Config**. The WebArena-Pro team ran the
+paper baselines and the four coding-agent evaluations below. Google DeepMind
+self-reported the three Gemini 4 GenericAgent runs. Config shows the recorded
+reasoning effort and identifies checkpoints from longer runs. The paper
+describes high reasoning effort in [Section 4.1](https://arxiv.org/html/2611.17955v1).
+Accepted submissions can supply their own attribution and configuration.
+
+The paper's 50-step overall and domain scores follow Tables 5 and 9 of
+[arXiv:2611.17955v1](https://arxiv.org/pdf/2611.17955v1). The Kimi 3.1 Pro
+score of 60.7% follows Table 5 and the abstract.
 Unreported scores use `null`, display as “—”, and receive no rank or medal.
 Tied scores share a competition rank.
 The omni configuration uses `watch()` and `listen()`. Domain task counts are
 53, 44, 16, 63, 98, and 26 (300 overall); success requires a final reward of 1.
 
-### Gemini 4 results (temporarily removed)
+### Codex and Gemini CLI results
 
-The three Gemini 4 GenericAgent entries were temporarily removed from all
-leaderboard views on November 16, 2026. Their reported results and provenance
-are retained below for possible restoration. The results were supplied by
-ericpts@ on November 12, 2026. Their 50-step values are midpoint checkpoints
-from the same 100-step runs, not separate runs capped at 50 steps.
+Each run used high reasoning effort and a 50-step budget on all 300 Test tasks.
+The per-model Hugging Face trace datasets require repository access. The domain
+rates use the selected task outcomes and the [scoring catalog](scoring/test-tasks.json).
+
+| Agent | Model | Strict passes | Success rate | Trace dataset |
+| --- | --- | ---: | ---: | --- |
+| Codex | GPT-6.2 Astra | 192 / 300 | 64.0% | [Astra](https://huggingface.co/datasets/WebArena-Pro/traces_codex_gpt-6.2_astra_high) |
+| Codex | GPT-6.2 Sol | 183 / 300 | 61.0% | [Sol](https://huggingface.co/datasets/WebArena-Pro/traces_codex_gpt-6.2_sol_high) |
+| Gemini CLI | Gemini 4 Neon | 185 / 300 | 61.7% | [Neon](https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-neon_high) |
+| Gemini CLI | Gemini 4 Carbon | 160 / 300 | 53.3% | [Carbon](https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-carbon_high) |
+
+### Google DeepMind GenericAgent results
+
+Eric at Google DeepMind shared these self-reported results on November 12, 2026.
+The 50-step scores are midpoint checkpoints from the same 100-step runs.
+Google DeepMind supplied overall strict pass counts at both budgets.
 
 | Model | 50-step checkpoint | 100 steps | Benchmark release | Full traces |
 | --- | --- | --- | --- | --- |
@@ -169,10 +181,9 @@ scores non-terminal early stops as zero at completion while preserving valid
 midpoint checkpoints. Overall SR uses strict full-rubric completion, not mean
 rubric reward.
 
-These entries are currently excluded from `leaderboardEntries` in `script.js`.
-The supplied Drive archives are linked for review; their contents have not been
-re-scored by this website's submission validator. They are not checksum-pinned scoring records
-under `submissions/`.
+Each row links to the original model-specific trace archive from Google DeepMind.
+The website displays the overall scores as reported. Domain breakdowns were
+not supplied.
 
 ### Historical figures
 
@@ -197,7 +208,7 @@ Plotting dependencies are only needed when regenerating the figures.
 Form-submitted results are reviewed as JSON files in `submissions/` and included
 by the build after merge. Existing baseline entries remain in `leaderboardEntries` in
 `script.js`. Each entry has an agent,
-model, paper URL, code URL, and results keyed by step budget. Domain scores
+model, submitter name, paper URL, code URL, and results keyed by step budget. Domain scores
 follow `leaderboardDomains`; `averageSR` is the reported overall success rate,
 not an unweighted average of the domain scores. Both views rank entries by
 that score and mark the top three ranks with gold, silver, and bronze medal
@@ -207,7 +218,7 @@ The baseline uses GenericAgent. Existing baseline Code links point to the
 WebArena-Pro benchmark repository defined by `benchmarkRepository`, with a
 GitHub label. Existing baseline Paper entries use `benchmarkPaper`, which
 links to the WebArena-Pro paper at `https://arxiv.org/abs/2611.17955`.
-The 50-step Traces links open the public
+For the paper baselines, the 50-step Traces links open the public
 [GenericAgent dataset](https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_generic_agent)
 for its seven published model cohorts, or the
 [coding-agent dataset](https://huggingface.co/datasets/WebArena-Pro/neurips_2026_traces_coding_agents)
