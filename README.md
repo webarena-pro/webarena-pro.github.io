@@ -129,19 +129,13 @@ The leaderboard appears after the overview and task examples and defaults to the
 tab at 50 steps. The 50, 100, and Unlimited step buttons apply to both the Overall
 and By domain tabs. Hover, focus, or click either view's Overall SR header to
 show the success criterion. Press Escape or click elsewhere to dismiss it.
-The 50-step view includes paper baselines, four additional coding-agent runs,
-and three GenericAgent checkpoints. The 100-step view shows the final results
-from those three GenericAgent runs.
+The 50-step view includes 14 paper baselines and four additional coding-agent runs.
 
-Both views show **Submitted by** and **Config**. The WebArena-Pro team ran the
-paper baselines and the four coding-agent evaluations below. Google DeepMind
-self-reported the three Gemini 4 GenericAgent runs. Config shows the recorded
-reasoning effort, WebArena-Pro release tag or commit, and any checkpoint from a longer run.
-The leaderboard displays the v1.0.0-rc.3 runtime (including patched builds) as
-v1.0.0. A slash separates releases used in the same score. The 50-step
-GenericAgent paper scores combine earlier traces with v0.6.0 reruns and regrades.
-The paper
-describes high reasoning effort in [Section 4.1](https://arxiv.org/html/2611.17955v1).
+In Overall, **Overall SR** is followed by **Config**, **Submitted by**, **Traces**,
+**Paper**, and **Code**. Both views show the reasoning effort in Config. A
+`v1.0.1` tag marks results that include evaluations on that release. GPT-6.2
+Sol includes both v1.0.0 and v1.0.1 evaluations. The paper describes its
+reasoning settings in [Section 4.1](https://arxiv.org/html/2611.17955v1).
 Accepted submissions can supply their own attribution and configuration.
 
 The paper's 50-step overall and domain scores follow Tables 5 and 9 of
@@ -164,7 +158,7 @@ The domain rates use the selected task outcomes and the [scoring catalog](scorin
 | Gemini CLI | Gemini 4 Neon | 185 / 300 | 61.7% | [Neon](https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-neon_high) |
 | Gemini CLI | Gemini 4 Carbon | 160 / 300 | 53.3% | [Carbon](https://huggingface.co/datasets/WebArena-Pro/traces_gemini_cli_gemini-4-carbon_high) |
 
-### Google DeepMind GenericAgent results
+### Archived Google DeepMind GenericAgent results
 
 Eric at Google DeepMind shared these self-reported results on November 12, 2026.
 The 50-step scores are midpoint checkpoints from the same 100-step runs.
@@ -184,9 +178,7 @@ scores non-terminal early stops as zero at completion while preserving valid
 midpoint checkpoints. Overall SR uses strict full-rubric completion, not mean
 rubric reward.
 
-Each row links to the original model-specific trace archive from Google DeepMind.
-The website displays the overall scores as reported. Domain breakdowns were
-not supplied.
+This table preserves the original reports and trace archives outside the leaderboard.
 
 ### Historical figures
 

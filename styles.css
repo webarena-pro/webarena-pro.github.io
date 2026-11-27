@@ -181,7 +181,7 @@ h3 { font-size: 24px; line-height: 1.35; }
 .results-table .results-submitter { min-width: 130px; max-width: 220px; color: var(--muted); overflow-wrap: anywhere; }
 .results-table .results-rank { width: 55px; padding-left: 8px; text-align: left; color: var(--muted); }
 .results-table .results-score { font-size: 15px; }
-.results-config small { display: block; color: var(--muted); font-size: 11px; }
+.results-version-tag { display: block; width: fit-content; margin-block: 2px; padding: 0 6px; border-radius: 4px; background: var(--blue-soft); color: var(--badge-ink); font-size: 11px; white-space: nowrap; }
 .results-table .results-resource { white-space: nowrap; }
 .results-resource a { text-decoration: none; }
 .results-resource a:hover { text-decoration: underline; }

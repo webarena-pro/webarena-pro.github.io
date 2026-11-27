@@ -25,37 +25,11 @@ const baselineResources = {
 };
 const newTeamResources = {
   ...teamResources,
-  taskCount: 300,
   isNew: true,
-};
-const gemini4Resources = {
-  ...baselineResources,
-  submittedBy: "Self-reported by Google DeepMind",
-  family: "Gemini",
-  paper: null,
-  isNew: true,
-  taskCount: 300,
-};
-const gemini4Traces = {
-  carbon: "https://drive.google.com/file/d/1V9iOWjsfshCzywmQegO8PGjVbYgGJkYF/view?usp=drivesdk&resourcekey=0-HHPWwBz_6v_pKVCDRExzAg",
-  argon: "https://drive.google.com/file/d/1o-65zPCLQ8cMyEx72qAfrcVJGg_3yCEY/view?usp=drivesdk&resourcekey=0-TcLkJFx2WFSyGTJXhWdzDQ",
-  hydrogen: "https://drive.google.com/file/d/1TNB9kl-BByL9EdaqIFDOF6Ig3THTAEbc/view?usp=drivesdk&resourcekey=0-NXZYcxOLNm4SKa11IR9Eqw",
 };
 // Counts are strict passes on the full Test split. Domain SRs use the same test-task catalog as the scorer.
-function testResult(passed, traces, domains = leaderboardDomains.map(() => null)) {
+function testResult(passed, traces, domains) {
   return { passed, averageSR: Number((100 * passed / 300).toFixed(1)), domains, traces };
-}
-
-function deepMindResult(model, benchmarkRevision, traces, checkpointPasses, finalPasses) {
-  return {
-    ...gemini4Resources,
-    model,
-    benchmarkRevision,
-    results: {
-      50: { ...testResult(checkpointPasses, traces), checkpointOf: 100 },
-      100: testResult(finalPasses, traces),
-    },
-  };
 }
 
 // Paper-backed 50-step scores match arXiv:2611.17955v1, Tables 5 and 9.
@@ -265,9 +239,6 @@ const leaderboardEntries = [
         [52.8, 65.9, 43.8, 50.8, 53.1, 46.2]),
     },
   },
-  deepMindResult("Gemini 4 Carbon", "v0.6.2", gemini4Traces.carbon, 137, 170),
-  deepMindResult("Gemini 4 Argon", "v0.6.0", gemini4Traces.argon, 147, 165),
-  deepMindResult("Gemini 4 Hydrogen", "v0.6.2", gemini4Traces.hydrogen, 120, 141),
 ];
 
 const leaderboard = document.querySelector("#results");
@@ -330,18 +301,14 @@ function modelCell(row, entry) {
 
 function configCell(row, entry, scores) {
   const revision = scores.benchmarkRevision || entry.benchmarkRevision;
-  const cell = resultCell(row, entry.config || (revision ? "" : "—"), "results-config");
-  if (revision) {
-    const version = document.createElement("small");
-    const tags = Array.isArray(revision) ? revision : [revision];
-    const label = tags.map(tag => tag === "v1.0.0-rc.3" ? "v1.0.0" : tag).join(" / ");
-    version.textContent = `WebArena-Pro ${label}`;
-    cell.append(version);
-  }
-  if (scores.checkpointOf) {
-    const note = document.createElement("small");
-    note.textContent = `Checkpoint of ${scores.checkpointOf}-step run`;
-    cell.append(note);
+  const revisions = Array.isArray(revision) ? revision : [revision];
+  const usesV101 = revisions.includes("v1.0.1");
+  const cell = resultCell(row, entry.config || (usesV101 ? "" : "—"), "results-config");
+  if (usesV101) {
+    const tag = document.createElement("span");
+    tag.className = "results-version-tag";
+    tag.textContent = "v1.0.1";
+    cell.append(tag);
   }
 }
 
@@ -407,11 +374,11 @@ function renderLeaderboard() {
     resultCell(overallRow, agentLabel, "results-agent");
     modelCell(overallRow, entry);
     resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
+    configCell(overallRow, entry, scores);
+    resultCell(overallRow, entry.submittedBy || "—", "results-submitter");
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
-    configCell(overallRow, entry, scores);
-    resultCell(overallRow, entry.submittedBy || "—", "results-submitter");
     overallResults.append(overallRow);
 
     const domainRow = document.createElement("tr");
