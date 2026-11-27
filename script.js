@@ -10,11 +10,12 @@ const codingAgentTraces = "https://huggingface.co/datasets/WebArena-Pro/neurips_
 const genericAgentPaper50 = {
   traces: genericAgentTraces,
   benchmarkRevision: "mixed revisions (v0.6.0 re-evaluations)",
+  versionTag: "v1.0.0",
 };
 const teamResources = {
   submittedBy: "WebArena-Pro team",
   website: benchmarkRepository,
-  config: "High reasoning effort",
+  config: "High effort",
   codeLabel: "GitHub",
   code: benchmarkRepository,
 };
@@ -302,12 +303,13 @@ function modelCell(row, entry) {
 function configCell(row, entry, scores) {
   const revision = scores.benchmarkRevision || entry.benchmarkRevision;
   const revisions = Array.isArray(revision) ? revision : [revision];
-  const usesV101 = revisions.includes("v1.0.1");
-  const cell = resultCell(row, entry.config || (usesV101 ? "" : "—"), "results-config");
-  if (usesV101) {
+  const releases = revisions.map(value => value === "v1.0.0-rc.3" ? "v1.0.0" : value);
+  const versionTag = scores.versionTag ?? releases.findLast(value => /^v\d+\.\d+\.\d+$/.test(value));
+  const cell = resultCell(row, entry.config || (versionTag ? "" : "—"), "results-config");
+  if (versionTag) {
     const tag = document.createElement("span");
     tag.className = "results-version-tag";
-    tag.textContent = "v1.0.1";
+    tag.textContent = versionTag;
     cell.append(tag);
   }
 }

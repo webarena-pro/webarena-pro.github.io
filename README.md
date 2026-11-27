@@ -132,9 +132,11 @@ show the success criterion. Press Escape or click elsewhere to dismiss it.
 The 50-step view includes 14 paper baselines and four additional coding-agent runs.
 
 In Overall, **Overall SR** is followed by **Config**, **Submitted by**, **Traces**,
-**Paper**, and **Code**. Both views show the reasoning effort in Config. A
-`v1.0.1` tag marks results that include evaluations on that release. GPT-6.2
-Sol includes both v1.0.0 and v1.0.1 evaluations. The paper describes its
+**Paper**, and **Code**. Both views show “High effort” and a version tag in Config
+for the 18 built-in 50-step results. GPT-6.2 Astra, GPT-6.2 Sol, and Gemini 4 Neon
+show `v1.0.1`. The other 15 rows show `v1.0.0`, including the paper’s GenericAgent
+baselines, whose traces span multiple revisions. GPT-6.2 Sol includes both
+v1.0.0 and v1.0.1 evaluations. The paper describes its
 reasoning settings in [Section 4.1](https://arxiv.org/html/2611.17955v1).
 Accepted submissions can supply their own attribution and configuration.
 
