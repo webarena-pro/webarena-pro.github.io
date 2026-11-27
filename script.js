@@ -377,7 +377,6 @@ function renderLeaderboard() {
     modelCell(overallRow, entry);
     resultCell(overallRow, formatScore(scores.averageSR, "%"), "results-score");
     configCell(overallRow, entry, scores);
-    resultCell(overallRow, entry.submittedBy || "—", "results-submitter");
     resourceCell(overallRow, scores.traces, "View", `Traces for ${entry.agent} with ${entry.model} at ${selectedBudget} steps`);
     resourceCell(overallRow, entry.paper, "Paper ↗", `Paper for ${entry.agent} with ${entry.model}`, entry.isNew ? "—" : "");
     resourceCell(overallRow, entry.code, `${entry.codeLabel} ↗`, `WebArena-Pro benchmark code for ${entry.agent} with ${entry.model}`, entry.codeLabel);
@@ -392,7 +391,6 @@ function renderLeaderboard() {
     });
     resultCell(domainRow, formatScore(scores.averageSR), "results-overall");
     configCell(domainRow, entry, scores);
-    resultCell(domainRow, entry.submittedBy || "—", "results-submitter");
     domainResults.append(domainRow);
   });
 }
